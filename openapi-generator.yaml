@@ -1,0 +1,20 @@
+# Configuración de OpenAPI Generator para el SDK de C# (docs/api/43-sdks-y-documentacion.md §2.5).
+# La corre sdks/generar.sh sobre sdks/especificacion/openapi.sdk.enums-abiertos.json (piloto: sin enum en lo que la API devuelve, un valor
+# nuevo no se vuelve «UnknownDefaultOpenApi»). Lo generado va a src/Trevol/Generado/ (espacio de nombres Trevol.Generado: Api/, Client/, Model/);
+# la capa propia (espacio de nombres Trevol, en src/Trevol/) lo usa. Del generador solo se conservan esas tres carpetas: generar.sh descarta el
+# .csproj, el .sln, las pruebas, docs/, README, appveyor.yml y git_push.sh (el .csproj es el nuestro: netstandard2.0 y net8.0).
+generatorName: csharp
+library: httpclient
+inputSpec: especificacion/openapi.sdk.enums-abiertos.json
+additionalProperties:
+  packageName: Trevol.Generado
+  packageVersion: 0.1.0
+  targetFramework: netstandard2.0;net8.0
+  nullableReferenceTypes: true
+  hideGenerationTimestamp: true
+  sortParamsByRequiredFlag: true
+  disallowAdditionalPropertiesIfNotPresent: false
+  validatable: false
+  generatePropertyChanged: false
+  optionalMethodArgument: true
+  useDateTimeOffset: true

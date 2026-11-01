@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>annotations</Nullable>
+    <AssemblyName>Trevol</AssemblyName>
+    <RootNamespace>Trevol</RootNamespace>
+    <PackageId>Trevol</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Trevol</Authors>
+    <Company>Trevol</Company>
+    <Product>Trevol</Product>
+    <Description>SDK de .NET para la API de Trevol (facturación electrónica y demás documentos ante la DIAN, Colombia).</Description>
+    <Copyright>Copyright (c) 2026 Trevol</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://platform.trevol.si/docs</PackageProjectUrl>
+    <PackageTags>trevol;dian;colombia;facturacion-electronica;invoice;sdk</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/trevol/trevol-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Lo generado y los comentarios en español no llevan siempre XML completo: no se exige. -->
+    <NoWarn>$(NoWarn);CS1591;CS1570;CS1572;CS1573;CS1587;CS8618;CS8625;CS8600;CS8601;CS8602;CS8603;CS8604;CS8765;CS8767;CS0618</NoWarn>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Polly" Version="8.1.0" />
+  </ItemGroup>
+
+  <!-- IAsyncEnumerable en netstandard2.0 (en net8.0 ya viene en el marco de trabajo). -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <InternalsVisibleTo Include="Trevol.Pruebas" />
+  </ItemGroup>
+
+</Project>

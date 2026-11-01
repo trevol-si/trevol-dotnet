@@ -1,0 +1,31 @@
+# Publicación del SDK de C# (docs/api/43 §2.13 y §2.14). Escrita, NO activa. Un tag `v*` la dispara; el environment `publicacion` exige la
+# aprobación del dueño. Publica en NuGet con *trusted publishing* (OIDC): sin API keys guardadas (configurar antes la política de publicación de
+# confianza del paquete `Trevol` en nuget.org con este repo y este flujo; y pedir la reserva del prefijo `Trevol.`).
+name: Publicar
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  nuget:
+    runs-on: ubuntu-latest
+    environment: publicacion
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - run: dotnet test pruebas/Trevol.Pruebas --nologo
+      - name: El tag coincide con la versión del paquete
+        run: test "v$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' src/Trevol/Trevol.csproj)" = "${GITHUB_REF_NAME}"
+      - run: dotnet pack src/Trevol -c Release --nologo -o paquete
+      - name: Credencial de corta vida de NuGet (OIDC)
+        id: nuget
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USUARIO }}
+      - run: dotnet nuget push "paquete/*.nupkg" --api-key "${{ steps.nuget.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json
