@@ -17,7 +17,7 @@
     <PackageProjectUrl>https://platform.trevol.si/docs</PackageProjectUrl>
     <PackageTags>trevol;dian;colombia;facturacion-electronica;invoice;sdk</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/trevol/trevol-dotnet</RepositoryUrl>
+    <RepositoryUrl>https://github.com/trevol-si/trevol-dotnet</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- Lo generado y los comentarios en español no llevan siempre XML completo: no se exige. -->
