@@ -45,7 +45,7 @@ namespace Trevol.Generado.Model
         /// <param name="numbering">Las numeraciones (resoluciones) activas del ambiente de la llave..</param>
         /// <param name="key">La llave con que se llamó..</param>
         /// <param name="capabilities">Lo que ESTA llave puede emitir ahora (documento soporte, equivalente, nómina, eventos RADIAN). Informativo: si una lectura falla, esa clave no aparece..</param>
-        public Company(string varObject = default, string id = default, string nit = default, string checkDigit = default, string name = default, string tradeName = default, string status = default, string varEnvironment = default, List<CompanyNumbering> numbering = default, CompanyKey key = default, Dictionary<string, Object> capabilities = default)
+        public Company(string varObject = default, string id = default, string nit = default, int? checkDigit = default, string name = default, string tradeName = default, string status = default, string varEnvironment = default, List<CompanyNumbering> numbering = default, CompanyKey key = default, Dictionary<string, Object> capabilities = default)
         {
             this.Object = varObject;
             this.Id = id;
@@ -84,7 +84,7 @@ namespace Trevol.Generado.Model
         /// Gets or Sets CheckDigit
         /// </summary>
         [DataMember(Name = "check_digit", EmitDefaultValue = true)]
-        public string CheckDigit { get; set; }
+        public int? CheckDigit { get; set; }
 
         /// <summary>
         /// La razón social.
