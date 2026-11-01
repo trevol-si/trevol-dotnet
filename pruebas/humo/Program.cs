@@ -2,7 +2,8 @@
 //
 //   TREVOL_API_KEY=tvl_test_… dotnet run --project pruebas/humo
 //
-// Solo lecturas y un preview (el SDK de C# NO emite). Se NIEGA a correr si la llave no es tvl_test_. TREVOL_BASE_URL (opcional) apunta a otro
+// Lecturas, un preview y un error tipado (validation_error); con TREVOL_HUMO_EMITIR=1 además EMITE una factura en habilitación, espera a que
+// quede final y descarga el PDF. Se NIEGA a correr si la llave no es tvl_test_. TREVOL_BASE_URL (opcional) apunta a otro
 // servidor, p. ej. un Prism local.
 using System.Security.Cryptography;
 using System.Text;
@@ -44,15 +45,28 @@ await Paso("RetrieveCompanyAsync", async () =>
     if (c.VarEnvironment != "test") throw new InvalidOperationException($"la empresa dice environment={c.VarEnvironment}"); // (el generador llama VarEnvironment a la propiedad «environment»)
     return $"{c.Name} ({c.Nit})";
 });
+InvoiceInput Factura(string externo, bool conLineas) => TrevolJson.Deserialize<InvoiceInput>(
+    "{\"external_id\": \"" + externo + "\", \"customer\": {\"final_consumer\": true}, \"items\": "
+    + (conLineas ? """[{"description": "Prueba de humo del SDK de Trevol", "quantity": "1", "unit_price": "1000", "taxes": [{"code": "01", "rate": "19"}]}]""" : "[]")
+    + """, "payment": {"form": "cash", "methods": [{"code": "10"}]}}""")!;
+
 await Paso("PreviewInvoiceAsync", async () =>
 {
-    var entrada = TrevolJson.Deserialize<InvoiceInput>("""
-        {"external_id": "HUMO-PREVIEW", "customer": {"final_consumer": true},
-         "items": [{"description": "Prueba de humo del SDK de Trevol", "quantity": "1", "unit_price": "1000", "taxes": [{"code": "01", "rate": "19"}]}],
-         "payment": {"form": "cash", "methods": [{"code": "10"}]}}
-        """);
-    var p = await trevol.Invoices.PreviewInvoiceAsync(entrada);
+    var p = await trevol.Invoices.PreviewInvoiceAsync(Factura("HUMO-PREVIEW", true));
     return "total " + (p.Totals != null && p.Totals.TryGetValue("total", out var total1) ? total1 : "?");
+});
+await Paso("PreviewInvoiceAsync sin líneas → ValidationException (code validation_error)", async () =>
+{
+    try
+    {
+        await trevol.Invoices.PreviewInvoiceAsync(Factura("HUMO-INVALIDA", false));
+    }
+    catch (ValidationException e)
+    {
+        if (e.Code != "validation_error") throw new InvalidOperationException($"code = {e.Code}");
+        return $"{e.Status} {e.Code} {(e.Errors.Count > 0 ? e.Errors[0].Pointer : "")}";
+    }
+    throw new InvalidOperationException("no lanzó ValidationException");
 });
 await Paso("ListInvoicesAsync + PaginateAsync (3)", async () =>
 {
@@ -86,6 +100,48 @@ await Paso("Webhook.Verify (firmado ahora, con un secreto local)", () =>
     var e = new Webhook("whsec_" + Convert.ToBase64String(clave)).Verify(cuerpo, new Dictionary<string, string> { ["webhook-id"] = id, ["webhook-timestamp"] = ts.ToString(), ["webhook-signature"] = firma });
     return Task.FromResult(e.Type ?? "");
 });
+
+if (Environment.GetEnvironmentVariable("TREVOL_HUMO_EMITIR") == "1")
+{
+    string? id = null;
+    await Paso("CreateInvoiceAsync (EMITE en habilitación)", async () =>
+    {
+        var d = await trevol.Invoices.CreateInvoiceAsync(invoiceInput: Factura($"HUMO-CS-{DateTimeOffset.UtcNow.ToUnixTimeSeconds()}", true));
+        id = d.Id;
+        return $"{d.Id} {d.Status}";
+    });
+    if (id != null)
+    {
+        await Paso("espera un estado final (hasta 90 s)", async () =>
+        {
+            var limite = DateTime.UtcNow.AddSeconds(90);
+            for (;;)
+            {
+                var estado = (await trevol.Invoices.RetrieveInvoiceAsync(id)).Status;
+                if (estado is not ("pending" or "sending" or "processing"))
+                {
+                    if (estado != "accepted") throw new InvalidOperationException($"status = {estado}");
+                    return estado;
+                }
+                if (DateTime.UtcNow > limite) throw new InvalidOperationException($"status = {estado}");
+                await Task.Delay(3000);
+            }
+        });
+        await Paso("DownloadInvoicePdfAsync", async () =>
+        {
+            var archivo = await trevol.Invoices.DownloadInvoicePdfAsync(id: id);
+            using var memoria = new MemoryStream();
+            await archivo.Content.CopyToAsync(memoria);
+            var bytes = memoria.ToArray();
+            if (bytes.Length < 4 || Encoding.ASCII.GetString(bytes, 0, 4) != "%PDF") throw new InvalidOperationException("no es un PDF");
+            return $"PDF {bytes.Length} bytes";
+        });
+    }
+}
+else
+{
+    Console.WriteLine("(no se emite nada: define TREVOL_HUMO_EMITIR=1 para emitir una factura en habilitación)");
+}
 
 Console.WriteLine($"\n{total - fallas}/{total} pasos bien");
 return fallas > 0 ? 1 : 0;
