@@ -186,4 +186,4 @@ new TrevolClient(llave, new TrevolClientOptions
 
 ## Licencia
 
-MIT © 2026 Trevol.
+MIT © 2026 Joshua Montclair (Trevol).

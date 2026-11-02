@@ -8,11 +8,11 @@
     <RootNamespace>Trevol</RootNamespace>
     <PackageId>Trevol</PackageId>
     <Version>0.1.0</Version>
-    <Authors>Trevol</Authors>
+    <Authors>Joshua Montclair (Trevol)</Authors>
     <Company>Trevol</Company>
     <Product>Trevol</Product>
     <Description>SDK de .NET para la API de Trevol (facturación electrónica y demás documentos ante la DIAN, Colombia).</Description>
-    <Copyright>Copyright (c) 2026 Trevol</Copyright>
+    <Copyright>Copyright (c) 2026 Joshua Montclair (Trevol)</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://platform.trevol.si/docs</PackageProjectUrl>
     <PackageTags>trevol;dian;colombia;facturacion-electronica;invoice;sdk</PackageTags>
