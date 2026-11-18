@@ -16,8 +16,8 @@ public class ClienteTests
         await b.Trevol.Invoices.RetrieveInvoiceAsync(Banco.IdDoc);
         var c = b.Peticiones[0].Cabeceras;
         Assert.Equal("Bearer " + Banco.LlaveTest, c["Authorization"]);
-        Assert.Equal("2026-10-22", c["Trevol-Version"]);
-        Assert.Equal("2026-10-22", Tablas.ApiVersion);
+        Assert.Equal("2026-11-18", c["Trevol-Version"]);
+        Assert.Equal("2026-11-18", Tablas.ApiVersion);
         Assert.Matches(new Regex("^trevol-dotnet/" + Regex.Escape(TrevolClient.Version) + @" \(.+; \+https://platform\.trevol\.si/docs\)$"), c["User-Agent"]);
         Assert.Equal("application/json, application/problem+json", c["Accept"]);
         Assert.DoesNotContain(c.Keys, k => k.StartsWith("x-trevol-", StringComparison.OrdinalIgnoreCase) || k.Equals("trevol-empresa", StringComparison.OrdinalIgnoreCase)

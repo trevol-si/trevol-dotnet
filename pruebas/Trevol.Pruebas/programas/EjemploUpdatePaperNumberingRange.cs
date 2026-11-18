@@ -1,0 +1,24 @@
+// Generado por sdks/herramientas/fragmentos.mjs: el fragmento de la documentación, apuntando a Prism. No editar.
+using System;
+using System.Threading.Tasks;
+using Trevol;
+using Trevol.Generado.Model;
+
+namespace Trevol.Pruebas.Programas { public static class EjemploUpdatePaperNumberingRange
+{
+    public static async Task Ejecutar()
+    {
+        var trevol = new TrevolClient(Environment.GetEnvironmentVariable("TREVOL_API_KEY"), new TrevolClientOptions { BaseUrl = Environment.GetEnvironmentVariable("TREVOL_PRISM_URL")!, MaxRetries = 0 }); // tvl_test_… → trevol.Environment == TrevolEnvironment.Test
+
+        var entrada = TrevolJson.Deserialize<PaperNumberingRangeUpdate>("""
+            {
+              "valid_to": "2028-06-30"
+            }
+            """);
+        var resultado = await trevol.PaperNumberingRanges.UpdatePaperNumberingRangeAsync(
+            id: "pnr_3f0c1a2b3f0c1a2b3f0c1a2b3f0c1a2b",
+            paperNumberingRangeUpdate: entrada
+        );
+        Console.WriteLine(TrevolJson.Serialize(resultado));
+    }
+} }

@@ -69,6 +69,18 @@ namespace Trevol
         public SupportDocumentAdjustmentsApi SupportDocumentAdjustments { get; }
         public SupportDocumentsApi SupportDocuments { get; }
         public WebhookEndpointsApi WebhookEndpoints { get; }
+        public CustomersApi Customers { get; }
+        public DianDocumentsApi DianDocuments { get; }
+        public DianSyncsApi DianSyncs { get; }
+        public InvoiceBatchesApi InvoiceBatches { get; }
+        public NumberingAssociationsApi NumberingAssociations { get; }
+        public NumberingRangesApi NumberingRanges { get; }
+        public NumberingRequestsApi NumberingRequests { get; }
+        public PaperNumberingRangesApi PaperNumberingRanges { get; }
+        public ProductsApi Products { get; }
+        public RadianStatusApi RadianStatus { get; }
+        public ReportRunsApi ReportRuns { get; }
+        public ReportsApi Reports { get; }
 
         /// <param name="apiKey"><c>tvl_test_…</c> o <c>tvl_live_…</c>; si falta se lee <c>TREVOL_API_KEY</c>.</param>
         /// <param name="options">Las opciones; ninguna es obligatoria.</param>
@@ -112,6 +124,18 @@ namespace Trevol
             SupportDocumentAdjustments = new SupportDocumentAdjustmentsApi(_http, config);
             SupportDocuments = new SupportDocumentsApi(_http, config);
             WebhookEndpoints = new WebhookEndpointsApi(_http, config);
+            Customers = new CustomersApi(_http, config);
+            DianDocuments = new DianDocumentsApi(_http, config);
+            DianSyncs = new DianSyncsApi(_http, config);
+            InvoiceBatches = new InvoiceBatchesApi(_http, config);
+            NumberingAssociations = new NumberingAssociationsApi(_http, config);
+            NumberingRanges = new NumberingRangesApi(_http, config);
+            NumberingRequests = new NumberingRequestsApi(_http, config);
+            PaperNumberingRanges = new PaperNumberingRangesApi(_http, config);
+            Products = new ProductsApi(_http, config);
+            RadianStatus = new RadianStatusApi(_http, config);
+            ReportRuns = new ReportRunsApi(_http, config);
+            Reports = new ReportsApi(_http, config);
 
             // Piloto: el generador marca como «emitir aunque sea nulo» los campos opcionales sin tipo (p. ej. `rounding`), y un `"rounding": null` que la
             // persona no escribió lo rechaza la API (422). Una propiedad sin valor se omite, como en los demás SDK.
@@ -119,7 +143,10 @@ namespace Trevol
             {
                 Balance.ApiClient, CreditNotes.ApiClient, DebitNotes.ApiClient, EquivalentDocumentAdjustments.ApiClient, EquivalentDocuments.ApiClient,
                 Events.ApiClient, General.ApiClient, Invoices.ApiClient, PayrollAdjustments.ApiClient, Payrolls.ApiClient, RadianEvents.ApiClient,
-                Requests.ApiClient, SupportDocumentAdjustments.ApiClient, SupportDocuments.ApiClient, WebhookEndpoints.ApiClient
+                Requests.ApiClient, SupportDocumentAdjustments.ApiClient, SupportDocuments.ApiClient, WebhookEndpoints.ApiClient,
+                Customers.ApiClient, DianDocuments.ApiClient, DianSyncs.ApiClient, InvoiceBatches.ApiClient, NumberingAssociations.ApiClient,
+                NumberingRanges.ApiClient, NumberingRequests.ApiClient, PaperNumberingRanges.ApiClient, Products.ApiClient, RadianStatus.ApiClient,
+                ReportRuns.ApiClient, Reports.ApiClient
             })
             {
                 cliente.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;

@@ -19,7 +19,7 @@ public class FragmentosTests
     public void LaEstructura()
     {
         var ops = Operaciones().Select(o => (string)o[0]).ToArray();
-        Assert.Equal(109, ops.Length);
+        Assert.Equal(149, ops.Length);
         var fragmentos = (JObject)Banco.Leer("fragmentos.json")["fragmentos"]!;
         foreach (var op in ops) Assert.Contains("new TrevolClient(", (string)fragmentos[op]!["csharp"]!);
         var presentes = typeof(FragmentosTests).Assembly.GetTypes().Where(t => t.Namespace == "Trevol.Pruebas.Programas" && t.DeclaringType == null && !t.Name.StartsWith("<")).Select(t => t.FullName).OrderBy(x => x, StringComparer.Ordinal).ToArray();
