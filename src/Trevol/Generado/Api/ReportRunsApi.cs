@@ -94,7 +94,7 @@ namespace Trevol.Generado.Api
         /// El enlace de descarga del archivo de un reporte
         /// </summary>
         /// <remarks>
-        /// El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;).
+        /// El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;). Si lo pidió una llave con &#x60;customers:read&#x60;, el archivo trae el número de documento de los clientes y bajarlo pide ese permiso a la llave que lo baja: sin él, 403 &#x60;permission_denied&#x60; con &#x60;required_permission: \&quot;customers:read\&quot;&#x60;.
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -105,7 +105,7 @@ namespace Trevol.Generado.Api
         /// El enlace de descarga del archivo de un reporte
         /// </summary>
         /// <remarks>
-        /// El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;).
+        /// El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;). Si lo pidió una llave con &#x60;customers:read&#x60;, el archivo trae el número de documento de los clientes y bajarlo pide ese permiso a la llave que lo baja: sin él, 403 &#x60;permission_denied&#x60; con &#x60;required_permission: \&quot;customers:read\&quot;&#x60;.
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -199,7 +199,7 @@ namespace Trevol.Generado.Api
         /// El enlace de descarga del archivo de un reporte
         /// </summary>
         /// <remarks>
-        /// El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;).
+        /// El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;). Si lo pidió una llave con &#x60;customers:read&#x60;, el archivo trae el número de documento de los clientes y bajarlo pide ese permiso a la llave que lo baja: sin él, 403 &#x60;permission_denied&#x60; con &#x60;required_permission: \&quot;customers:read\&quot;&#x60;.
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -211,7 +211,7 @@ namespace Trevol.Generado.Api
         /// El enlace de descarga del archivo de un reporte
         /// </summary>
         /// <remarks>
-        /// El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;).
+        /// El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;). Si lo pidió una llave con &#x60;customers:read&#x60;, el archivo trae el número de documento de los clientes y bajarlo pide ese permiso a la llave que lo baja: sin él, 403 &#x60;permission_denied&#x60; con &#x60;required_permission: \&quot;customers:read\&quot;&#x60;.
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -855,7 +855,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// El enlace de descarga del archivo de un reporte El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;).
+        /// El enlace de descarga del archivo de un reporte El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;). Si lo pidió una llave con &#x60;customers:read&#x60;, el archivo trae el número de documento de los clientes y bajarlo pide ese permiso a la llave que lo baja: sin él, 403 &#x60;permission_denied&#x60; con &#x60;required_permission: \&quot;customers:read\&quot;&#x60;.
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -867,7 +867,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// El enlace de descarga del archivo de un reporte El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;).
+        /// El enlace de descarga del archivo de un reporte El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;). Si lo pidió una llave con &#x60;customers:read&#x60;, el archivo trae el número de documento de los clientes y bajarlo pide ese permiso a la llave que lo baja: sin él, 403 &#x60;permission_denied&#x60; con &#x60;required_permission: \&quot;customers:read\&quot;&#x60;.
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -917,7 +917,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// El enlace de descarga del archivo de un reporte El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;).
+        /// El enlace de descarga del archivo de un reporte El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;). Si lo pidió una llave con &#x60;customers:read&#x60;, el archivo trae el número de documento de los clientes y bajarlo pide ese permiso a la llave que lo baja: sin él, 403 &#x60;permission_denied&#x60; con &#x60;required_permission: \&quot;customers:read\&quot;&#x60;.
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -930,7 +930,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// El enlace de descarga del archivo de un reporte El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;).
+        /// El enlace de descarga del archivo de un reporte El archivo de un reporte listo: un enlace firmado que vale 5 minutos y descarga el CSV o el Excel con el nombre &#x60;trevol-documentos-&lt;desde&gt;_&lt;hasta&gt;.&lt;csv|xlsx&gt;&#x60; (sin el NIT ni el nombre de la empresa). Es JSON, no una redirección: descarga &#x60;url&#x60; SIN tu llave (el enlace ya lleva su permiso). Pide uno nuevo cuando venza. Si el reporte todavía se genera, falló o su archivo venció: 409 &#x60;file_unavailable&#x60; con &#x60;reason&#x60; (&#x60;not_ready&#x60;, &#x60;failed&#x60; o &#x60;expired&#x60;). Si lo pidió una llave con &#x60;customers:read&#x60;, el archivo trae el número de documento de los clientes y bajarlo pide ese permiso a la llave que lo baja: sin él, 403 &#x60;permission_denied&#x60; con &#x60;required_permission: \&quot;customers:read\&quot;&#x60;.
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>

@@ -39,8 +39,9 @@ namespace Trevol.Generado.Model
         /// <param name="documentNumber">documentNumber.</param>
         /// <param name="found">found.</param>
         /// <param name="name">name.</param>
-        /// <param name="email">email.</param>
-        public Acquirer(string varObject = default, string documentType = default, string documentNumber = default, bool found = default, string name = default, string email = default)
+        /// <param name="email">Null si la DIAN no lo tiene o si la llave no tiene el permiso &#x60;customers:read&#x60; (es un dato personal)..</param>
+        /// <param name="personalData">Solo si la llave no tiene el permiso &#x60;customers:read&#x60;: &#x60;email&#x60; viene en null. Valores conocidos: &#x60;redacted&#x60;..</param>
+        public Acquirer(string varObject = default, string documentType = default, string documentNumber = default, bool found = default, string name = default, string email = default, string personalData = default)
         {
             this.Object = varObject;
             this.DocumentType = documentType;
@@ -48,6 +49,7 @@ namespace Trevol.Generado.Model
             this.Found = found;
             this.Name = name;
             this.Email = email;
+            this.PersonalData = personalData;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -83,10 +85,18 @@ namespace Trevol.Generado.Model
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Email
+        /// Null si la DIAN no lo tiene o si la llave no tiene el permiso &#x60;customers:read&#x60; (es un dato personal).
         /// </summary>
+        /// <value>Null si la DIAN no lo tiene o si la llave no tiene el permiso &#x60;customers:read&#x60; (es un dato personal).</value>
         [DataMember(Name = "email", EmitDefaultValue = true)]
         public string Email { get; set; }
+
+        /// <summary>
+        /// Solo si la llave no tiene el permiso &#x60;customers:read&#x60;: &#x60;email&#x60; viene en null. Valores conocidos: &#x60;redacted&#x60;.
+        /// </summary>
+        /// <value>Solo si la llave no tiene el permiso &#x60;customers:read&#x60;: &#x60;email&#x60; viene en null. Valores conocidos: &#x60;redacted&#x60;.</value>
+        [DataMember(Name = "personal_data", EmitDefaultValue = false)]
+        public string PersonalData { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -108,6 +118,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Found: ").Append(Found).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  PersonalData: ").Append(PersonalData).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
