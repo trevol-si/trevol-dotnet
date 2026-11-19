@@ -3,13 +3,15 @@
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y el versionado, [SemVer](https://semver.org/lang/es/): antes
 de la 1.0, un cambio incompatible sube el número menor.
 
-## [Sin publicar]
+## [0.2.0] — 2026-11-18
 
 Regenerado con la API de noviembre de 2026 (versión `2026-11-18`, la de los errores juntos; 149 operaciones y 70 tipos de evento).
 
 - Recursos nuevos: `Customers`, `DianDocuments`, `DianSyncs`, `InvoiceBatches`, `NumberingAssociations`, `NumberingRanges`, `NumberingRequests`, `PaperNumberingRanges`, `Products`, `RadianStatus`, `ReportRuns`, `Reports`: lo recibido y el XML de la DIAN, la sincronización, el estado RADIAN, clientes y productos, numeraciones
   (también el modo simulado de las llaves de prueba), lotes de facturas, reportes (también los asíncronos) y la numeración de talonario.
 - `Trevol-Version` por defecto: `2026-11-18`.
+- `PaginateAsync` recorre también los listados nuevos (clientes, productos, documentos recibidos, sincronizaciones, lotes,
+  numeraciones, solicitudes de numeración, numeraciones de talonario y reportes).
 - Errores tipados para los códigos nuevos (`company_busy`, `confirmation_required`, `duplicate_customer`, `duplicate_product`,
   `numbering_request_in_progress`, `range_protected`, `paper_numbering_limit_reached` → conflicto; `automatic_mode_unavailable`,
   `portal_read_required`, `report_too_large` → precondición).
@@ -19,7 +21,7 @@ Regenerado con la API de noviembre de 2026 (versión `2026-11-18`, la de los err
 - `Acquirer` trae `personal_data` (`redacted` si la llave no tiene `customers:read`: `email` viene en null). El PDF, el XML y el
   ZIP de lo emitido y el archivo de un reporte asíncrono con datos personales responden 403 `permission_denied` sin ese permiso.
 
-## [0.1.0] — sin publicar
+## [0.1.0] — 2026-11-01
 
 Primera versión (API `2026-10-22`).
 
