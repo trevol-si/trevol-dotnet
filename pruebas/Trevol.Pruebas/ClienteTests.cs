@@ -164,8 +164,9 @@ public class ClienteTests
             var t = pendientes.Pop();
             if (t is JObject obj)
             {
-                if (obj.TryGetValue("$ref", out var r) && visitados.Add((string)r!)) pendientes.Push(esquemas[((string)r!).Split('/').Last()]!);
-                Assert.NotEqual("date-time", (string?)obj["format"]);
+                // `$ref` y `format` solo cuentan como palabras clave si son texto: ReportRunInput tiene una PROPIEDAD llamada `format`.
+                if (obj["$ref"] is JValue { Type: JTokenType.String } r && visitados.Add((string)r!)) pendientes.Push(esquemas[((string)r!).Split('/').Last()]!);
+                if (obj["format"] is JValue { Type: JTokenType.String } f) Assert.NotEqual("date-time", (string?)f);
                 foreach (var h in obj.Properties()) pendientes.Push(h.Value);
             }
             else if (t is JArray a) foreach (var x in a) pendientes.Push(x);
