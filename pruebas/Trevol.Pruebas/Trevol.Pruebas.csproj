@@ -8,7 +8,7 @@
     <IsPackable>false</IsPackable>
     <RootNamespace>Trevol.Pruebas</RootNamespace>
     <NoWarn>$(NoWarn);CS8632;CS0618;CS8600;CS8602;CS8604;CS8625;CS8603</NoWarn>
-    <!-- Las pruebas de fragmentos compilan 149 programas (uno por operación) como parte del proyecto. -->
+    <!-- Las pruebas de fragmentos compilan 159 programas (uno por operación) como parte del proyecto. -->
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 

@@ -17,7 +17,7 @@ public class ErroresTests
         ((JObject)Banco.Leer("errores.json")["clases"]!).Properties().SelectMany(p => ((JArray)p.Value).Select(c => new object[] { p.Name, (string)c! }));
 
     [Fact]
-    public void CubreLos40Code() => Assert.Equal(40, Codes().Count());
+    public void CubreLos43Code() => Assert.Equal(43, Codes().Count());
 
     [Theory]
     [MemberData(nameof(Codes))]

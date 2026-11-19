@@ -47,7 +47,7 @@ namespace Trevol.Generado.Api
         /// La empresa de la llave
         /// </summary>
         /// <remarks>
-        /// La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece.
+        /// La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece. Con una llave de administración, la empresa es la de &#x60;Trevol-Company&#x60; y &#x60;key&#x60; es la identidad con que esa llave trabaja en la empresa (un &#x60;key_…&#x60; que no sale en &#x60;GET /v1/account/companies/{id}/api_keys&#x60;).
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Company</returns>
@@ -57,7 +57,7 @@ namespace Trevol.Generado.Api
         /// La empresa de la llave
         /// </summary>
         /// <remarks>
-        /// La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece.
+        /// La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece. Con una llave de administración, la empresa es la de &#x60;Trevol-Company&#x60; y &#x60;key&#x60; es la identidad con que esa llave trabaja en la empresa (un &#x60;key_…&#x60; que no sale en &#x60;GET /v1/account/companies/{id}/api_keys&#x60;).
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of Company</returns>
@@ -116,7 +116,7 @@ namespace Trevol.Generado.Api
         /// La empresa de la llave
         /// </summary>
         /// <remarks>
-        /// La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece.
+        /// La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece. Con una llave de administración, la empresa es la de &#x60;Trevol-Company&#x60; y &#x60;key&#x60; es la identidad con que esa llave trabaja en la empresa (un &#x60;key_…&#x60; que no sale en &#x60;GET /v1/account/companies/{id}/api_keys&#x60;).
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -127,7 +127,7 @@ namespace Trevol.Generado.Api
         /// La empresa de la llave
         /// </summary>
         /// <remarks>
-        /// La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece.
+        /// La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece. Con una llave de administración, la empresa es la de &#x60;Trevol-Company&#x60; y &#x60;key&#x60; es la identidad con que esa llave trabaja en la empresa (un &#x60;key_…&#x60; que no sale en &#x60;GET /v1/account/companies/{id}/api_keys&#x60;).
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -469,7 +469,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// La empresa de la llave La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece.
+        /// La empresa de la llave La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece. Con una llave de administración, la empresa es la de &#x60;Trevol-Company&#x60; y &#x60;key&#x60; es la identidad con que esa llave trabaja en la empresa (un &#x60;key_…&#x60; que no sale en &#x60;GET /v1/account/companies/{id}/api_keys&#x60;).
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Company</returns>
@@ -480,7 +480,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// La empresa de la llave La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece.
+        /// La empresa de la llave La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece. Con una llave de administración, la empresa es la de &#x60;Trevol-Company&#x60; y &#x60;key&#x60; es la identidad con que esa llave trabaja en la empresa (un &#x60;key_…&#x60; que no sale en &#x60;GET /v1/account/companies/{id}/api_keys&#x60;).
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of Company</returns>
@@ -524,7 +524,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// La empresa de la llave La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece.
+        /// La empresa de la llave La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece. Con una llave de administración, la empresa es la de &#x60;Trevol-Company&#x60; y &#x60;key&#x60; es la identidad con que esa llave trabaja en la empresa (un &#x60;key_…&#x60; que no sale en &#x60;GET /v1/account/companies/{id}/api_keys&#x60;).
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -536,7 +536,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// La empresa de la llave La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece.
+        /// La empresa de la llave La empresa de la llave: NIT, razón social, ambiente y numeraciones activas. Desde la fase 3 trae &#x60;capabilities&#x60;, un resumen de lo que ESTA llave puede emitir ahora: documento soporte (con su numeración), documento equivalente (con los prefijos POS), nómina (&#x60;status&#x60;: &#x60;enabled&#x60;, &#x60;testing&#x60;, &#x60;not_registered&#x60; o &#x60;not_enabled&#x60;, según el ambiente de la llave) y eventos RADIAN (representante legal). Es informativo: si una lectura falla, esa clave no aparece. Con una llave de administración, la empresa es la de &#x60;Trevol-Company&#x60; y &#x60;key&#x60; es la identidad con que esa llave trabaja en la empresa (un &#x60;key_…&#x60; que no sale en &#x60;GET /v1/account/companies/{id}/api_keys&#x60;).
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

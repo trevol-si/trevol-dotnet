@@ -114,7 +114,12 @@ namespace Trevol
             }
         }
 
+        /// <summary>La propiedad de la petición con la empresa del cliente (la pone <see cref="ConEmpresa"/>; solo con una llave de administración).</summary>
+        internal const string PropiedadEmpresa = "Trevol.Company";
+
         private readonly string _llave;
+        private readonly TrevolKeyType _tipo;
+        private readonly string _entorno;
         private readonly string _apiVersion;
         private readonly string _userAgent;
         private readonly int _maxReintentos;
@@ -126,16 +131,23 @@ namespace Trevol
         private readonly Func<string> _uuid;
         private readonly Func<DateTimeOffset> _ahora;
 
-        internal Transporte(HttpMessageHandler interno, string llave, string apiVersion, string userAgent, int maxReintentos, double maxRetryAfter,
+        internal Transporte(HttpMessageHandler interno, string llave, TrevolKeyType tipo, TrevolEnvironment entorno, string apiVersion, string userAgent, int maxReintentos, double maxRetryAfter,
             TimeSpan timeout, string rutaBase, Func<double, CancellationToken, Task> dormir, Func<double> azar, Func<string> uuid, Func<DateTimeOffset> ahora)
             : base(interno)
         {
-            _llave = llave; _apiVersion = apiVersion; _userAgent = userAgent; _maxReintentos = maxReintentos; _maxRetryAfter = maxRetryAfter;
+            _llave = llave; _tipo = tipo; _entorno = entorno == TrevolEnvironment.Test ? "test" : "live"; _apiVersion = apiVersion; _userAgent = userAgent; _maxReintentos = maxReintentos; _maxRetryAfter = maxRetryAfter;
             _timeout = timeout; _rutaBase = rutaBase; _dormir = dormir; _azar = azar; _uuid = uuid; _ahora = ahora;
         }
 
         /// <summary>La llave nunca sale en un ToString, un log ni un volcado.</summary>
-        public override string ToString() => $"Transporte(apiVersion={_apiVersion}, maxReintentos={_maxReintentos})";
+        public override string ToString() => $"Transporte(keyType={_tipo}, environment={_entorno}, apiVersion={_apiVersion}, maxReintentos={_maxReintentos})";
+
+        /// <summary>Qué llave admite una ruta que no está en las tablas (una ruta nueva de la API): lo de <c>/account</c> es de administración.</summary>
+        private static string LlaveDeRuta(string ruta) =>
+            ruta == "/account" || ruta.StartsWith("/account/", StringComparison.Ordinal) ? "administracion" : ruta == "/health" ? "ninguna" : "api_o_administracion";
+
+        private static bool EsCabeceraDeEmpresa(string nombre) =>
+            string.Equals(nombre, "Trevol-Company", StringComparison.OrdinalIgnoreCase) || string.Equals(nombre, "Trevol-Environment", StringComparison.OrdinalIgnoreCase);
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
@@ -144,6 +156,22 @@ namespace Trevol
             if (_rutaBase.Length > 0 && ruta.StartsWith(_rutaBase, StringComparison.Ordinal)) ruta = ruta.Substring(_rutaBase.Length);
             var op = Operacion(metodo, ruta);
             var reintento = op != null ? op.Reintento : (metodo == "GET" ? "seguro" : "solo_429");
+
+            // Con una llave de administración, cada ruta de una empresa lleva Trevol-Company y Trevol-Environment (sin valor por defecto en la API).
+            // Sin empresa, el error es local y sale ANTES de mandar nada. Con una llave tvl_ esas cabeceras no se mandan nunca, y una operación
+            // de /account (que solo admite una tva_) tampoco sale: la API la rechazaría de seguro con 401.
+            var llaveDeLaOperacion = op?.Llave ?? LlaveDeRuta(ruta);
+            if (_tipo == TrevolKeyType.Api && llaveDeLaOperacion == "administracion")
+                throw new ConfigurationException($"{(op != null ? op.OperationId : metodo + " " + ruta)} pide una llave de administración (tva_test_… o tva_live_…); " +
+                    "una llave tvl_ es de una sola empresa. La crea el titular de la cuenta en https://platform.trevol.si/administracion.");
+            string? empresa = null;
+            if (_tipo == TrevolKeyType.Account && llaveDeLaOperacion == "api_o_administracion")
+            {
+                empresa = request.Properties.TryGetValue(PropiedadEmpresa, out var dada) ? dada as string : null;
+                if (empresa == null)
+                    throw new ConfigurationException($"Con una llave de administración (tva_…), {(op != null ? op.OperationId : metodo + " " + ruta)} necesita saber en qué empresa: " +
+                        "pasa Company en TrevolClientOptions o usa trevol.WithCompany(\"com_…\"). Las operaciones de trevol.Account no la necesitan.");
+            }
 
             // La Idempotency-Key: una por llamada, la misma en todos los reintentos.
             string? clave = null;
@@ -167,7 +195,7 @@ namespace Trevol
             {
                 using var peticion = new HttpRequestMessage(request.Method, request.RequestUri) { Version = request.Version };
                 foreach (var h in request.Headers.Where(h => !string.Equals(h.Key, "Idempotency-Key", StringComparison.OrdinalIgnoreCase) && !string.Equals(h.Key, "Accept", StringComparison.OrdinalIgnoreCase)
-                    && !string.Equals(h.Key, "User-Agent", StringComparison.OrdinalIgnoreCase) && !string.Equals(h.Key, "Authorization", StringComparison.OrdinalIgnoreCase)))
+                    && !string.Equals(h.Key, "User-Agent", StringComparison.OrdinalIgnoreCase) && !string.Equals(h.Key, "Authorization", StringComparison.OrdinalIgnoreCase) && !EsCabeceraDeEmpresa(h.Key)))
                     peticion.Headers.TryAddWithoutValidation(h.Key, h.Value);
                 if (cuerpo != null)
                 {
@@ -177,6 +205,11 @@ namespace Trevol
                 if (clave != null) peticion.Headers.TryAddWithoutValidation("Idempotency-Key", clave);
                 peticion.Headers.TryAddWithoutValidation("Authorization", "Bearer " + _llave);
                 peticion.Headers.TryAddWithoutValidation("Trevol-Version", _apiVersion);
+                if (empresa != null)
+                {
+                    peticion.Headers.TryAddWithoutValidation("Trevol-Company", empresa);
+                    peticion.Headers.TryAddWithoutValidation("Trevol-Environment", _entorno);
+                }
                 peticion.Headers.TryAddWithoutValidation("User-Agent", _userAgent);
                 peticion.Headers.TryAddWithoutValidation("Accept", Aceptar(op?.Binario));
 
@@ -225,6 +258,25 @@ namespace Trevol
                 }
                 await _dormir(decision.Espera ?? 0.0, cancellationToken).ConfigureAwait(false);
             }
+        }
+    }
+
+    /// <summary>
+    /// Lo único propio de cada cliente derivado (<see cref="TrevolClient.WithCompany"/>): anota en la petición la empresa y la pasa al
+    /// <see cref="Transporte"/> compartido (las mismas conexiones, la misma llave). No lleva la llave.
+    /// </summary>
+    internal sealed class ConEmpresa : DelegatingHandler
+    {
+        private readonly string? _empresa;
+
+        internal ConEmpresa(string? empresa, HttpMessageHandler interno) : base(interno) { _empresa = empresa; }
+
+        public override string ToString() => $"ConEmpresa(company={_empresa ?? "null"})";
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            if (_empresa != null) request.Properties[Transporte.PropiedadEmpresa] = _empresa;
+            return base.SendAsync(request, cancellationToken);
         }
     }
 }

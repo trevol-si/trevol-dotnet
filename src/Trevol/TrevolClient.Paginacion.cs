@@ -11,6 +11,26 @@ namespace Trevol
     {
         // Una sobrecarga por sobre de lista: el compilador elige la correcta por lo que devuelve tu lambda y `var f` ya es el modelo.
         // Si la API suma un listado, la prueba de cobertura falla hasta agregar su sobrecarga.
+        /// <summary>Recorre todas las páginas de un listado de <c>AccountApiKey</c> (llave de administración), perezosamente (<c>await foreach</c>).</summary>
+        public IAsyncEnumerable<AccountApiKey> PaginateAsync(Func<string?, Task<AccountApiKeyList>> pagina, CancellationToken cancellationToken = default) =>
+            Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Id, cancellationToken);
+
+        /// <summary>Recorre todas las páginas de un listado de <c>AccountCompany</c> (llave de administración), perezosamente (<c>await foreach</c>).</summary>
+        public IAsyncEnumerable<AccountCompany> PaginateAsync(Func<string?, Task<AccountCompanyList>> pagina, CancellationToken cancellationToken = default) =>
+            Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Id, cancellationToken);
+
+        /// <summary>Recorre todas las páginas de un listado de <c>AccountDianDocument</c> (llave de administración), perezosamente (<c>await foreach</c>).</summary>
+        public IAsyncEnumerable<AccountDianDocument> PaginateAsync(Func<string?, Task<AccountDianDocumentList>> pagina, CancellationToken cancellationToken = default) =>
+            Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Id, cancellationToken);
+
+        /// <summary>Recorre todas las páginas de un listado de <c>AccountRadianEvent</c> (llave de administración), perezosamente (<c>await foreach</c>).</summary>
+        public IAsyncEnumerable<AccountRadianEvent> PaginateAsync(Func<string?, Task<AccountRadianEventList>> pagina, CancellationToken cancellationToken = default) =>
+            Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Id, cancellationToken);
+
+        /// <summary>Recorre todas las páginas de un listado de <c>AccountRequestLog</c> (llave de administración), perezosamente (<c>await foreach</c>).</summary>
+        public IAsyncEnumerable<AccountRequestLog> PaginateAsync(Func<string?, Task<AccountRequestLogList>> pagina, CancellationToken cancellationToken = default) =>
+            Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Id, cancellationToken);
+
         /// <summary>Recorre todas las páginas de un listado de <c>BalanceTransaction</c>, perezosamente (<c>await foreach</c>).</summary>
         public IAsyncEnumerable<BalanceTransaction> PaginateAsync(Func<string?, Task<BalanceTransactionList>> pagina, CancellationToken cancellationToken = default) =>
             Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Id, cancellationToken);

@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Trevol.Pruebas;
 
+[Collection(LlaveDelEntorno.Coleccion)]
 public class ClienteTests
 {
     [Fact]

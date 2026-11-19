@@ -31,7 +31,7 @@ namespace Trevol.Generado.Api
         /// El registro de peticiones de la empresa y el ambiente de la llave (30 días)
         /// </summary>
         /// <remarks>
-        /// Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla.
+        /// Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla. Lo que hizo una llave de administración en la empresa sale con el &#x60;key_…&#x60; de su identidad en la empresa (el de &#x60;GET /v1/company&#x60;); su propio registro, con la IP, está en &#x60;GET /v1/account/requests&#x60;.
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit"> (optional)</param>
@@ -47,7 +47,7 @@ namespace Trevol.Generado.Api
         /// El registro de peticiones de la empresa y el ambiente de la llave (30 días)
         /// </summary>
         /// <remarks>
-        /// Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla.
+        /// Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla. Lo que hizo una llave de administración en la empresa sale con el &#x60;key_…&#x60; de su identidad en la empresa (el de &#x60;GET /v1/company&#x60;); su propio registro, con la IP, está en &#x60;GET /v1/account/requests&#x60;.
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit"> (optional)</param>
@@ -71,7 +71,7 @@ namespace Trevol.Generado.Api
         /// El registro de peticiones de la empresa y el ambiente de la llave (30 días)
         /// </summary>
         /// <remarks>
-        /// Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla.
+        /// Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla. Lo que hizo una llave de administración en la empresa sale con el &#x60;key_…&#x60; de su identidad en la empresa (el de &#x60;GET /v1/company&#x60;); su propio registro, con la IP, está en &#x60;GET /v1/account/requests&#x60;.
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit"> (optional)</param>
@@ -88,7 +88,7 @@ namespace Trevol.Generado.Api
         /// El registro de peticiones de la empresa y el ambiente de la llave (30 días)
         /// </summary>
         /// <remarks>
-        /// Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla.
+        /// Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla. Lo que hizo una llave de administración en la empresa sale con el &#x60;key_…&#x60; de su identidad en la empresa (el de &#x60;GET /v1/company&#x60;); su propio registro, con la IP, está en &#x60;GET /v1/account/requests&#x60;.
         /// </remarks>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit"> (optional)</param>
@@ -314,7 +314,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// El registro de peticiones de la empresa y el ambiente de la llave (30 días) Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla.
+        /// El registro de peticiones de la empresa y el ambiente de la llave (30 días) Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla. Lo que hizo una llave de administración en la empresa sale con el &#x60;key_…&#x60; de su identidad en la empresa (el de &#x60;GET /v1/company&#x60;); su propio registro, con la IP, está en &#x60;GET /v1/account/requests&#x60;.
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit"> (optional)</param>
@@ -331,7 +331,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// El registro de peticiones de la empresa y el ambiente de la llave (30 días) Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla.
+        /// El registro de peticiones de la empresa y el ambiente de la llave (30 días) Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla. Lo que hizo una llave de administración en la empresa sale con el &#x60;key_…&#x60; de su identidad en la empresa (el de &#x60;GET /v1/company&#x60;); su propio registro, con la IP, está en &#x60;GET /v1/account/requests&#x60;.
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit"> (optional)</param>
@@ -405,7 +405,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// El registro de peticiones de la empresa y el ambiente de la llave (30 días) Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla.
+        /// El registro de peticiones de la empresa y el ambiente de la llave (30 días) Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla. Lo que hizo una llave de administración en la empresa sale con el &#x60;key_…&#x60; de su identidad en la empresa (el de &#x60;GET /v1/company&#x60;); su propio registro, con la IP, está en &#x60;GET /v1/account/requests&#x60;.
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit"> (optional)</param>
@@ -423,7 +423,7 @@ namespace Trevol.Generado.Api
         }
 
         /// <summary>
-        /// El registro de peticiones de la empresa y el ambiente de la llave (30 días) Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla.
+        /// El registro de peticiones de la empresa y el ambiente de la llave (30 días) Cada petición que pasó la autenticación de una llave, aunque terminara en 403, 422 o 429. Sin cuerpos, consultas, IP ni llaves; &#x60;path&#x60; es la plantilla. Lo que hizo una llave de administración en la empresa sale con el &#x60;key_…&#x60; de su identidad en la empresa (el de &#x60;GET /v1/company&#x60;); su propio registro, con la IP, está en &#x60;GET /v1/account/requests&#x60;.
         /// </summary>
         /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="limit"> (optional)</param>

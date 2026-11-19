@@ -7,10 +7,10 @@ RADIAN ante la DIAN (Colombia). Documentación: <https://platform.trevol.si/docs
 > clients generated from the OpenAPI spec (OpenAPI Generator `csharp` / `httpclient`, namespace `Trevol.Generado`), plus a thin hand-written layer
 > (namespace `Trevol`, client `TrevolClient`): automatic `Idempotency-Key` (the same one on retries), retries with exponential backoff
 > honouring `Retry-After`, typed exceptions by problem+json `code`, environment inferred from the key prefix (`tvl_test_` = DIAN test
-> environment, `tvl_live_` = production), pinned `Trevol-Version`, Standard Webhooks signature verification, cursor pagination with
+> environment, `tvl_live_` = production; account keys `tva_test_`/`tva_live_` too, with `Company`/`WithCompany` for per-company calls), pinned `Trevol-Version`, Standard Webhooks signature verification, cursor pagination with
 > `IAsyncEnumerable<T>` and PDF/XML/ZIP downloads. Docs are in Spanish like the API.
 
-**Versión 0.2.0** — API `2026-11-18`. Licencia MIT.
+**Versión 0.3.0** (sin publicar) — API `2026-11-18`. Licencia MIT.
 
 ## Instalación
 
@@ -25,7 +25,7 @@ Newtonsoft.Json, Polly y JsonSubTypes (los usa el código generado) y, en `netst
 
 La llave de la API se crea en la consola de desarrolladores (<https://platform.trevol.si/llaves>) y se guarda en el entorno de tu **servidor**:
 `TREVOL_API_KEY`. Una llave `tvl_test_…` llama a la habilitación de la DIAN; una `tvl_live_…`, a producción. El SDK deduce el entorno del
-prefijo (`trevol.Environment`). La clase se llama `TrevolClient` y no `Trevol` porque el espacio de nombres ya es `Trevol`.
+prefijo (`trevol.Environment`). Para varias empresas de una cuenta, mira [Llave de administración](#llave-de-administración). La clase se llama `TrevolClient` y no `Trevol` porque el espacio de nombres ya es `Trevol`.
 
 ```csharp
 using Trevol;
@@ -73,6 +73,29 @@ uno tiene también su versión síncrona. **Usa argumentos con nombre**: el orde
 si la API suma un filtro opcional; los nombres no. El cuerpo es el modelo generado (`InvoiceInput`) o, lo más cómodo, desde JSON con
 `TrevolJson.Deserialize<InvoiceInput>(texto)` (los campos se llaman igual que en la API: `external_id`); los importes y las fechas viajan como texto
 (`"32000.50"`, `"2026-10-31"`). (Los literales `"""` de texto sin procesar necesitan C# 11 en *tu* código; el SDK compila con cualquier versión.)
+
+## Llave de administración
+
+Si llevas varias empresas en una cuenta, una llave de administración (`tva_test_…` o `tva_live_…`, la crea el titular en la consola) sirve en
+`trevol.Account` (tus empresas, reservar una, las llaves de cada empresa y lo emitido, lo recibido y los eventos RADIAN de todas) y, si tiene
+el permiso, en las rutas de cualquiera de sus empresas. Ahí cada petición dice en qué empresa: el SDK manda `Trevol-Company` con la empresa
+que le das y `Trevol-Environment` con el ambiente de la llave (`tva_test_` = habilitación, `tva_live_` = producción). Sin empresa, una ruta de
+empresa lanza `ConfigurationException` antes de llamar. `trevol.KeyType` dice qué llave es (`Api` o `Account`).
+
+```csharp
+var cuenta = new TrevolClient(Environment.GetEnvironmentVariable("TREVOL_ACCOUNT_KEY")); // tva_live_… → cuenta.KeyType == TrevolKeyType.Account
+
+await foreach (var empresa in cuenta.PaginateAsync(c => cuenta.Account.ListAccountCompaniesAsync(status: "enabled", startingAfter: c)))
+{
+    var trevol = cuenta.WithCompany(empresa.Id); // la misma llave y las mismas conexiones; otra empresa
+    var facturas = await trevol.Invoices.ListInvoicesAsync(limit: 10);
+    Console.WriteLine($"{empresa.Name}: {facturas.Data.Count}");
+}
+```
+
+Para una sola empresa, pásala al crear el cliente: `new TrevolClient(llave, new TrevolClientOptions { Company = "com_3f0c…" })`. Con una
+llave `tvl_` (que ya es de una empresa) `Company` y `WithCompany` lanzan `ConfigurationException`, el SDK nunca manda esas cabeceras y las
+operaciones de `trevol.Account` lanzan `ConfigurationException` sin llamar: solo sirven con una llave de administración.
 
 ## Lo que conviene saber
 
@@ -165,6 +188,7 @@ new TrevolClient(llave, new TrevolClientOptions
     MaxRetryAfter = TimeSpan.FromSeconds(60),
     BaseUrl = "https://api.trevol.si/v1",
     Environment = TrevolEnvironment.Test,    // si la llave no coincide: ConfigurationException antes de llamar
+    Company = "com_3f0c9a1e5b2d4c7f8a6e1d2c3b4a5f60", // solo con una llave de administración (tva_…)
     Handler = miHandler,                     // proxy, TLS, métricas, pruebas: el SDK lo envuelve con su Transporte
 });
 ```

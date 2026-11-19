@@ -10,6 +10,7 @@ namespace Trevol.Pruebas;
 /// Prism valida cada petición contra la especificación PÚBLICA: si el SDK serializa mal un cuerpo, olvida una cabecera o la Idempotency-Key,
 /// responde 4xx y la prueba falla (el motivo viene en la cabecera <c>sl-violations</c>, que la excepción conserva).
 /// </summary>
+[Collection(LlaveDelEntorno.Coleccion)]
 public class PrismTests
 {
     private static readonly string Url = Environment.GetEnvironmentVariable("TREVOL_PRISM_URL") ?? "";
@@ -175,5 +176,46 @@ public class PrismTests
         Assert.Equal(503, e.Status);
         Assert.Equal("PRUEBA-PRISM-1", e.IdempotencyKey);
         Assert.Single(esperas);
+    }
+
+    // La llave de administración: Prism no distingue tvl_ de tva_ (las dos son Bearer), pero sí valida la especificación pública: las
+    // cabeceras Trevol-Company y Trevol-Environment (esquemas de seguridad `empresa` y `ambiente`), los cuerpos y la Idempotency-Key de /account.
+    private const string Admin = LlaveAdministracionTests.AdminTest;
+
+    [PrismFact]
+    public async Task ConUnaTvaLasOperacionesDeAccountPasanLaEspecificacion()
+    {
+        var t = new TrevolClient(Admin, new TrevolClientOptions { BaseUrl = Url, MaxRetries = 0 });
+        var info = await ConViolaciones(() => t.Account.RetrieveAccountAsync());
+        Assert.Equal("account_key_info", info.Object);
+        var n = 0;
+        await foreach (var c in t.PaginateAsync(cursor => t.Account.ListAccountCompaniesAsync(limit: 2, startingAfter: cursor)))
+        {
+            Assert.StartsWith("com_", c.Id);
+            if (++n == 3) break;
+        }
+        Assert.True(n > 0);
+        var alta = await ConViolaciones(() => t.Account.CreateAccountCompanyAsync(Ejemplo<AccountCompanyInput>("createAccountCompany")));
+        Assert.StartsWith("com_", alta.Id);
+        var llave = await ConViolaciones(() => t.Account.CreateAccountCompanyApiKeyAsync(LlaveAdministracionTests.Empresa, Ejemplo<AccountApiKeyInput>("createAccountCompanyApiKey")));
+        Assert.StartsWith("key_", llave.Id);
+        Assert.NotNull(await ConViolaciones(() => t.Account.ListAccountDianDocumentsAsync(direction: "issued")));
+        Assert.NotNull(await ConViolaciones(() => t.Account.ListAccountRequestsAsync(limit: 5)));
+    }
+
+    [PrismFact]
+    public async Task ConUnaTvaYSuEmpresaUnaRutaDeEmpresaPasaLaEspecificacion()
+    {
+        var t = new TrevolClient(Admin, new TrevolClientOptions { BaseUrl = Url, MaxRetries = 0 }).WithCompany(LlaveAdministracionTests.Empresa);
+        var doc = await ConViolaciones(() => t.Invoices.CreateInvoiceAsync(Ejemplo<InvoiceInput>("createInvoice")));
+        Assert.Equal("invoice", doc.Object.ToString().ToLowerInvariant());
+        Assert.NotNull(await ConViolaciones(() => t.General.RetrieveCompanyAsync()));
+    }
+
+    [PrismFact]
+    public async Task ConUnaTvaSinEmpresaNoSaleNadaHaciaPrism()
+    {
+        var t = new TrevolClient(Admin, new TrevolClientOptions { BaseUrl = Url, MaxRetries = 0 });
+        await Assert.ThrowsAsync<ConfigurationException>(() => t.Invoices.CreateInvoiceAsync(Ejemplo<InvoiceInput>("createInvoice")));
     }
 }
