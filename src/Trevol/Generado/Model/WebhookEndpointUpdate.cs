@@ -490,7 +490,7 @@ namespace Trevol.Generado.Model
         /// </summary>
         /// <param name="url">https:// con un nombre de dominio (no una IP), sin usuario ni clave, puerto 443 o 1024–65535. En cada intento se resuelve el nombre y se rechaza toda dirección privada o local..</param>
         /// <param name="description">description.</param>
-        /// <param name="events">Eventos del catálogo (60 tipos, hasta 100 en la lista), o [\&quot;*\&quot;] para todos (no se mezcla). Solo existen en producción (llaves live): &#x60;balance.low&#x60;, &#x60;numbering.low&#x60;, &#x60;numbering.expiring&#x60;, &#x60;dian_sync.completed&#x60;, &#x60;dian_sync.failed&#x60;, &#x60;numbering_range.exhausted&#x60;. &#x60;webhook.test&#x60; no se suscribe..</param>
+        /// <param name="events">Eventos del catálogo (69 tipos, hasta 100 en la lista), o [\&quot;*\&quot;] para todos (no se mezcla). Solo existen en producción (llaves live): &#x60;balance.low&#x60;, &#x60;numbering.low&#x60;, &#x60;numbering.expiring&#x60;, &#x60;dian_sync.completed&#x60;, &#x60;dian_sync.failed&#x60;, &#x60;numbering_range.exhausted&#x60;. &#x60;webhook.test&#x60; no se suscribe..</param>
         /// <param name="status">enabled reactiva (también uno desactivado por Trevol) y pone en cero el contador de fallos..</param>
         public WebhookEndpointUpdate(string url = default, string description = default, List<EventsEnum> events = default, StatusEnum? status = default)
         {
@@ -515,9 +515,9 @@ namespace Trevol.Generado.Model
         public string Description { get; set; }
 
         /// <summary>
-        /// Eventos del catálogo (60 tipos, hasta 100 en la lista), o [\&quot;*\&quot;] para todos (no se mezcla). Solo existen en producción (llaves live): &#x60;balance.low&#x60;, &#x60;numbering.low&#x60;, &#x60;numbering.expiring&#x60;, &#x60;dian_sync.completed&#x60;, &#x60;dian_sync.failed&#x60;, &#x60;numbering_range.exhausted&#x60;. &#x60;webhook.test&#x60; no se suscribe.
+        /// Eventos del catálogo (69 tipos, hasta 100 en la lista), o [\&quot;*\&quot;] para todos (no se mezcla). Solo existen en producción (llaves live): &#x60;balance.low&#x60;, &#x60;numbering.low&#x60;, &#x60;numbering.expiring&#x60;, &#x60;dian_sync.completed&#x60;, &#x60;dian_sync.failed&#x60;, &#x60;numbering_range.exhausted&#x60;. &#x60;webhook.test&#x60; no se suscribe.
         /// </summary>
-        /// <value>Eventos del catálogo (60 tipos, hasta 100 en la lista), o [\&quot;*\&quot;] para todos (no se mezcla). Solo existen en producción (llaves live): &#x60;balance.low&#x60;, &#x60;numbering.low&#x60;, &#x60;numbering.expiring&#x60;, &#x60;dian_sync.completed&#x60;, &#x60;dian_sync.failed&#x60;, &#x60;numbering_range.exhausted&#x60;. &#x60;webhook.test&#x60; no se suscribe.</value>
+        /// <value>Eventos del catálogo (69 tipos, hasta 100 en la lista), o [\&quot;*\&quot;] para todos (no se mezcla). Solo existen en producción (llaves live): &#x60;balance.low&#x60;, &#x60;numbering.low&#x60;, &#x60;numbering.expiring&#x60;, &#x60;dian_sync.completed&#x60;, &#x60;dian_sync.failed&#x60;, &#x60;numbering_range.exhausted&#x60;. &#x60;webhook.test&#x60; no se suscribe.</value>
         [DataMember(Name = "events", EmitDefaultValue = false)]
         public List<WebhookEndpointUpdate.EventsEnum> Events { get; set; }
 

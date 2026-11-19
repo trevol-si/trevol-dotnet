@@ -32,9 +32,9 @@ namespace Trevol.Generado.Model
     public partial class AccountApiKeyInput
     {
         /// <summary>
-        /// &#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee. Una de escritura de producción, por ahora, se crea en la app.
+        /// &#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee.
         /// </summary>
-        /// <value>&#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee. Una de escritura de producción, por ahora, se crea en la app.</value>
+        /// <value>&#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum PermissionsEnum
         {
@@ -53,9 +53,9 @@ namespace Trevol.Generado.Model
 
 
         /// <summary>
-        /// &#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee. Una de escritura de producción, por ahora, se crea en la app.
+        /// &#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee.
         /// </summary>
-        /// <value>&#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee. Una de escritura de producción, por ahora, se crea en la app.</value>
+        /// <value>&#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee.</value>
         [DataMember(Name = "permissions", IsRequired = true, EmitDefaultValue = true)]
         public PermissionsEnum Permissions { get; set; }
         /// <summary>
@@ -70,7 +70,7 @@ namespace Trevol.Generado.Model
         /// Initializes a new instance of the <see cref="AccountApiKeyInput" /> class.
         /// </summary>
         /// <param name="name">Para reconocerla (el software o el equipo que la usa). (required).</param>
-        /// <param name="permissions">&#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee. Una de escritura de producción, por ahora, se crea en la app. (required).</param>
+        /// <param name="permissions">&#x60;read&#x60;: solo lee; &#x60;write&#x60;: emite y lee. (required).</param>
         /// <param name="allowedIps">Hasta 10 direcciones IP o redes CIDR desde donde sirve (opcional)..</param>
         /// <param name="customersRead">Con el permiso &#x60;customers:read&#x60; (los datos personales de los clientes). Solo si tu llave de administración lo tiene. (default to false).</param>
         public AccountApiKeyInput(string name = default, PermissionsEnum permissions = default, List<string> allowedIps = default, bool customersRead = false)

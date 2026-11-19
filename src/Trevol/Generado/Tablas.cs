@@ -6,7 +6,7 @@ namespace Trevol.Generado
 {
     public static class Tablas
     {
-        public const string Version = "0.3.0";
+        public const string Version = "0.3.1";
         public const string ApiVersion = "2026-11-18";
 
         /// <summary>Una operación de la API. Reintento: «seguro» (GET, preview, PATCH y todo POST/PUT con Idempotency-Key que no devuelva un secreto una sola vez) o «solo_429». Binario: «pdf», «xml», «zip», «csv» (los reportes: CSV o Excel) o null.</summary>
