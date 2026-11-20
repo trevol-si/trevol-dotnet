@@ -26,7 +26,7 @@ using OpenAPIDateConverter = Trevol.Generado.Client.OpenAPIDateConverter;
 namespace Trevol.Generado.Model
 {
     /// <summary>
-    /// El saldo prepago de Trevol. Es de la **cuenta**, no de la empresa: todas las empresas de la cuenta lo comparten (&#x60;shared: true&#x60;) y cualquier llave de cualquiera de ellas, de lectura o de escritura, &#x60;test&#x60; o &#x60;live&#x60;, ve el mismo. Solo lo que se emite en producción (llaves &#x60;live&#x60;) lo consume; la habilitación (&#x60;test&#x60;) no cobra. &#x60;available&#x60; es lo que se puede gastar (en pesos); &#x60;held&#x60;, lo apartado por documentos que la DIAN todavía valida y por operaciones de la API en curso; &#x60;overdraft&#x60;, cuánto puede bajar &#x60;available&#x60; de cero al apartar un documento; &#x60;low_threshold&#x60;, el umbral del aviso de saldo bajo (el 20 % de la última recarga; &#x60;null&#x60; sin recargas). &#x60;level&#x60;: &#x60;empty&#x60; con &#x60;available&#x60; ≤ 0, &#x60;low&#x60; por debajo de &#x60;low_threshold&#x60;, si no &#x60;ok&#x60;. Con &#x60;available&#x60; por debajo del precio de un documento, emitir en producción responde 402 &#x60;insufficient_balance&#x60;. El evento &#x60;balance.low&#x60; avisa por webhook. &#x60;operation_prices&#x60;: el precio en pesos de cada operación de la API que se cobra del saldo porque Trevol entra al portal de la DIAN (&#x60;dian_sync&#x60;: &#x60;POST /v1/dian_syncs&#x60;; &#x60;numbering_refresh&#x60;: &#x60;POST /v1/numbering_ranges/refresh&#x60;; &#x60;numbering_association&#x60;: &#x60;POST /v1/numbering_ranges/{id}/associate&#x60;; &#x60;numbering_request&#x60;: &#x60;POST /v1/numbering_requests&#x60;, una vez por solicitud). 0 es gratis, y es 0 mientras el cobro de Trevol está apagado. Solo en producción: se aparta al crearla, se cobra si termina bien y se devuelve si falla; sin saldo, 402 &#x60;insufficient_balance&#x60; y no se crea nada.
+    /// El saldo prepago de Trevol. Es de la **cuenta**, no de la empresa: todas las empresas de la cuenta lo comparten (&#x60;shared: true&#x60;) y cualquier llave de cualquiera de ellas, de lectura o de escritura, &#x60;test&#x60; o &#x60;live&#x60;, ve el mismo. Solo lo que se emite en producción (llaves &#x60;live&#x60;) lo consume; la habilitación (&#x60;test&#x60;) no cobra. &#x60;available&#x60; es lo que se puede gastar (en pesos); &#x60;held&#x60;, lo apartado por documentos que la DIAN todavía valida y por operaciones de la API en curso; &#x60;overdraft&#x60;, cuánto puede bajar &#x60;available&#x60; de cero al apartar un documento; &#x60;low_threshold&#x60;, el umbral del aviso de saldo bajo (el 20 % de la última recarga; &#x60;null&#x60; sin recargas). &#x60;level&#x60;: &#x60;empty&#x60; con &#x60;available&#x60; ≤ 0, &#x60;low&#x60; por debajo de &#x60;low_threshold&#x60;, si no &#x60;ok&#x60;. Con &#x60;available&#x60; por debajo del precio de un documento, emitir en producción responde 402 &#x60;insufficient_balance&#x60;. El evento &#x60;balance.low&#x60; avisa por webhook. &#x60;operation_prices&#x60;: el precio en pesos de cada operación que Trevol hace por la empresa en el portal de la DIAN y que se cobra del saldo (&#x60;dian_sync&#x60;: &#x60;POST /v1/dian_syncs&#x60;; &#x60;numbering_refresh&#x60;: &#x60;POST /v1/numbering_ranges/refresh&#x60;; &#x60;numbering_association&#x60;: &#x60;POST /v1/numbering_ranges/{id}/associate&#x60;; &#x60;numbering_request&#x60;: &#x60;POST /v1/numbering_requests&#x60;, una vez por solicitud). 0 es gratis. Solo en producción: se aparta al crearla, se cobra si termina bien y se devuelve si falla; sin saldo, 402 &#x60;insufficient_balance&#x60; y no se crea nada.
     /// </summary>
     [DataContract(Name = "Balance")]
     public partial class Balance
@@ -43,7 +43,7 @@ namespace Trevol.Generado.Model
         /// <param name="level">Valores conocidos: &#x60;ok&#x60;, &#x60;low&#x60;, &#x60;empty&#x60;..</param>
         /// <param name="updatedAt">Cuándo cambió el saldo por última vez; null si nunca tuvo..</param>
         /// <param name="shared">Siempre true: el saldo es de la cuenta y lo comparten todas sus empresas..</param>
-        /// <param name="operationPrices">El precio en pesos de cada operación de la API que se cobra del saldo porque Trevol entra al portal de la DIAN (0 &#x3D; gratis). Solo en producción..</param>
+        /// <param name="operationPrices">El precio en pesos de cada operación que Trevol hace por la empresa en el portal de la DIAN y que se cobra del saldo (0 es gratis). Solo en producción..</param>
         public Balance(string varObject = default, string currency = default, int available = default, int held = default, int overdraft = default, int? lowThreshold = default, string level = default, DateTimeOffset? updatedAt = default, bool shared = default, BalanceOperationPrices operationPrices = default)
         {
             this.Object = varObject;
@@ -123,9 +123,9 @@ namespace Trevol.Generado.Model
         public bool Shared { get; set; }
 
         /// <summary>
-        /// El precio en pesos de cada operación de la API que se cobra del saldo porque Trevol entra al portal de la DIAN (0 &#x3D; gratis). Solo en producción.
+        /// El precio en pesos de cada operación que Trevol hace por la empresa en el portal de la DIAN y que se cobra del saldo (0 es gratis). Solo en producción.
         /// </summary>
-        /// <value>El precio en pesos de cada operación de la API que se cobra del saldo porque Trevol entra al portal de la DIAN (0 &#x3D; gratis). Solo en producción.</value>
+        /// <value>El precio en pesos de cada operación que Trevol hace por la empresa en el portal de la DIAN y que se cobra del saldo (0 es gratis). Solo en producción.</value>
         [DataMember(Name = "operation_prices", EmitDefaultValue = false)]
         public BalanceOperationPrices OperationPrices { get; set; }
 
