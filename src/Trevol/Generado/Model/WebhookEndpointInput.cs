@@ -472,7 +472,8 @@ namespace Trevol.Generado.Model
         /// <param name="url">https:// con un nombre de dominio (no una IP), sin usuario ni clave, puerto 443 o 1024–65535. En cada intento se resuelve el nombre y se rechaza toda dirección privada o local. (required).</param>
         /// <param name="description">description.</param>
         /// <param name="events">Eventos del catálogo (69 tipos, hasta 100 en la lista), o [\&quot;*\&quot;] para todos (no se mezcla). Solo existen en producción (llaves live): &#x60;balance.low&#x60;, &#x60;numbering.low&#x60;, &#x60;numbering.expiring&#x60;, &#x60;dian_sync.completed&#x60;, &#x60;dian_sync.failed&#x60;, &#x60;numbering_range.exhausted&#x60;. &#x60;webhook.test&#x60; no se suscribe. (required).</param>
-        public WebhookEndpointInput(string url = default, string description = default, List<EventsEnum> events = default)
+        /// <param name="followLatestCatalog">Solo con &#x60;events: [\&quot;*\&quot;]&#x60; (si no, 422 en &#x60;/follow_latest_catalog&#x60;): el endpoint sigue el catálogo más nuevo. Cambiar a una lista explícita lo apaga..</param>
+        public WebhookEndpointInput(string url = default, string description = default, List<EventsEnum> events = default, bool followLatestCatalog = default)
         {
             // to ensure "url" is required (not null)
             if (url == null)
@@ -487,6 +488,7 @@ namespace Trevol.Generado.Model
             }
             this.Events = events;
             this.Description = description;
+            this.FollowLatestCatalog = followLatestCatalog;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -511,6 +513,13 @@ namespace Trevol.Generado.Model
         public List<WebhookEndpointInput.EventsEnum> Events { get; set; }
 
         /// <summary>
+        /// Solo con &#x60;events: [\&quot;*\&quot;]&#x60; (si no, 422 en &#x60;/follow_latest_catalog&#x60;): el endpoint sigue el catálogo más nuevo. Cambiar a una lista explícita lo apaga.
+        /// </summary>
+        /// <value>Solo con &#x60;events: [\&quot;*\&quot;]&#x60; (si no, 422 en &#x60;/follow_latest_catalog&#x60;): el endpoint sigue el catálogo más nuevo. Cambiar a una lista explícita lo apaga.</value>
+        [DataMember(Name = "follow_latest_catalog", EmitDefaultValue = true)]
+        public bool FollowLatestCatalog { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -527,6 +536,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Events: ").Append(Events).Append("\n");
+            sb.Append("  FollowLatestCatalog: ").Append(FollowLatestCatalog).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

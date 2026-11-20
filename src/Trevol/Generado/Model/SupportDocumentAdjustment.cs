@@ -37,6 +37,7 @@ namespace Trevol.Generado.Model
         /// <param name="id">sda_….</param>
         /// <param name="varObject">Valores conocidos: &#x60;support_document_adjustment&#x60;..</param>
         /// <param name="varEnvironment">Valores conocidos: &#x60;test&#x60;, &#x60;live&#x60;..</param>
+        /// <param name="simulated">Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad..</param>
         /// <param name="status">&#x60;processing&#x60; solo en la versión 2026-10-22: la DIAN no confirmó y Trevol sigue resolviendo el documento (el resultado llega por GET y por webhook; no crees otro documento para la misma venta). En 2026-10-21 ese documento se ve como &#x60;error&#x60;. Valores conocidos: &#x60;pending&#x60;, &#x60;sending&#x60;, &#x60;accepted&#x60;, &#x60;rejected&#x60;, &#x60;error&#x60;, &#x60;processing&#x60;..</param>
         /// <param name="number">number.</param>
         /// <param name="prefix">prefix.</param>
@@ -60,11 +61,12 @@ namespace Trevol.Generado.Model
         /// <param name="concept">Concepto de la nota (tabla 16.2.4): 1 a 5..</param>
         /// <param name="description">description.</param>
         /// <param name="supportDocument">supportDocument.</param>
-        public SupportDocumentAdjustment(string id = default, string varObject = default, string varEnvironment = default, string status = default, string number = default, string prefix = default, string externalId = default, string origin = default, string qr = default, DateTimeOffset? issuedAt = default, List<SupportAdjustmentItem> items = default, Payment payment = default, SupportCurrency currency = default, DocumentTotals totals = default, DianResult dian = default, SupportDocumentDelivery delivery = default, DateTimeOffset createdAt = default, DateTimeOffset? updatedAt = default, string cuds = default, Seller seller = default, List<string> notes = default, References references = default, List<AllowanceCharge> allowanceCharges = default, string concept = default, string description = default, SupportDocumentReference supportDocument = default)
+        public SupportDocumentAdjustment(string id = default, string varObject = default, string varEnvironment = default, bool simulated = default, string status = default, string number = default, string prefix = default, string externalId = default, string origin = default, string qr = default, DateTimeOffset? issuedAt = default, List<SupportAdjustmentItem> items = default, Payment payment = default, SupportCurrency currency = default, DocumentTotals totals = default, DianResult dian = default, SupportDocumentDelivery delivery = default, DateTimeOffset createdAt = default, DateTimeOffset? updatedAt = default, string cuds = default, Seller seller = default, List<string> notes = default, References references = default, List<AllowanceCharge> allowanceCharges = default, string concept = default, string description = default, SupportDocumentReference supportDocument = default)
         {
             this.Id = id;
             this.Object = varObject;
             this.VarEnvironment = varEnvironment;
+            this.Simulated = simulated;
             this.Status = status;
             this.Number = number;
             this.Prefix = prefix;
@@ -111,6 +113,13 @@ namespace Trevol.Generado.Model
         /// <value>Valores conocidos: &#x60;test&#x60;, &#x60;live&#x60;.</value>
         [DataMember(Name = "environment", EmitDefaultValue = false)]
         public string VarEnvironment { get; set; }
+
+        /// <summary>
+        /// Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.
+        /// </summary>
+        /// <value>Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.</value>
+        [DataMember(Name = "simulated", EmitDefaultValue = true)]
+        public bool Simulated { get; set; }
 
         /// <summary>
         /// &#x60;processing&#x60; solo en la versión 2026-10-22: la DIAN no confirmó y Trevol sigue resolviendo el documento (el resultado llega por GET y por webhook; no crees otro documento para la misma venta). En 2026-10-21 ese documento se ve como &#x60;error&#x60;. Valores conocidos: &#x60;pending&#x60;, &#x60;sending&#x60;, &#x60;accepted&#x60;, &#x60;rejected&#x60;, &#x60;error&#x60;, &#x60;processing&#x60;.
@@ -273,6 +282,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Object: ").Append(Object).Append("\n");
             sb.Append("  VarEnvironment: ").Append(VarEnvironment).Append("\n");
+            sb.Append("  Simulated: ").Append(Simulated).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
             sb.Append("  Prefix: ").Append(Prefix).Append("\n");

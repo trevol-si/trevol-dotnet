@@ -109,6 +109,7 @@ namespace Trevol
                 case "pdf": return "application/pdf, " + Problema;
                 case "xml": return "application/xml, " + Problema;
                 case "zip": return "application/zip, " + Problema;
+                case "png": return "image/png, " + Problema; // el logo de la empresa (0.4.0)
                 case "csv": return "text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, " + Problema; // los reportes: CSV o Excel
                 default: return "application/json, " + Problema;
             }

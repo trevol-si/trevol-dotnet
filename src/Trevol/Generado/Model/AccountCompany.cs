@@ -36,6 +36,7 @@ namespace Trevol.Generado.Model
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="varObject">Valores conocidos: &#x60;company&#x60;..</param>
+        /// <param name="simulated">Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad. En la empresa de &#x60;/v1/account/companies&#x60;: solo la ve una llave de administración de pruebas (&#x60;tva_test_…&#x60;); para una de producción no existe..</param>
         /// <param name="nit">El NIT, sin DV..</param>
         /// <param name="checkDigit">El dígito de verificación del NIT (como texto)..</param>
         /// <param name="name">La razón social..</param>
@@ -47,10 +48,11 @@ namespace Trevol.Generado.Model
         /// <param name="enabledAt">Cuándo quedó habilitada..</param>
         /// <param name="onboardingUrl">Donde la empresa termina la vinculación con la DIAN, en la app..</param>
         /// <param name="apiKeys">Cuántas llaves &#x60;tvl_&#x60; activas tiene, por ambiente..</param>
-        public AccountCompany(string id = default, string varObject = default, string nit = default, string checkDigit = default, string name = default, string tradeName = default, string status = default, AccountCompanyOnboarding onboarding = default, string emissionEnvironment = default, DateTimeOffset createdAt = default, DateTimeOffset? enabledAt = default, string onboardingUrl = default, AccountCompanyApiKeyCounts apiKeys = default)
+        public AccountCompany(string id = default, string varObject = default, bool simulated = default, string nit = default, string checkDigit = default, string name = default, string tradeName = default, string status = default, AccountCompanyOnboarding onboarding = default, string emissionEnvironment = default, DateTimeOffset createdAt = default, DateTimeOffset? enabledAt = default, string onboardingUrl = default, AccountCompanyApiKeyCounts apiKeys = default)
         {
             this.Id = id;
             this.Object = varObject;
+            this.Simulated = simulated;
             this.Nit = nit;
             this.CheckDigit = checkDigit;
             this.Name = name;
@@ -77,6 +79,13 @@ namespace Trevol.Generado.Model
         /// <value>Valores conocidos: &#x60;company&#x60;.</value>
         [DataMember(Name = "object", EmitDefaultValue = false)]
         public string Object { get; set; }
+
+        /// <summary>
+        /// Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad. En la empresa de &#x60;/v1/account/companies&#x60;: solo la ve una llave de administración de pruebas (&#x60;tva_test_…&#x60;); para una de producción no existe.
+        /// </summary>
+        /// <value>Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad. En la empresa de &#x60;/v1/account/companies&#x60;: solo la ve una llave de administración de pruebas (&#x60;tva_test_…&#x60;); para una de producción no existe.</value>
+        [DataMember(Name = "simulated", EmitDefaultValue = true)]
+        public bool Simulated { get; set; }
 
         /// <summary>
         /// El NIT, sin DV.
@@ -170,6 +179,7 @@ namespace Trevol.Generado.Model
             sb.Append("class AccountCompany {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Object: ").Append(Object).Append("\n");
+            sb.Append("  Simulated: ").Append(Simulated).Append("\n");
             sb.Append("  Nit: ").Append(Nit).Append("\n");
             sb.Append("  CheckDigit: ").Append(CheckDigit).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");

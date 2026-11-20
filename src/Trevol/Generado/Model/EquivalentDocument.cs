@@ -66,7 +66,9 @@ namespace Trevol.Generado.Model
         /// <param name="extension">extension.</param>
         /// <param name="originNote">originNote.</param>
         /// <param name="contingency">contingency.</param>
-        public EquivalentDocument(string id = default, string varObject = default, string varEnvironment = default, string status = default, string number = default, string prefix = default, string externalId = default, string origin = default, string cude = default, string qr = default, DateTimeOffset? issuedAt = default, Customer customer = default, List<EquivalentItem> items = default, Payment payment = default, string documentType = default, string operationType = default, DocumentTotals totals = default, DianResult dian = default, Delivery delivery = default, DateTimeOffset createdAt = default, DateTimeOffset? updatedAt = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, Object rounding = default, List<Withholding> withholdings = default, Pos pos = default, Extension extension = default, OriginNote originNote = default, EquivalentDocumentContingency contingency = default)
+        /// <param name="pdfDesignId">El que pidió el documento, o null..</param>
+        /// <param name="pdfDesign">El diseño fijado al emitir; null mientras está pendiente..</param>
+        public EquivalentDocument(string id = default, string varObject = default, string varEnvironment = default, string status = default, string number = default, string prefix = default, string externalId = default, string origin = default, string cude = default, string qr = default, DateTimeOffset? issuedAt = default, Customer customer = default, List<EquivalentItem> items = default, Payment payment = default, string documentType = default, string operationType = default, DocumentTotals totals = default, DianResult dian = default, Delivery delivery = default, DateTimeOffset createdAt = default, DateTimeOffset? updatedAt = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, Object rounding = default, List<Withholding> withholdings = default, Pos pos = default, Extension extension = default, OriginNote originNote = default, EquivalentDocumentContingency contingency = default, string pdfDesignId = default, PdfDesignApplied pdfDesign = default)
         {
             this.Id = id;
             this.Object = varObject;
@@ -100,6 +102,8 @@ namespace Trevol.Generado.Model
             this.Extension = extension;
             this.OriginNote = originNote;
             this.Contingency = contingency;
+            this.PdfDesignId = pdfDesignId;
+            this.PdfDesign = pdfDesign;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -306,6 +310,20 @@ namespace Trevol.Generado.Model
         public EquivalentDocumentContingency Contingency { get; set; }
 
         /// <summary>
+        /// El que pidió el documento, o null.
+        /// </summary>
+        /// <value>El que pidió el documento, o null.</value>
+        [DataMember(Name = "pdf_design_id", EmitDefaultValue = true)]
+        public string PdfDesignId { get; set; }
+
+        /// <summary>
+        /// El diseño fijado al emitir; null mientras está pendiente.
+        /// </summary>
+        /// <value>El diseño fijado al emitir; null mientras está pendiente.</value>
+        [DataMember(Name = "pdf_design", EmitDefaultValue = true)]
+        public PdfDesignApplied PdfDesign { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -351,6 +369,8 @@ namespace Trevol.Generado.Model
             sb.Append("  Extension: ").Append(Extension).Append("\n");
             sb.Append("  OriginNote: ").Append(OriginNote).Append("\n");
             sb.Append("  Contingency: ").Append(Contingency).Append("\n");
+            sb.Append("  PdfDesignId: ").Append(PdfDesignId).Append("\n");
+            sb.Append("  PdfDesign: ").Append(PdfDesign).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

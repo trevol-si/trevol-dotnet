@@ -42,10 +42,11 @@ namespace Trevol.Generado.Model
         /// <param name="tradeName">tradeName.</param>
         /// <param name="status">Valores conocidos: &#x60;enabled&#x60;, &#x60;not_enabled&#x60;..</param>
         /// <param name="varEnvironment">Valores conocidos: &#x60;test&#x60;, &#x60;live&#x60;..</param>
+        /// <param name="simulated">Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad..</param>
         /// <param name="numbering">Las numeraciones (resoluciones) activas del ambiente de la llave..</param>
         /// <param name="key">La llave con que se llamó..</param>
         /// <param name="capabilities">Lo que ESTA llave puede emitir ahora (documento soporte, equivalente, nómina, eventos RADIAN). Informativo: si una lectura falla, esa clave no aparece..</param>
-        public Company(string varObject = default, string id = default, string nit = default, int? checkDigit = default, string name = default, string tradeName = default, string status = default, string varEnvironment = default, List<CompanyNumbering> numbering = default, CompanyKey key = default, Dictionary<string, Object> capabilities = default)
+        public Company(string varObject = default, string id = default, string nit = default, int? checkDigit = default, string name = default, string tradeName = default, string status = default, string varEnvironment = default, bool simulated = default, List<CompanyNumbering> numbering = default, CompanyKey key = default, Dictionary<string, Object> capabilities = default)
         {
             this.Object = varObject;
             this.Id = id;
@@ -55,6 +56,7 @@ namespace Trevol.Generado.Model
             this.TradeName = tradeName;
             this.Status = status;
             this.VarEnvironment = varEnvironment;
+            this.Simulated = simulated;
             this.Numbering = numbering;
             this.Key = key;
             this.Capabilities = capabilities;
@@ -114,6 +116,13 @@ namespace Trevol.Generado.Model
         public string VarEnvironment { get; set; }
 
         /// <summary>
+        /// Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.
+        /// </summary>
+        /// <value>Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.</value>
+        [DataMember(Name = "simulated", EmitDefaultValue = true)]
+        public bool Simulated { get; set; }
+
+        /// <summary>
         /// Las numeraciones (resoluciones) activas del ambiente de la llave.
         /// </summary>
         /// <value>Las numeraciones (resoluciones) activas del ambiente de la llave.</value>
@@ -156,6 +165,7 @@ namespace Trevol.Generado.Model
             sb.Append("  TradeName: ").Append(TradeName).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  VarEnvironment: ").Append(VarEnvironment).Append("\n");
+            sb.Append("  Simulated: ").Append(Simulated).Append("\n");
             sb.Append("  Numbering: ").Append(Numbering).Append("\n");
             sb.Append("  Key: ").Append(Key).Append("\n");
             sb.Append("  Capabilities: ").Append(Capabilities).Append("\n");

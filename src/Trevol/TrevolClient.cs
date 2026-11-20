@@ -95,6 +95,11 @@ namespace Trevol
         public RadianStatusApi RadianStatus { get; private set; }
         public ReportRunsApi ReportRuns { get; private set; }
         public ReportsApi Reports { get; private set; }
+        // 0.4.0: las listas de valores y el diseño del PDF (plantillas, diseños, ajustes y logo de la empresa).
+        public CatalogsApi Catalogs { get; private set; }
+        public CompanySettingsApi CompanySettings { get; private set; }
+        public PdfDesignsApi PdfDesigns { get; private set; }
+        public PdfTemplatesApi PdfTemplates { get; private set; }
 
         /// <param name="apiKey"><c>tvl_test_…</c> o <c>tvl_live_…</c> (de una empresa), o <c>tva_test_…</c> o <c>tva_live_…</c> (de administración); si falta se lee <c>TREVOL_API_KEY</c>.</param>
         /// <param name="options">Las opciones; ninguna es obligatoria.</param>
@@ -178,6 +183,10 @@ namespace Trevol
             RadianStatus = new RadianStatusApi(http, config);
             ReportRuns = new ReportRunsApi(http, config);
             Reports = new ReportsApi(http, config);
+            Catalogs = new CatalogsApi(http, config);
+            CompanySettings = new CompanySettingsApi(http, config);
+            PdfDesigns = new PdfDesignsApi(http, config);
+            PdfTemplates = new PdfTemplatesApi(http, config);
 
             // Piloto: el generador marca como «emitir aunque sea nulo» los campos opcionales sin tipo (p. ej. `rounding`), y un `"rounding": null` que la
             // persona no escribió lo rechaza la API (422). Una propiedad sin valor se omite, como en los demás SDK.
@@ -188,7 +197,8 @@ namespace Trevol
                 Requests.ApiClient, SupportDocumentAdjustments.ApiClient, SupportDocuments.ApiClient, WebhookEndpoints.ApiClient,
                 Customers.ApiClient, DianDocuments.ApiClient, DianSyncs.ApiClient, InvoiceBatches.ApiClient, NumberingAssociations.ApiClient,
                 NumberingRanges.ApiClient, NumberingRequests.ApiClient, PaperNumberingRanges.ApiClient, Products.ApiClient, RadianStatus.ApiClient,
-                ReportRuns.ApiClient, Reports.ApiClient
+                ReportRuns.ApiClient, Reports.ApiClient, Catalogs.ApiClient, CompanySettings.ApiClient, PdfDesigns.ApiClient,
+                PdfTemplates.ApiClient
             })
             {
                 cliente.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;

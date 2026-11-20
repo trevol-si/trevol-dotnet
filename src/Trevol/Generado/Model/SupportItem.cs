@@ -46,14 +46,15 @@ namespace Trevol.Generado.Model
         /// <param name="description">description (required).</param>
         /// <param name="unit">Unidad de medida (tabla 13.3.6). Por defecto 94 (unidad)..</param>
         /// <param name="quantity">Número o texto decimal con punto («150000.50»). (required).</param>
-        /// <param name="unitPrice">Precio unitario SIN impuestos. (required).</param>
+        /// <param name="unitPrice">Precio unitario SIN impuestos (con unit_price_includes_tax, con ellos). (required).</param>
+        /// <param name="unitPriceIncludesTax">true: unit_price trae los impuestos de la línea; Trevol calcula el precio sin ellos..</param>
         /// <param name="taxes">Solo IVA: {code: \&quot;01\&quot;, rate: 0 | 5 | 19} o {code: \&quot;01\&quot;, excluded: true}..</param>
         /// <param name="discounts">Descuentos de la línea, sin código; la razón va de 10 a 5000 caracteres (DSBE04)..</param>
         /// <param name="charges">charges.</param>
         /// <param name="withholdings">Las practica la empresa al vendedor: 05 ReteIVA (15 o 100 %) o 06 ReteRenta. No restan del total a pagar..</param>
         /// <param name="standardCode">standardCode.</param>
         /// <param name="purchaseDate">Fecha de la compra. Obligatoria en el acumulado semanal (entre 6 días antes de hoy y hoy); por operación no se informa..</param>
-        public SupportItem(string code = default, string description = default, string unit = default, string quantity = default, string unitPrice = default, List<SupportItemTax> taxes = default, List<ItemAllowance> discounts = default, List<SupportItemCharge> charges = default, List<SupportItemWithholding> withholdings = default, StandardCode standardCode = default, DateTimeOffset purchaseDate = default)
+        public SupportItem(string code = default, string description = default, string unit = default, string quantity = default, string unitPrice = default, bool unitPriceIncludesTax = default, List<SupportItemTax> taxes = default, List<ItemAllowance> discounts = default, List<SupportItemCharge> charges = default, List<SupportItemWithholding> withholdings = default, StandardCode standardCode = default, DateTimeOffset purchaseDate = default)
         {
             // to ensure "description" is required (not null)
             if (description == null)
@@ -75,6 +76,7 @@ namespace Trevol.Generado.Model
             this.UnitPrice = unitPrice;
             this.Code = code;
             this.Unit = unit;
+            this.UnitPriceIncludesTax = unitPriceIncludesTax;
             this.Taxes = taxes;
             this.Discounts = discounts;
             this.Charges = charges;
@@ -112,11 +114,18 @@ namespace Trevol.Generado.Model
         public string Quantity { get; set; }
 
         /// <summary>
-        /// Precio unitario SIN impuestos.
+        /// Precio unitario SIN impuestos (con unit_price_includes_tax, con ellos).
         /// </summary>
-        /// <value>Precio unitario SIN impuestos.</value>
+        /// <value>Precio unitario SIN impuestos (con unit_price_includes_tax, con ellos).</value>
         [DataMember(Name = "unit_price", IsRequired = true, EmitDefaultValue = true)]
         public string UnitPrice { get; set; }
+
+        /// <summary>
+        /// true: unit_price trae los impuestos de la línea; Trevol calcula el precio sin ellos.
+        /// </summary>
+        /// <value>true: unit_price trae los impuestos de la línea; Trevol calcula el precio sin ellos.</value>
+        [DataMember(Name = "unit_price_includes_tax", EmitDefaultValue = true)]
+        public bool UnitPriceIncludesTax { get; set; }
 
         /// <summary>
         /// Solo IVA: {code: \&quot;01\&quot;, rate: 0 | 5 | 19} o {code: \&quot;01\&quot;, excluded: true}.
@@ -178,6 +187,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Unit: ").Append(Unit).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("  UnitPrice: ").Append(UnitPrice).Append("\n");
+            sb.Append("  UnitPriceIncludesTax: ").Append(UnitPriceIncludesTax).Append("\n");
             sb.Append("  Taxes: ").Append(Taxes).Append("\n");
             sb.Append("  Discounts: ").Append(Discounts).Append("\n");
             sb.Append("  Charges: ").Append(Charges).Append("\n");

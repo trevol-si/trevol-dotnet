@@ -39,13 +39,15 @@ namespace Trevol.Generado.Model
         /// <param name="zip">zip.</param>
         /// <param name="xml">xml.</param>
         /// <param name="email">email.</param>
-        public Delivery(string status = default, bool pdf = default, bool zip = default, bool xml = default, DeliveryEmail email = default)
+        /// <param name="emailResends">Los reenvíos del correo con &#x60;POST …/{id}/email&#x60;; null si nunca se reenvió. &#x60;status&#x60; y &#x60;email&#x60; siguen hablando del correo original. &#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después. Sin &#x60;customers:read&#x60;, &#x60;last.to&#x60; y &#x60;last.deliveries[].to&#x60; salen en null..</param>
+        public Delivery(string status = default, bool pdf = default, bool zip = default, bool xml = default, DeliveryEmail email = default, DeliveryEmailResends emailResends = default)
         {
             this.Status = status;
             this.Pdf = pdf;
             this.Zip = zip;
             this.Xml = xml;
             this.Email = email;
+            this.EmailResends = emailResends;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -81,6 +83,13 @@ namespace Trevol.Generado.Model
         public DeliveryEmail Email { get; set; }
 
         /// <summary>
+        /// Los reenvíos del correo con &#x60;POST …/{id}/email&#x60;; null si nunca se reenvió. &#x60;status&#x60; y &#x60;email&#x60; siguen hablando del correo original. &#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después. Sin &#x60;customers:read&#x60;, &#x60;last.to&#x60; y &#x60;last.deliveries[].to&#x60; salen en null.
+        /// </summary>
+        /// <value>Los reenvíos del correo con &#x60;POST …/{id}/email&#x60;; null si nunca se reenvió. &#x60;status&#x60; y &#x60;email&#x60; siguen hablando del correo original. &#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después. Sin &#x60;customers:read&#x60;, &#x60;last.to&#x60; y &#x60;last.deliveries[].to&#x60; salen en null.</value>
+        [DataMember(Name = "email_resends", EmitDefaultValue = true)]
+        public DeliveryEmailResends EmailResends { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -99,6 +108,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Zip: ").Append(Zip).Append("\n");
             sb.Append("  Xml: ").Append(Xml).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
+            sb.Append("  EmailResends: ").Append(EmailResends).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

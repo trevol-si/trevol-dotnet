@@ -6,10 +6,10 @@ namespace Trevol.Generado
 {
     public static class Tablas
     {
-        public const string Version = "0.3.1";
+        public const string Version = "0.4.0";
         public const string ApiVersion = "2026-11-18";
 
-        /// <summary>Una operación de la API. Reintento: «seguro» (GET, preview, PATCH y todo POST/PUT con Idempotency-Key que no devuelva un secreto una sola vez) o «solo_429». Binario: «pdf», «xml», «zip», «csv» (los reportes: CSV o Excel) o null.</summary>
+        /// <summary>Una operación de la API. Reintento: «seguro» (GET, preview, PATCH y todo POST/PUT con Idempotency-Key que no devuelva un secreto una sola vez) o «solo_429». Binario: «pdf», «xml», «zip», «csv» (los reportes: CSV o Excel), «png» (el logo de la empresa) o null.</summary>
         public sealed class Operacion
         {
             public Operacion(string operationId, string metodo, string ruta, string recurso, bool idempotente, string reintento, string? binario, string llave)
@@ -30,6 +30,7 @@ namespace Trevol.Generado
 
         public static readonly IReadOnlyList<Operacion> Operaciones = new Operacion[]
         {
+            new Operacion("archivePdfDesign", "POST", "/pdf_designs/{id}/archive", "PdfDesigns", false, "solo_429", null, "api_o_administracion"),
             new Operacion("associateNumberingRange", "POST", "/numbering_ranges/{id}/associate", "NumberingRanges", true, "seguro", null, "api_o_administracion"),
             new Operacion("cancelNumberingRequest", "POST", "/numbering_requests/{id}/cancel", "NumberingRequests", false, "solo_429", null, "api_o_administracion"),
             new Operacion("correctCreditNote", "PUT", "/credit_notes/{id}", "CreditNotes", true, "seguro", null, "api_o_administracion"),
@@ -56,6 +57,7 @@ namespace Trevol.Generado
             new Operacion("createPaperNumberingRange", "POST", "/paper_numbering_ranges", "PaperNumberingRanges", true, "seguro", null, "api_o_administracion"),
             new Operacion("createPayroll", "POST", "/payrolls", "Payrolls", true, "seguro", null, "api_o_administracion"),
             new Operacion("createPayrollAdjustment", "POST", "/payroll_adjustments", "PayrollAdjustments", true, "seguro", null, "api_o_administracion"),
+            new Operacion("createPdfDesign", "POST", "/pdf_designs", "PdfDesigns", true, "seguro", null, "api_o_administracion"),
             new Operacion("createProduct", "POST", "/products", "Products", true, "seguro", null, "api_o_administracion"),
             new Operacion("createRadianEvent", "POST", "/radian_events", "RadianEvents", true, "seguro", null, "api_o_administracion"),
             new Operacion("createReportRun", "POST", "/report_runs", "ReportRuns", true, "seguro", null, "api_o_administracion"),
@@ -63,6 +65,7 @@ namespace Trevol.Generado
             new Operacion("createSupportDocumentAdjustment", "POST", "/support_document_adjustments", "SupportDocumentAdjustments", true, "seguro", null, "api_o_administracion"),
             new Operacion("createWebhookEndpoint", "POST", "/webhook_endpoints", "WebhookEndpoints", false, "solo_429", null, "api_o_administracion"),
             new Operacion("deactivatePaperNumberingRange", "POST", "/paper_numbering_ranges/{id}/deactivate", "PaperNumberingRanges", false, "solo_429", null, "api_o_administracion"),
+            new Operacion("deleteCompanyLogo", "DELETE", "/company/logo", "CompanySettings", false, "solo_429", null, "api_o_administracion"),
             new Operacion("deleteWebhookEndpoint", "DELETE", "/webhook_endpoints/{id}", "WebhookEndpoints", false, "solo_429", null, "api_o_administracion"),
             new Operacion("downloadCreditNoteDianResponse", "GET", "/credit_notes/{id}/dian_response", "CreditNotes", false, "seguro", "xml", "api_o_administracion"),
             new Operacion("downloadCreditNotePdf", "GET", "/credit_notes/{id}/pdf", "CreditNotes", false, "seguro", "pdf", "api_o_administracion"),
@@ -107,6 +110,8 @@ namespace Trevol.Generado
             new Operacion("listAccountRadianEvents", "GET", "/account/radian_events", "Account", false, "seguro", null, "administracion"),
             new Operacion("listAccountRequests", "GET", "/account/requests", "Account", false, "seguro", null, "administracion"),
             new Operacion("listBalanceTransactions", "GET", "/balance/transactions", "Balance", false, "seguro", null, "api_o_administracion"),
+            new Operacion("listCatalogEntries", "GET", "/catalogs/{name}", "Catalogs", false, "seguro", null, "api_o_administracion"),
+            new Operacion("listCatalogs", "GET", "/catalogs", "Catalogs", false, "seguro", null, "api_o_administracion"),
             new Operacion("listCreditNotes", "GET", "/credit_notes", "CreditNotes", false, "seguro", null, "api_o_administracion"),
             new Operacion("listCustomers", "GET", "/customers", "Customers", false, "seguro", null, "api_o_administracion"),
             new Operacion("listDebitNotes", "GET", "/debit_notes", "DebitNotes", false, "seguro", null, "api_o_administracion"),
@@ -122,6 +127,8 @@ namespace Trevol.Generado
             new Operacion("listPaperNumberingRanges", "GET", "/paper_numbering_ranges", "PaperNumberingRanges", false, "seguro", null, "api_o_administracion"),
             new Operacion("listPayrollAdjustments", "GET", "/payroll_adjustments", "PayrollAdjustments", false, "seguro", null, "api_o_administracion"),
             new Operacion("listPayrolls", "GET", "/payrolls", "Payrolls", false, "seguro", null, "api_o_administracion"),
+            new Operacion("listPdfDesigns", "GET", "/pdf_designs", "PdfDesigns", false, "seguro", null, "api_o_administracion"),
+            new Operacion("listPdfTemplates", "GET", "/pdf_templates", "PdfTemplates", false, "seguro", null, "api_o_administracion"),
             new Operacion("listProducts", "GET", "/products", "Products", false, "seguro", null, "api_o_administracion"),
             new Operacion("listRadianEvents", "GET", "/radian_events", "RadianEvents", false, "seguro", null, "api_o_administracion"),
             new Operacion("listReportRuns", "GET", "/report_runs", "ReportRuns", false, "seguro", null, "api_o_administracion"),
@@ -146,6 +153,8 @@ namespace Trevol.Generado
             new Operacion("retrieveAccountCompany", "GET", "/account/companies/{id}", "Account", false, "seguro", null, "administracion"),
             new Operacion("retrieveBalance", "GET", "/balance", "Balance", false, "seguro", null, "api_o_administracion"),
             new Operacion("retrieveCompany", "GET", "/company", "General", false, "seguro", null, "api_o_administracion"),
+            new Operacion("retrieveCompanyLogo", "GET", "/company/logo", "CompanySettings", false, "seguro", null, "api_o_administracion"),
+            new Operacion("retrieveCompanyLogoFile", "GET", "/company/logo/file", "CompanySettings", false, "seguro", "png", "api_o_administracion"),
             new Operacion("retrieveCreditNote", "GET", "/credit_notes/{id}", "CreditNotes", false, "seguro", null, "api_o_administracion"),
             new Operacion("retrieveCustomer", "GET", "/customers/{id}", "Customers", false, "seguro", null, "api_o_administracion"),
             new Operacion("retrieveDebitNote", "GET", "/debit_notes/{id}", "DebitNotes", false, "seguro", null, "api_o_administracion"),
@@ -162,6 +171,8 @@ namespace Trevol.Generado
             new Operacion("retrievePaperNumberingRange", "GET", "/paper_numbering_ranges/{id}", "PaperNumberingRanges", false, "seguro", null, "api_o_administracion"),
             new Operacion("retrievePayroll", "GET", "/payrolls/{id}", "Payrolls", false, "seguro", null, "api_o_administracion"),
             new Operacion("retrievePayrollAdjustment", "GET", "/payroll_adjustments/{id}", "PayrollAdjustments", false, "seguro", null, "api_o_administracion"),
+            new Operacion("retrievePdfDesign", "GET", "/pdf_designs/{id}", "PdfDesigns", false, "seguro", null, "api_o_administracion"),
+            new Operacion("retrievePdfSettings", "GET", "/company/pdf_settings", "CompanySettings", false, "seguro", null, "api_o_administracion"),
             new Operacion("retrieveProduct", "GET", "/products/{id}", "Products", false, "seguro", null, "api_o_administracion"),
             new Operacion("retrieveRadianEvent", "GET", "/radian_events/{id}", "RadianEvents", false, "seguro", null, "api_o_administracion"),
             new Operacion("retrieveReportRun", "GET", "/report_runs/{id}", "ReportRuns", false, "seguro", null, "api_o_administracion"),
@@ -175,24 +186,32 @@ namespace Trevol.Generado
             new Operacion("revokeAccountCompanyApiKey", "DELETE", "/account/companies/{id}/api_keys/{key_id}", "Account", false, "solo_429", null, "administracion"),
             new Operacion("rotateWebhookEndpointSecret", "POST", "/webhook_endpoints/{id}/rotate_secret", "WebhookEndpoints", false, "solo_429", null, "api_o_administracion"),
             new Operacion("sendCreditNote", "POST", "/credit_notes/{id}/send", "CreditNotes", false, "solo_429", null, "api_o_administracion"),
+            new Operacion("sendCreditNoteEmail", "POST", "/credit_notes/{id}/email", "CreditNotes", true, "seguro", null, "api_o_administracion"),
             new Operacion("sendDebitNote", "POST", "/debit_notes/{id}/send", "DebitNotes", false, "solo_429", null, "api_o_administracion"),
+            new Operacion("sendDebitNoteEmail", "POST", "/debit_notes/{id}/email", "DebitNotes", true, "seguro", null, "api_o_administracion"),
             new Operacion("sendEquivalentDocument", "POST", "/equivalent_documents/{id}/send", "EquivalentDocuments", false, "solo_429", null, "api_o_administracion"),
             new Operacion("sendEquivalentDocumentAdjustment", "POST", "/equivalent_document_adjustments/{id}/send", "EquivalentDocumentAdjustments", false, "solo_429", null, "api_o_administracion"),
+            new Operacion("sendEquivalentDocumentAdjustmentEmail", "POST", "/equivalent_document_adjustments/{id}/email", "EquivalentDocumentAdjustments", true, "seguro", null, "api_o_administracion"),
+            new Operacion("sendEquivalentDocumentEmail", "POST", "/equivalent_documents/{id}/email", "EquivalentDocuments", true, "seguro", null, "api_o_administracion"),
             new Operacion("sendInvoice", "POST", "/invoices/{id}/send", "Invoices", false, "solo_429", null, "api_o_administracion"),
+            new Operacion("sendInvoiceEmail", "POST", "/invoices/{id}/email", "Invoices", true, "seguro", null, "api_o_administracion"),
             new Operacion("sendPayroll", "POST", "/payrolls/{id}/send", "Payrolls", false, "solo_429", null, "api_o_administracion"),
             new Operacion("sendPayrollAdjustment", "POST", "/payroll_adjustments/{id}/send", "PayrollAdjustments", false, "solo_429", null, "api_o_administracion"),
             new Operacion("sendRadianEvent", "POST", "/radian_events/{id}/send", "RadianEvents", false, "solo_429", null, "api_o_administracion"),
             new Operacion("sendSupportDocument", "POST", "/support_documents/{id}/send", "SupportDocuments", false, "solo_429", null, "api_o_administracion"),
             new Operacion("sendSupportDocumentAdjustment", "POST", "/support_document_adjustments/{id}/send", "SupportDocumentAdjustments", false, "solo_429", null, "api_o_administracion"),
             new Operacion("testWebhookEndpoint", "POST", "/webhook_endpoints/{id}/test", "WebhookEndpoints", false, "solo_429", null, "api_o_administracion"),
+            new Operacion("updateCompanyLogo", "PUT", "/company/logo", "CompanySettings", false, "solo_429", null, "api_o_administracion"),
             new Operacion("updateCustomer", "PATCH", "/customers/{id}", "Customers", false, "seguro", null, "api_o_administracion"),
             new Operacion("updatePaperNumberingRange", "PATCH", "/paper_numbering_ranges/{id}", "PaperNumberingRanges", false, "seguro", null, "api_o_administracion"),
+            new Operacion("updatePdfDesign", "PATCH", "/pdf_designs/{id}", "PdfDesigns", false, "seguro", null, "api_o_administracion"),
+            new Operacion("updatePdfSettings", "PATCH", "/company/pdf_settings", "CompanySettings", false, "seguro", null, "api_o_administracion"),
             new Operacion("updateProduct", "PATCH", "/products/{id}", "Products", false, "seguro", null, "api_o_administracion"),
             new Operacion("updateWebhookEndpoint", "PATCH", "/webhook_endpoints/{id}", "WebhookEndpoints", false, "seguro", null, "api_o_administracion")
         };
 
         /// <summary>El nombre de cada etiqueta del SDK (una propiedad del cliente por etiqueta).</summary>
-        public static readonly IReadOnlyList<string> Etiquetas = new string[] { "Account", "Balance", "CreditNotes", "Customers", "DebitNotes", "DianDocuments", "DianSyncs", "EquivalentDocumentAdjustments", "EquivalentDocuments", "Events", "General", "InvoiceBatches", "Invoices", "NumberingAssociations", "NumberingRanges", "NumberingRequests", "PaperNumberingRanges", "PayrollAdjustments", "Payrolls", "Products", "RadianEvents", "RadianStatus", "ReportRuns", "Reports", "Requests", "SupportDocumentAdjustments", "SupportDocuments", "WebhookEndpoints" };
+        public static readonly IReadOnlyList<string> Etiquetas = new string[] { "Account", "Balance", "Catalogs", "CompanySettings", "CreditNotes", "Customers", "DebitNotes", "DianDocuments", "DianSyncs", "EquivalentDocumentAdjustments", "EquivalentDocuments", "Events", "General", "InvoiceBatches", "Invoices", "NumberingAssociations", "NumberingRanges", "NumberingRequests", "PaperNumberingRanges", "PayrollAdjustments", "Payrolls", "PdfDesigns", "PdfTemplates", "Products", "RadianEvents", "RadianStatus", "ReportRuns", "Reports", "Requests", "SupportDocumentAdjustments", "SupportDocuments", "WebhookEndpoints" };
 
         /// <summary>code de problem+json -> clase de error.</summary>
         public static readonly IReadOnlyDictionary<string, string> ClasePorCode = new Dictionary<string, string>
@@ -208,6 +227,8 @@ namespace Trevol.Generado
             ["idempotency_key_required"] = "InvalidRequestError",
             ["idempotency_key_reused"] = "IdempotencyError",
             ["validation_error"] = "ValidationError",
+            ["logo_invalid"] = "ValidationError",
+            ["pdf_design_invalid"] = "ValidationError",
             ["external_id_in_use"] = "ConflictError",
             ["invalid_state"] = "ConflictError",
             ["duplicate_document"] = "ConflictError",
@@ -224,6 +245,10 @@ namespace Trevol.Generado
             ["paper_numbering_limit_reached"] = "ConflictError",
             ["company_exists"] = "ConflictError",
             ["key_limit_reached"] = "ConflictError",
+            ["pdf_design_limit_reached"] = "ConflictError",
+            ["pdf_design_in_use"] = "ConflictError",
+            ["pdf_design_outdated"] = "ConflictError",
+            ["pdf_design_archived"] = "ConflictError",
             ["company_not_enabled"] = "PreconditionError",
             ["numbering_unavailable"] = "PreconditionError",
             ["certificate_problem"] = "PreconditionError",

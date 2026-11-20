@@ -172,8 +172,10 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>EquivalentDocumentAdjustmentList</returns>
-        EquivalentDocumentAdjustmentList ListEquivalentDocumentAdjustments(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default);
+        EquivalentDocumentAdjustmentList ListEquivalentDocumentAdjustments(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default);
 
         /// <summary>
         /// Listar (nota de ajuste del documento equivalente)
@@ -188,8 +190,10 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>ApiResponse of EquivalentDocumentAdjustmentList</returns>
-        ApiResponse<EquivalentDocumentAdjustmentList> ListEquivalentDocumentAdjustmentsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default);
+        ApiResponse<EquivalentDocumentAdjustmentList> ListEquivalentDocumentAdjustmentsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default);
         /// <summary>
         /// Calcular una nota de ajuste del documento equivalente sin emitirla
         /// </summary>
@@ -253,6 +257,31 @@ namespace Trevol.Generado.Api
         /// <param name="id"></param>
         /// <returns>ApiResponse of EquivalentDocumentAdjustment</returns>
         ApiResponse<EquivalentDocumentAdjustment> SendEquivalentDocumentAdjustmentWithHttpInfo(string id);
+        /// <summary>
+        /// Reenviar el correo de una nota de ajuste del documento equivalente
+        /// </summary>
+        /// <remarks>
+        /// Reenvía el correo del documento validado: el mismo ZIP (el AttachedDocument y el PDF), la misma plantilla y el mismo asunto. Sin cuerpo, va al destinatario de siempre: en producción, el correo del comprador (&#x60;customer.email&#x60;); en habilitación, solo a quien emitió el documento (con «[PRUEBA – sin validez legal]» en el asunto). Con &#x60;to&#x60; (de 1 a 3 direcciones; solo producción y solo con el permiso &#x60;customers:read&#x60;, porque el ZIP trae los datos del comprador) va a esas direcciones, un correo por destinatario: nadie ve a los demás.  Solo sirve cuando el documento está validado y su correo original ya terminó (si todavía se está enviando o se va a reintentar, 409 &#x60;invalid_state&#x60; con &#x60;reason: delivery_pending&#x60; y &#x60;Retry-After&#x60;; si ya no está programada, &#x60;delivery_incomplete&#x60;, sin reintento). Si el correo original falló y ya no se va a reintentar, sí se puede reenviar. A una dirección que rebotó o se quejó no le volvemos a escribir (409 &#x60;email_suppressed&#x60;). Topes: 5 reenvíos por documento al día y 200 por empresa al día en producción (20 en habilitación; cuentan reenvíos, no destinatarios: con 3 direcciones, hasta 600 correos); al pasarse, 429 con &#x60;limit: \&quot;email_resend\&quot;&#x60; y &#x60;Retry-After&#x60; hasta la medianoche (hora de Colombia).  &#x60;Idempotency-Key&#x60; obligatoria: repetirla devuelve el mismo resultado sin volver a enviar. El reenvío queda en &#x60;delivery.email_resends&#x60; del documento (&#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después); &#x60;delivery.status&#x60; y &#x60;delivery.email&#x60; siguen hablando del correo original. Sin &#x60;customers:read&#x60;, las direcciones salen en &#x60;null&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="idempotencyKey">Obligatoria: 1 a 255 caracteres ASCII visibles, única por pedido (7 días). (optional)</param>
+        /// <param name="emailResendRequest"> (optional)</param>
+        /// <returns>EmailResend</returns>
+        EmailResend SendEquivalentDocumentAdjustmentEmail(string id, string? idempotencyKey = default, EmailResendRequest? emailResendRequest = default);
+
+        /// <summary>
+        /// Reenviar el correo de una nota de ajuste del documento equivalente
+        /// </summary>
+        /// <remarks>
+        /// Reenvía el correo del documento validado: el mismo ZIP (el AttachedDocument y el PDF), la misma plantilla y el mismo asunto. Sin cuerpo, va al destinatario de siempre: en producción, el correo del comprador (&#x60;customer.email&#x60;); en habilitación, solo a quien emitió el documento (con «[PRUEBA – sin validez legal]» en el asunto). Con &#x60;to&#x60; (de 1 a 3 direcciones; solo producción y solo con el permiso &#x60;customers:read&#x60;, porque el ZIP trae los datos del comprador) va a esas direcciones, un correo por destinatario: nadie ve a los demás.  Solo sirve cuando el documento está validado y su correo original ya terminó (si todavía se está enviando o se va a reintentar, 409 &#x60;invalid_state&#x60; con &#x60;reason: delivery_pending&#x60; y &#x60;Retry-After&#x60;; si ya no está programada, &#x60;delivery_incomplete&#x60;, sin reintento). Si el correo original falló y ya no se va a reintentar, sí se puede reenviar. A una dirección que rebotó o se quejó no le volvemos a escribir (409 &#x60;email_suppressed&#x60;). Topes: 5 reenvíos por documento al día y 200 por empresa al día en producción (20 en habilitación; cuentan reenvíos, no destinatarios: con 3 direcciones, hasta 600 correos); al pasarse, 429 con &#x60;limit: \&quot;email_resend\&quot;&#x60; y &#x60;Retry-After&#x60; hasta la medianoche (hora de Colombia).  &#x60;Idempotency-Key&#x60; obligatoria: repetirla devuelve el mismo resultado sin volver a enviar. El reenvío queda en &#x60;delivery.email_resends&#x60; del documento (&#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después); &#x60;delivery.status&#x60; y &#x60;delivery.email&#x60; siguen hablando del correo original. Sin &#x60;customers:read&#x60;, las direcciones salen en &#x60;null&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="idempotencyKey">Obligatoria: 1 a 255 caracteres ASCII visibles, única por pedido (7 días). (optional)</param>
+        /// <param name="emailResendRequest"> (optional)</param>
+        /// <returns>ApiResponse of EmailResend</returns>
+        ApiResponse<EmailResend> SendEquivalentDocumentAdjustmentEmailWithHttpInfo(string id, string? idempotencyKey = default, EmailResendRequest? emailResendRequest = default);
         #endregion Synchronous Operations
     }
 
@@ -419,9 +448,11 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of EquivalentDocumentAdjustmentList</returns>
-        System.Threading.Tasks.Task<EquivalentDocumentAdjustmentList> ListEquivalentDocumentAdjustmentsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<EquivalentDocumentAdjustmentList> ListEquivalentDocumentAdjustmentsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Listar (nota de ajuste del documento equivalente)
@@ -436,9 +467,11 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (EquivalentDocumentAdjustmentList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<EquivalentDocumentAdjustmentList>> ListEquivalentDocumentAdjustmentsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<EquivalentDocumentAdjustmentList>> ListEquivalentDocumentAdjustmentsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Calcular una nota de ajuste del documento equivalente sin emitirla
         /// </summary>
@@ -508,6 +541,33 @@ namespace Trevol.Generado.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (EquivalentDocumentAdjustment)</returns>
         System.Threading.Tasks.Task<ApiResponse<EquivalentDocumentAdjustment>> SendEquivalentDocumentAdjustmentWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Reenviar el correo de una nota de ajuste del documento equivalente
+        /// </summary>
+        /// <remarks>
+        /// Reenvía el correo del documento validado: el mismo ZIP (el AttachedDocument y el PDF), la misma plantilla y el mismo asunto. Sin cuerpo, va al destinatario de siempre: en producción, el correo del comprador (&#x60;customer.email&#x60;); en habilitación, solo a quien emitió el documento (con «[PRUEBA – sin validez legal]» en el asunto). Con &#x60;to&#x60; (de 1 a 3 direcciones; solo producción y solo con el permiso &#x60;customers:read&#x60;, porque el ZIP trae los datos del comprador) va a esas direcciones, un correo por destinatario: nadie ve a los demás.  Solo sirve cuando el documento está validado y su correo original ya terminó (si todavía se está enviando o se va a reintentar, 409 &#x60;invalid_state&#x60; con &#x60;reason: delivery_pending&#x60; y &#x60;Retry-After&#x60;; si ya no está programada, &#x60;delivery_incomplete&#x60;, sin reintento). Si el correo original falló y ya no se va a reintentar, sí se puede reenviar. A una dirección que rebotó o se quejó no le volvemos a escribir (409 &#x60;email_suppressed&#x60;). Topes: 5 reenvíos por documento al día y 200 por empresa al día en producción (20 en habilitación; cuentan reenvíos, no destinatarios: con 3 direcciones, hasta 600 correos); al pasarse, 429 con &#x60;limit: \&quot;email_resend\&quot;&#x60; y &#x60;Retry-After&#x60; hasta la medianoche (hora de Colombia).  &#x60;Idempotency-Key&#x60; obligatoria: repetirla devuelve el mismo resultado sin volver a enviar. El reenvío queda en &#x60;delivery.email_resends&#x60; del documento (&#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después); &#x60;delivery.status&#x60; y &#x60;delivery.email&#x60; siguen hablando del correo original. Sin &#x60;customers:read&#x60;, las direcciones salen en &#x60;null&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="idempotencyKey">Obligatoria: 1 a 255 caracteres ASCII visibles, única por pedido (7 días). (optional)</param>
+        /// <param name="emailResendRequest"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of EmailResend</returns>
+        System.Threading.Tasks.Task<EmailResend> SendEquivalentDocumentAdjustmentEmailAsync(string id, string? idempotencyKey = default, EmailResendRequest? emailResendRequest = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Reenviar el correo de una nota de ajuste del documento equivalente
+        /// </summary>
+        /// <remarks>
+        /// Reenvía el correo del documento validado: el mismo ZIP (el AttachedDocument y el PDF), la misma plantilla y el mismo asunto. Sin cuerpo, va al destinatario de siempre: en producción, el correo del comprador (&#x60;customer.email&#x60;); en habilitación, solo a quien emitió el documento (con «[PRUEBA – sin validez legal]» en el asunto). Con &#x60;to&#x60; (de 1 a 3 direcciones; solo producción y solo con el permiso &#x60;customers:read&#x60;, porque el ZIP trae los datos del comprador) va a esas direcciones, un correo por destinatario: nadie ve a los demás.  Solo sirve cuando el documento está validado y su correo original ya terminó (si todavía se está enviando o se va a reintentar, 409 &#x60;invalid_state&#x60; con &#x60;reason: delivery_pending&#x60; y &#x60;Retry-After&#x60;; si ya no está programada, &#x60;delivery_incomplete&#x60;, sin reintento). Si el correo original falló y ya no se va a reintentar, sí se puede reenviar. A una dirección que rebotó o se quejó no le volvemos a escribir (409 &#x60;email_suppressed&#x60;). Topes: 5 reenvíos por documento al día y 200 por empresa al día en producción (20 en habilitación; cuentan reenvíos, no destinatarios: con 3 direcciones, hasta 600 correos); al pasarse, 429 con &#x60;limit: \&quot;email_resend\&quot;&#x60; y &#x60;Retry-After&#x60; hasta la medianoche (hora de Colombia).  &#x60;Idempotency-Key&#x60; obligatoria: repetirla devuelve el mismo resultado sin volver a enviar. El reenvío queda en &#x60;delivery.email_resends&#x60; del documento (&#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después); &#x60;delivery.status&#x60; y &#x60;delivery.email&#x60; siguen hablando del correo original. Sin &#x60;customers:read&#x60;, las direcciones salen en &#x60;null&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="idempotencyKey">Obligatoria: 1 a 255 caracteres ASCII visibles, única por pedido (7 días). (optional)</param>
+        /// <param name="emailResendRequest"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (EmailResend)</returns>
+        System.Threading.Tasks.Task<ApiResponse<EmailResend>> SendEquivalentDocumentAdjustmentEmailWithHttpInfoAsync(string id, string? idempotencyKey = default, EmailResendRequest? emailResendRequest = default, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -1547,10 +1607,12 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>EquivalentDocumentAdjustmentList</returns>
-        public EquivalentDocumentAdjustmentList ListEquivalentDocumentAdjustments(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default)
+        public EquivalentDocumentAdjustmentList ListEquivalentDocumentAdjustments(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default)
         {
-            Trevol.Generado.Client.ApiResponse<EquivalentDocumentAdjustmentList> localVarResponse = ListEquivalentDocumentAdjustmentsWithHttpInfo(limit, startingAfter, status, externalId, createdFrom, createdTo);
+            Trevol.Generado.Client.ApiResponse<EquivalentDocumentAdjustmentList> localVarResponse = ListEquivalentDocumentAdjustmentsWithHttpInfo(limit, startingAfter, status, externalId, createdFrom, createdTo, number, prefix);
             return localVarResponse.Data;
         }
 
@@ -1564,8 +1626,10 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>ApiResponse of EquivalentDocumentAdjustmentList</returns>
-        public Trevol.Generado.Client.ApiResponse<EquivalentDocumentAdjustmentList> ListEquivalentDocumentAdjustmentsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default)
+        public Trevol.Generado.Client.ApiResponse<EquivalentDocumentAdjustmentList> ListEquivalentDocumentAdjustmentsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default)
         {
             Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
 
@@ -1607,6 +1671,14 @@ namespace Trevol.Generado.Api
             if (createdTo != null)
             {
                 localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "created_to", createdTo));
+            }
+            if (number != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "number", number));
+            }
+            if (prefix != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "prefix", prefix));
             }
 
             // authentication (llave) required
@@ -1638,11 +1710,13 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of EquivalentDocumentAdjustmentList</returns>
-        public async System.Threading.Tasks.Task<EquivalentDocumentAdjustmentList> ListEquivalentDocumentAdjustmentsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<EquivalentDocumentAdjustmentList> ListEquivalentDocumentAdjustmentsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default)
         {
-            Trevol.Generado.Client.ApiResponse<EquivalentDocumentAdjustmentList> localVarResponse = await ListEquivalentDocumentAdjustmentsWithHttpInfoAsync(limit, startingAfter, status, externalId, createdFrom, createdTo, cancellationToken).ConfigureAwait(false);
+            Trevol.Generado.Client.ApiResponse<EquivalentDocumentAdjustmentList> localVarResponse = await ListEquivalentDocumentAdjustmentsWithHttpInfoAsync(limit, startingAfter, status, externalId, createdFrom, createdTo, number, prefix, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1656,9 +1730,11 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (EquivalentDocumentAdjustmentList)</returns>
-        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<EquivalentDocumentAdjustmentList>> ListEquivalentDocumentAdjustmentsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<EquivalentDocumentAdjustmentList>> ListEquivalentDocumentAdjustmentsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default)
         {
 
             Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
@@ -1702,6 +1778,14 @@ namespace Trevol.Generado.Api
             if (createdTo != null)
             {
                 localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "created_to", createdTo));
+            }
+            if (number != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "number", number));
+            }
+            if (prefix != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "prefix", prefix));
             }
 
             // authentication (llave) required
@@ -2107,6 +2191,155 @@ namespace Trevol.Generado.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("SendEquivalentDocumentAdjustment", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Reenviar el correo de una nota de ajuste del documento equivalente Reenvía el correo del documento validado: el mismo ZIP (el AttachedDocument y el PDF), la misma plantilla y el mismo asunto. Sin cuerpo, va al destinatario de siempre: en producción, el correo del comprador (&#x60;customer.email&#x60;); en habilitación, solo a quien emitió el documento (con «[PRUEBA – sin validez legal]» en el asunto). Con &#x60;to&#x60; (de 1 a 3 direcciones; solo producción y solo con el permiso &#x60;customers:read&#x60;, porque el ZIP trae los datos del comprador) va a esas direcciones, un correo por destinatario: nadie ve a los demás.  Solo sirve cuando el documento está validado y su correo original ya terminó (si todavía se está enviando o se va a reintentar, 409 &#x60;invalid_state&#x60; con &#x60;reason: delivery_pending&#x60; y &#x60;Retry-After&#x60;; si ya no está programada, &#x60;delivery_incomplete&#x60;, sin reintento). Si el correo original falló y ya no se va a reintentar, sí se puede reenviar. A una dirección que rebotó o se quejó no le volvemos a escribir (409 &#x60;email_suppressed&#x60;). Topes: 5 reenvíos por documento al día y 200 por empresa al día en producción (20 en habilitación; cuentan reenvíos, no destinatarios: con 3 direcciones, hasta 600 correos); al pasarse, 429 con &#x60;limit: \&quot;email_resend\&quot;&#x60; y &#x60;Retry-After&#x60; hasta la medianoche (hora de Colombia).  &#x60;Idempotency-Key&#x60; obligatoria: repetirla devuelve el mismo resultado sin volver a enviar. El reenvío queda en &#x60;delivery.email_resends&#x60; del documento (&#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después); &#x60;delivery.status&#x60; y &#x60;delivery.email&#x60; siguen hablando del correo original. Sin &#x60;customers:read&#x60;, las direcciones salen en &#x60;null&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="idempotencyKey">Obligatoria: 1 a 255 caracteres ASCII visibles, única por pedido (7 días). (optional)</param>
+        /// <param name="emailResendRequest"> (optional)</param>
+        /// <returns>EmailResend</returns>
+        public EmailResend SendEquivalentDocumentAdjustmentEmail(string id, string? idempotencyKey = default, EmailResendRequest? emailResendRequest = default)
+        {
+            Trevol.Generado.Client.ApiResponse<EmailResend> localVarResponse = SendEquivalentDocumentAdjustmentEmailWithHttpInfo(id, idempotencyKey, emailResendRequest);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Reenviar el correo de una nota de ajuste del documento equivalente Reenvía el correo del documento validado: el mismo ZIP (el AttachedDocument y el PDF), la misma plantilla y el mismo asunto. Sin cuerpo, va al destinatario de siempre: en producción, el correo del comprador (&#x60;customer.email&#x60;); en habilitación, solo a quien emitió el documento (con «[PRUEBA – sin validez legal]» en el asunto). Con &#x60;to&#x60; (de 1 a 3 direcciones; solo producción y solo con el permiso &#x60;customers:read&#x60;, porque el ZIP trae los datos del comprador) va a esas direcciones, un correo por destinatario: nadie ve a los demás.  Solo sirve cuando el documento está validado y su correo original ya terminó (si todavía se está enviando o se va a reintentar, 409 &#x60;invalid_state&#x60; con &#x60;reason: delivery_pending&#x60; y &#x60;Retry-After&#x60;; si ya no está programada, &#x60;delivery_incomplete&#x60;, sin reintento). Si el correo original falló y ya no se va a reintentar, sí se puede reenviar. A una dirección que rebotó o se quejó no le volvemos a escribir (409 &#x60;email_suppressed&#x60;). Topes: 5 reenvíos por documento al día y 200 por empresa al día en producción (20 en habilitación; cuentan reenvíos, no destinatarios: con 3 direcciones, hasta 600 correos); al pasarse, 429 con &#x60;limit: \&quot;email_resend\&quot;&#x60; y &#x60;Retry-After&#x60; hasta la medianoche (hora de Colombia).  &#x60;Idempotency-Key&#x60; obligatoria: repetirla devuelve el mismo resultado sin volver a enviar. El reenvío queda en &#x60;delivery.email_resends&#x60; del documento (&#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después); &#x60;delivery.status&#x60; y &#x60;delivery.email&#x60; siguen hablando del correo original. Sin &#x60;customers:read&#x60;, las direcciones salen en &#x60;null&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="idempotencyKey">Obligatoria: 1 a 255 caracteres ASCII visibles, única por pedido (7 días). (optional)</param>
+        /// <param name="emailResendRequest"> (optional)</param>
+        /// <returns>ApiResponse of EmailResend</returns>
+        public Trevol.Generado.Client.ApiResponse<EmailResend> SendEquivalentDocumentAdjustmentEmailWithHttpInfo(string id, string? idempotencyKey = default, EmailResendRequest? emailResendRequest = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new Trevol.Generado.Client.ApiException(400, "Missing required parameter 'id' when calling EquivalentDocumentAdjustmentsApi->SendEquivalentDocumentAdjustmentEmail");
+
+            Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/problem+json"
+            };
+
+            var localVarContentType = Trevol.Generado.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Trevol.Generado.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", Trevol.Generado.Client.ClientUtils.ParameterToString(id)); // path parameter
+            if (idempotencyKey != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Idempotency-Key", Trevol.Generado.Client.ClientUtils.ParameterToString(idempotencyKey)); // header parameter
+            }
+            localVarRequestOptions.Data = emailResendRequest;
+
+            // authentication (llave) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<EmailResend>("/equivalent_document_adjustments/{id}/email", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SendEquivalentDocumentAdjustmentEmail", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Reenviar el correo de una nota de ajuste del documento equivalente Reenvía el correo del documento validado: el mismo ZIP (el AttachedDocument y el PDF), la misma plantilla y el mismo asunto. Sin cuerpo, va al destinatario de siempre: en producción, el correo del comprador (&#x60;customer.email&#x60;); en habilitación, solo a quien emitió el documento (con «[PRUEBA – sin validez legal]» en el asunto). Con &#x60;to&#x60; (de 1 a 3 direcciones; solo producción y solo con el permiso &#x60;customers:read&#x60;, porque el ZIP trae los datos del comprador) va a esas direcciones, un correo por destinatario: nadie ve a los demás.  Solo sirve cuando el documento está validado y su correo original ya terminó (si todavía se está enviando o se va a reintentar, 409 &#x60;invalid_state&#x60; con &#x60;reason: delivery_pending&#x60; y &#x60;Retry-After&#x60;; si ya no está programada, &#x60;delivery_incomplete&#x60;, sin reintento). Si el correo original falló y ya no se va a reintentar, sí se puede reenviar. A una dirección que rebotó o se quejó no le volvemos a escribir (409 &#x60;email_suppressed&#x60;). Topes: 5 reenvíos por documento al día y 200 por empresa al día en producción (20 en habilitación; cuentan reenvíos, no destinatarios: con 3 direcciones, hasta 600 correos); al pasarse, 429 con &#x60;limit: \&quot;email_resend\&quot;&#x60; y &#x60;Retry-After&#x60; hasta la medianoche (hora de Colombia).  &#x60;Idempotency-Key&#x60; obligatoria: repetirla devuelve el mismo resultado sin volver a enviar. El reenvío queda en &#x60;delivery.email_resends&#x60; del documento (&#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después); &#x60;delivery.status&#x60; y &#x60;delivery.email&#x60; siguen hablando del correo original. Sin &#x60;customers:read&#x60;, las direcciones salen en &#x60;null&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="idempotencyKey">Obligatoria: 1 a 255 caracteres ASCII visibles, única por pedido (7 días). (optional)</param>
+        /// <param name="emailResendRequest"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of EmailResend</returns>
+        public async System.Threading.Tasks.Task<EmailResend> SendEquivalentDocumentAdjustmentEmailAsync(string id, string? idempotencyKey = default, EmailResendRequest? emailResendRequest = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            Trevol.Generado.Client.ApiResponse<EmailResend> localVarResponse = await SendEquivalentDocumentAdjustmentEmailWithHttpInfoAsync(id, idempotencyKey, emailResendRequest, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Reenviar el correo de una nota de ajuste del documento equivalente Reenvía el correo del documento validado: el mismo ZIP (el AttachedDocument y el PDF), la misma plantilla y el mismo asunto. Sin cuerpo, va al destinatario de siempre: en producción, el correo del comprador (&#x60;customer.email&#x60;); en habilitación, solo a quien emitió el documento (con «[PRUEBA – sin validez legal]» en el asunto). Con &#x60;to&#x60; (de 1 a 3 direcciones; solo producción y solo con el permiso &#x60;customers:read&#x60;, porque el ZIP trae los datos del comprador) va a esas direcciones, un correo por destinatario: nadie ve a los demás.  Solo sirve cuando el documento está validado y su correo original ya terminó (si todavía se está enviando o se va a reintentar, 409 &#x60;invalid_state&#x60; con &#x60;reason: delivery_pending&#x60; y &#x60;Retry-After&#x60;; si ya no está programada, &#x60;delivery_incomplete&#x60;, sin reintento). Si el correo original falló y ya no se va a reintentar, sí se puede reenviar. A una dirección que rebotó o se quejó no le volvemos a escribir (409 &#x60;email_suppressed&#x60;). Topes: 5 reenvíos por documento al día y 200 por empresa al día en producción (20 en habilitación; cuentan reenvíos, no destinatarios: con 3 direcciones, hasta 600 correos); al pasarse, 429 con &#x60;limit: \&quot;email_resend\&quot;&#x60; y &#x60;Retry-After&#x60; hasta la medianoche (hora de Colombia).  &#x60;Idempotency-Key&#x60; obligatoria: repetirla devuelve el mismo resultado sin volver a enviar. El reenvío queda en &#x60;delivery.email_resends&#x60; del documento (&#x60;last.deliveries&#x60; dice cómo le fue a cada destinatario del último reenvío, también si rebotó o se quejó después); &#x60;delivery.status&#x60; y &#x60;delivery.email&#x60; siguen hablando del correo original. Sin &#x60;customers:read&#x60;, las direcciones salen en &#x60;null&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="idempotencyKey">Obligatoria: 1 a 255 caracteres ASCII visibles, única por pedido (7 días). (optional)</param>
+        /// <param name="emailResendRequest"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (EmailResend)</returns>
+        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<EmailResend>> SendEquivalentDocumentAdjustmentEmailWithHttpInfoAsync(string id, string? idempotencyKey = default, EmailResendRequest? emailResendRequest = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new Trevol.Generado.Client.ApiException(400, "Missing required parameter 'id' when calling EquivalentDocumentAdjustmentsApi->SendEquivalentDocumentAdjustmentEmail");
+
+
+            Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/problem+json"
+            };
+
+
+            var localVarContentType = Trevol.Generado.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Trevol.Generado.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", Trevol.Generado.Client.ClientUtils.ParameterToString(id)); // path parameter
+            if (idempotencyKey != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Idempotency-Key", Trevol.Generado.Client.ClientUtils.ParameterToString(idempotencyKey)); // header parameter
+            }
+            localVarRequestOptions.Data = emailResendRequest;
+
+            // authentication (llave) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<EmailResend>("/equivalent_document_adjustments/{id}/email", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("SendEquivalentDocumentAdjustmentEmail", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

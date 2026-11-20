@@ -143,7 +143,8 @@ public class ClienteTests
     [Fact]
     public void CadaSobreDeListaTieneSuSobrecargaDePaginateAsync()
     {
-        var listas = typeof(InvoiceList).Assembly.GetTypes().Where(x => x.Namespace == "Trevol.Generado.Model" && x.Name.EndsWith("List")).Select(x => x.Name).ToArray();
+        // Los sobres de lista (`…List` con `HasMore`): `CodeList` (una lista de valores, 0.4.0) termina en «List» pero no es un sobre.
+        var listas = typeof(InvoiceList).Assembly.GetTypes().Where(x => x.Namespace == "Trevol.Generado.Model" && x.Name.EndsWith("List") && x.GetProperty("HasMore") != null).Select(x => x.Name).ToArray();
         Assert.NotEmpty(listas);
         foreach (var l in listas)
             Assert.True(typeof(TrevolClient).GetMethods().Any(m => m.Name == "PaginateAsync" && m.GetParameters()[0].ParameterType.ToString().Contains($"{l}]")), l); // si la API suma un listado, falta su sobrecarga

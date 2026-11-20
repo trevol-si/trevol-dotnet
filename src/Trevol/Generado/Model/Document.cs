@@ -37,6 +37,7 @@ namespace Trevol.Generado.Model
         /// <param name="id">inv_… | cn_… | dn_….</param>
         /// <param name="varObject">Valores conocidos: &#x60;invoice&#x60;, &#x60;credit_note&#x60;, &#x60;debit_note&#x60;..</param>
         /// <param name="varEnvironment">Valores conocidos: &#x60;test&#x60;, &#x60;live&#x60;..</param>
+        /// <param name="simulated">Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad..</param>
         /// <param name="status">&#x60;processing&#x60; solo en la versión 2026-10-22: la DIAN no confirmó y Trevol sigue resolviendo el documento (el resultado llega por GET y por webhook; no crees otro documento para la misma venta). En 2026-10-21 ese documento se ve como &#x60;error&#x60;. Valores conocidos: &#x60;pending&#x60;, &#x60;sending&#x60;, &#x60;accepted&#x60;, &#x60;rejected&#x60;, &#x60;error&#x60;, &#x60;contingency&#x60;, &#x60;processing&#x60;..</param>
         /// <param name="number">number.</param>
         /// <param name="prefix">prefix.</param>
@@ -64,11 +65,14 @@ namespace Trevol.Generado.Model
         /// <param name="delivery">delivery.</param>
         /// <param name="createdAt">createdAt.</param>
         /// <param name="updatedAt">updatedAt.</param>
-        public Document(string id = default, string varObject = default, string varEnvironment = default, string status = default, string number = default, string prefix = default, string externalId = default, string origin = default, string cufe = default, string cude = default, string qr = default, DateTimeOffset? issuedAt = default, Customer customer = default, List<Item> items = default, Payment payment = default, InvoiceReference invoice = default, string documentType = default, string operationType = default, Currency currency = default, bool copTotals = default, DeliveryTerms deliveryTerms = default, Shipment shipment = default, string dueDiligence = default, Interoperability interoperability = default, InvoiceContingency contingency = default, DocumentTotals totals = default, DianResult dian = default, Delivery delivery = default, DateTimeOffset createdAt = default, DateTimeOffset? updatedAt = default)
+        /// <param name="pdfDesignId">El que pidió el documento, o null..</param>
+        /// <param name="pdfDesign">El diseño fijado al emitir; null mientras está pendiente..</param>
+        public Document(string id = default, string varObject = default, string varEnvironment = default, bool simulated = default, string status = default, string number = default, string prefix = default, string externalId = default, string origin = default, string cufe = default, string cude = default, string qr = default, DateTimeOffset? issuedAt = default, Customer customer = default, List<Item> items = default, Payment payment = default, InvoiceReference invoice = default, string documentType = default, string operationType = default, Currency currency = default, bool copTotals = default, DeliveryTerms deliveryTerms = default, Shipment shipment = default, string dueDiligence = default, Interoperability interoperability = default, InvoiceContingency contingency = default, DocumentTotals totals = default, DianResult dian = default, Delivery delivery = default, DateTimeOffset createdAt = default, DateTimeOffset? updatedAt = default, string pdfDesignId = default, PdfDesignApplied pdfDesign = default)
         {
             this.Id = id;
             this.Object = varObject;
             this.VarEnvironment = varEnvironment;
+            this.Simulated = simulated;
             this.Status = status;
             this.Number = number;
             this.Prefix = prefix;
@@ -96,6 +100,8 @@ namespace Trevol.Generado.Model
             this.Delivery = delivery;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+            this.PdfDesignId = pdfDesignId;
+            this.PdfDesign = pdfDesign;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -119,6 +125,13 @@ namespace Trevol.Generado.Model
         /// <value>Valores conocidos: &#x60;test&#x60;, &#x60;live&#x60;.</value>
         [DataMember(Name = "environment", EmitDefaultValue = false)]
         public string VarEnvironment { get; set; }
+
+        /// <summary>
+        /// Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.
+        /// </summary>
+        /// <value>Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.</value>
+        [DataMember(Name = "simulated", EmitDefaultValue = true)]
+        public bool Simulated { get; set; }
 
         /// <summary>
         /// &#x60;processing&#x60; solo en la versión 2026-10-22: la DIAN no confirmó y Trevol sigue resolviendo el documento (el resultado llega por GET y por webhook; no crees otro documento para la misma venta). En 2026-10-21 ese documento se ve como &#x60;error&#x60;. Valores conocidos: &#x60;pending&#x60;, &#x60;sending&#x60;, &#x60;accepted&#x60;, &#x60;rejected&#x60;, &#x60;error&#x60;, &#x60;contingency&#x60;, &#x60;processing&#x60;.
@@ -290,6 +303,20 @@ namespace Trevol.Generado.Model
         public DateTimeOffset? UpdatedAt { get; set; }
 
         /// <summary>
+        /// El que pidió el documento, o null.
+        /// </summary>
+        /// <value>El que pidió el documento, o null.</value>
+        [DataMember(Name = "pdf_design_id", EmitDefaultValue = true)]
+        public string PdfDesignId { get; set; }
+
+        /// <summary>
+        /// El diseño fijado al emitir; null mientras está pendiente.
+        /// </summary>
+        /// <value>El diseño fijado al emitir; null mientras está pendiente.</value>
+        [DataMember(Name = "pdf_design", EmitDefaultValue = true)]
+        public PdfDesignApplied PdfDesign { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -306,6 +333,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Object: ").Append(Object).Append("\n");
             sb.Append("  VarEnvironment: ").Append(VarEnvironment).Append("\n");
+            sb.Append("  Simulated: ").Append(Simulated).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
             sb.Append("  Prefix: ").Append(Prefix).Append("\n");
@@ -333,6 +361,8 @@ namespace Trevol.Generado.Model
             sb.Append("  Delivery: ").Append(Delivery).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  PdfDesignId: ").Append(PdfDesignId).Append("\n");
+            sb.Append("  PdfDesign: ").Append(PdfDesign).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

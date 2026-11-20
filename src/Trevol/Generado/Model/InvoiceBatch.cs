@@ -37,16 +37,18 @@ namespace Trevol.Generado.Model
         /// <param name="id">id.</param>
         /// <param name="varObject">Valores conocidos: &#x60;invoice_batch&#x60;..</param>
         /// <param name="varEnvironment">Valores conocidos: &#x60;test&#x60;, &#x60;live&#x60;..</param>
+        /// <param name="simulated">Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad..</param>
         /// <param name="status">completed cuando todas sus facturas reservadas llegaron a un estado final. Valores conocidos: &#x60;processing&#x60;, &#x60;completed&#x60;..</param>
         /// <param name="createdAt">createdAt.</param>
         /// <param name="completedAt">completedAt.</param>
         /// <param name="counts">counts.</param>
         /// <param name="items">Solo en POST y en GET /v1/invoice_batches/{id} (la lista no los trae)..</param>
-        public InvoiceBatch(string id = default, string varObject = default, string varEnvironment = default, string status = default, DateTimeOffset createdAt = default, DateTimeOffset? completedAt = default, InvoiceBatchCounts counts = default, List<InvoiceBatchItem> items = default)
+        public InvoiceBatch(string id = default, string varObject = default, string varEnvironment = default, bool simulated = default, string status = default, DateTimeOffset createdAt = default, DateTimeOffset? completedAt = default, InvoiceBatchCounts counts = default, List<InvoiceBatchItem> items = default)
         {
             this.Id = id;
             this.Object = varObject;
             this.VarEnvironment = varEnvironment;
+            this.Simulated = simulated;
             this.Status = status;
             this.CreatedAt = createdAt;
             this.CompletedAt = completedAt;
@@ -74,6 +76,13 @@ namespace Trevol.Generado.Model
         /// <value>Valores conocidos: &#x60;test&#x60;, &#x60;live&#x60;.</value>
         [DataMember(Name = "environment", EmitDefaultValue = false)]
         public string VarEnvironment { get; set; }
+
+        /// <summary>
+        /// Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.
+        /// </summary>
+        /// <value>Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.</value>
+        [DataMember(Name = "simulated", EmitDefaultValue = true)]
+        public bool Simulated { get; set; }
 
         /// <summary>
         /// completed cuando todas sus facturas reservadas llegaron a un estado final. Valores conocidos: &#x60;processing&#x60;, &#x60;completed&#x60;.
@@ -124,6 +133,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Object: ").Append(Object).Append("\n");
             sb.Append("  VarEnvironment: ").Append(VarEnvironment).Append("\n");
+            sb.Append("  Simulated: ").Append(Simulated).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  CompletedAt: ").Append(CompletedAt).Append("\n");
