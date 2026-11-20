@@ -39,8 +39,7 @@ namespace Trevol.Generado.Model
         /// <param name="description">description.</param>
         /// <param name="unit">Unidad de medida (tabla 13.3.6). Por defecto 94 (unidad)..</param>
         /// <param name="quantity">Número o texto decimal con punto («150000.50»)..</param>
-        /// <param name="unitPrice">Precio unitario SIN impuestos (con unit_price_includes_tax, con ellos)..</param>
-        /// <param name="unitPriceIncludesTax">true: unit_price trae los impuestos de la línea; Trevol calcula el precio sin ellos..</param>
+        /// <param name="unitPrice">Precio unitario SIN impuestos..</param>
         /// <param name="taxes">Impuestos de la línea: {code, rate} porcentual, {code: \&quot;01\&quot;, excluded: true} o nominal {code, unit_amount, unit?, quantity?}..</param>
         /// <param name="discounts">discounts.</param>
         /// <param name="charges">charges.</param>
@@ -56,7 +55,7 @@ namespace Trevol.Generado.Model
         /// <param name="consignment">La remesa del RNDC (transporte de carga, 12). Solo en facturas..</param>
         /// <param name="notary">Matrícula inmobiliaria y valor comercial (notarios, 14). Solo en facturas..</param>
         /// <param name="properties">Propiedades libres de la línea (hasta 20; no en el transporte de carga). Solo en facturas..</param>
-        public Item(string productId = default, string code = default, string description = default, string unit = default, string quantity = default, string unitPrice = default, bool unitPriceIncludesTax = default, List<ItemTax> taxes = default, List<ItemAllowance> discounts = default, List<ItemAllowance> charges = default, List<ItemWithholding> withholdings = default, FreeOfCharge freeOfCharge = default, StandardCode standardCode = default, string brand = default, string model = default, string aiu = default, string aiuContract = default, string income = default, ItemMandator mandator = default, ItemConsignment consignment = default, ItemNotary notary = default, List<ItemProperty> properties = default)
+        public Item(string productId = default, string code = default, string description = default, string unit = default, string quantity = default, string unitPrice = default, List<ItemTax> taxes = default, List<ItemAllowance> discounts = default, List<ItemAllowance> charges = default, List<ItemWithholding> withholdings = default, FreeOfCharge freeOfCharge = default, StandardCode standardCode = default, string brand = default, string model = default, string aiu = default, string aiuContract = default, string income = default, ItemMandator mandator = default, ItemConsignment consignment = default, ItemNotary notary = default, List<ItemProperty> properties = default)
         {
             this.ProductId = productId;
             this.Code = code;
@@ -64,7 +63,6 @@ namespace Trevol.Generado.Model
             this.Unit = unit;
             this.Quantity = quantity;
             this.UnitPrice = unitPrice;
-            this.UnitPriceIncludesTax = unitPriceIncludesTax;
             this.Taxes = taxes;
             this.Discounts = discounts;
             this.Charges = charges;
@@ -118,18 +116,11 @@ namespace Trevol.Generado.Model
         public string Quantity { get; set; }
 
         /// <summary>
-        /// Precio unitario SIN impuestos (con unit_price_includes_tax, con ellos).
+        /// Precio unitario SIN impuestos.
         /// </summary>
-        /// <value>Precio unitario SIN impuestos (con unit_price_includes_tax, con ellos).</value>
+        /// <value>Precio unitario SIN impuestos.</value>
         [DataMember(Name = "unit_price", EmitDefaultValue = false)]
         public string UnitPrice { get; set; }
-
-        /// <summary>
-        /// true: unit_price trae los impuestos de la línea; Trevol calcula el precio sin ellos.
-        /// </summary>
-        /// <value>true: unit_price trae los impuestos de la línea; Trevol calcula el precio sin ellos.</value>
-        [DataMember(Name = "unit_price_includes_tax", EmitDefaultValue = true)]
-        public bool UnitPriceIncludesTax { get; set; }
 
         /// <summary>
         /// Impuestos de la línea: {code, rate} porcentual, {code: \&quot;01\&quot;, excluded: true} o nominal {code, unit_amount, unit?, quantity?}.
@@ -250,7 +241,6 @@ namespace Trevol.Generado.Model
             sb.Append("  Unit: ").Append(Unit).Append("\n");
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("  UnitPrice: ").Append(UnitPrice).Append("\n");
-            sb.Append("  UnitPriceIncludesTax: ").Append(UnitPriceIncludesTax).Append("\n");
             sb.Append("  Taxes: ").Append(Taxes).Append("\n");
             sb.Append("  Discounts: ").Append(Discounts).Append("\n");
             sb.Append("  Charges: ").Append(Charges).Append("\n");

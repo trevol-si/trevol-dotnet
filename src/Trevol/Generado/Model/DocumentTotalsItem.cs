@@ -39,17 +39,13 @@ namespace Trevol.Generado.Model
         /// <param name="lineExtension">lineExtension.</param>
         /// <param name="charge">charge.</param>
         /// <param name="commercialValue">commercialValue.</param>
-        /// <param name="netUnitPrice">Solo en las líneas con unit_price_includes_tax: el precio unitario sin impuestos que Trevol derivó (hasta 6 decimales), en la moneda de totals..</param>
-        /// <param name="total">Solo en las líneas con unit_price_includes_tax: line_extension más los impuestos de la línea, en la moneda de totals..</param>
-        public DocumentTotalsItem(string gross = default, string discount = default, string lineExtension = default, string charge = default, string commercialValue = default, string netUnitPrice = default, string total = default)
+        public DocumentTotalsItem(string gross = default, string discount = default, string lineExtension = default, string charge = default, string commercialValue = default)
         {
             this.Gross = gross;
             this.Discount = discount;
             this.LineExtension = lineExtension;
             this.Charge = charge;
             this.CommercialValue = commercialValue;
-            this.NetUnitPrice = netUnitPrice;
-            this.Total = total;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -85,20 +81,6 @@ namespace Trevol.Generado.Model
         public string CommercialValue { get; set; }
 
         /// <summary>
-        /// Solo en las líneas con unit_price_includes_tax: el precio unitario sin impuestos que Trevol derivó (hasta 6 decimales), en la moneda de totals.
-        /// </summary>
-        /// <value>Solo en las líneas con unit_price_includes_tax: el precio unitario sin impuestos que Trevol derivó (hasta 6 decimales), en la moneda de totals.</value>
-        [DataMember(Name = "net_unit_price", EmitDefaultValue = false)]
-        public string NetUnitPrice { get; set; }
-
-        /// <summary>
-        /// Solo en las líneas con unit_price_includes_tax: line_extension más los impuestos de la línea, en la moneda de totals.
-        /// </summary>
-        /// <value>Solo en las líneas con unit_price_includes_tax: line_extension más los impuestos de la línea, en la moneda de totals.</value>
-        [DataMember(Name = "total", EmitDefaultValue = false)]
-        public string Total { get; set; }
-
-        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -117,8 +99,6 @@ namespace Trevol.Generado.Model
             sb.Append("  LineExtension: ").Append(LineExtension).Append("\n");
             sb.Append("  Charge: ").Append(Charge).Append("\n");
             sb.Append("  CommercialValue: ").Append(CommercialValue).Append("\n");
-            sb.Append("  NetUnitPrice: ").Append(NetUnitPrice).Append("\n");
-            sb.Append("  Total: ").Append(Total).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
