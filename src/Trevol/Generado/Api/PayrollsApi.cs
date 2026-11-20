@@ -154,8 +154,10 @@ namespace Trevol.Generado.Api
         /// <param name="employeeCode"> (optional)</param>
         /// <param name="periodEndFrom"> (optional)</param>
         /// <param name="periodEndTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>PayrollList</returns>
-        PayrollList ListPayrolls(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default);
+        PayrollList ListPayrolls(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, string? number = default, string? prefix = default);
 
         /// <summary>
         /// Listar (nómina electrónica)
@@ -173,8 +175,10 @@ namespace Trevol.Generado.Api
         /// <param name="employeeCode"> (optional)</param>
         /// <param name="periodEndFrom"> (optional)</param>
         /// <param name="periodEndTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>ApiResponse of PayrollList</returns>
-        ApiResponse<PayrollList> ListPayrollsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default);
+        ApiResponse<PayrollList> ListPayrollsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, string? number = default, string? prefix = default);
         /// <summary>
         /// Calcular una nómina electrónica sin emitirla
         /// </summary>
@@ -384,9 +388,11 @@ namespace Trevol.Generado.Api
         /// <param name="employeeCode"> (optional)</param>
         /// <param name="periodEndFrom"> (optional)</param>
         /// <param name="periodEndTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PayrollList</returns>
-        System.Threading.Tasks.Task<PayrollList> ListPayrollsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<PayrollList> ListPayrollsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Listar (nómina electrónica)
@@ -404,9 +410,11 @@ namespace Trevol.Generado.Api
         /// <param name="employeeCode"> (optional)</param>
         /// <param name="periodEndFrom"> (optional)</param>
         /// <param name="periodEndTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PayrollList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PayrollList>> ListPayrollsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<PayrollList>> ListPayrollsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Calcular una nómina electrónica sin emitirla
         /// </summary>
@@ -1389,10 +1397,12 @@ namespace Trevol.Generado.Api
         /// <param name="employeeCode"> (optional)</param>
         /// <param name="periodEndFrom"> (optional)</param>
         /// <param name="periodEndTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>PayrollList</returns>
-        public PayrollList ListPayrolls(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default)
+        public PayrollList ListPayrolls(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, string? number = default, string? prefix = default)
         {
-            Trevol.Generado.Client.ApiResponse<PayrollList> localVarResponse = ListPayrollsWithHttpInfo(limit, startingAfter, status, externalId, createdFrom, createdTo, employeeCode, periodEndFrom, periodEndTo);
+            Trevol.Generado.Client.ApiResponse<PayrollList> localVarResponse = ListPayrollsWithHttpInfo(limit, startingAfter, status, externalId, createdFrom, createdTo, employeeCode, periodEndFrom, periodEndTo, number, prefix);
             return localVarResponse.Data;
         }
 
@@ -1409,8 +1419,10 @@ namespace Trevol.Generado.Api
         /// <param name="employeeCode"> (optional)</param>
         /// <param name="periodEndFrom"> (optional)</param>
         /// <param name="periodEndTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>ApiResponse of PayrollList</returns>
-        public Trevol.Generado.Client.ApiResponse<PayrollList> ListPayrollsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default)
+        public Trevol.Generado.Client.ApiResponse<PayrollList> ListPayrollsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, string? number = default, string? prefix = default)
         {
             Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
 
@@ -1464,6 +1476,14 @@ namespace Trevol.Generado.Api
             if (periodEndTo != null)
             {
                 localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "period_end_to", periodEndTo));
+            }
+            if (number != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "number", number));
+            }
+            if (prefix != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "prefix", prefix));
             }
 
             // authentication (llave) required
@@ -1498,11 +1518,13 @@ namespace Trevol.Generado.Api
         /// <param name="employeeCode"> (optional)</param>
         /// <param name="periodEndFrom"> (optional)</param>
         /// <param name="periodEndTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of PayrollList</returns>
-        public async System.Threading.Tasks.Task<PayrollList> ListPayrollsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<PayrollList> ListPayrollsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default)
         {
-            Trevol.Generado.Client.ApiResponse<PayrollList> localVarResponse = await ListPayrollsWithHttpInfoAsync(limit, startingAfter, status, externalId, createdFrom, createdTo, employeeCode, periodEndFrom, periodEndTo, cancellationToken).ConfigureAwait(false);
+            Trevol.Generado.Client.ApiResponse<PayrollList> localVarResponse = await ListPayrollsWithHttpInfoAsync(limit, startingAfter, status, externalId, createdFrom, createdTo, employeeCode, periodEndFrom, periodEndTo, number, prefix, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1519,9 +1541,11 @@ namespace Trevol.Generado.Api
         /// <param name="employeeCode"> (optional)</param>
         /// <param name="periodEndFrom"> (optional)</param>
         /// <param name="periodEndTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (PayrollList)</returns>
-        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<PayrollList>> ListPayrollsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<PayrollList>> ListPayrollsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? employeeCode = default, string? periodEndFrom = default, string? periodEndTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default)
         {
 
             Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
@@ -1577,6 +1601,14 @@ namespace Trevol.Generado.Api
             if (periodEndTo != null)
             {
                 localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "period_end_to", periodEndTo));
+            }
+            if (number != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "number", number));
+            }
+            if (prefix != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "prefix", prefix));
             }
 
             // authentication (llave) required

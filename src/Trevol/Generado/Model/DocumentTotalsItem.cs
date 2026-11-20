@@ -34,7 +34,7 @@ namespace Trevol.Generado.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentTotalsItem" /> class.
         /// </summary>
-        /// <param name="gross">gross.</param>
+        /// <param name="gross">Cantidad × precio SIN impuestos..</param>
         /// <param name="discount">discount.</param>
         /// <param name="lineExtension">lineExtension.</param>
         /// <param name="charge">charge.</param>
@@ -50,8 +50,9 @@ namespace Trevol.Generado.Model
         }
 
         /// <summary>
-        /// Gets or Sets Gross
+        /// Cantidad × precio SIN impuestos.
         /// </summary>
+        /// <value>Cantidad × precio SIN impuestos.</value>
         [DataMember(Name = "gross", EmitDefaultValue = false)]
         public string Gross { get; set; }
 

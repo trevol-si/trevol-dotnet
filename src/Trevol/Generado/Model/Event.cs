@@ -39,15 +39,17 @@ namespace Trevol.Generado.Model
         /// <param name="type">Valores conocidos: &#x60;invoice.accepted&#x60;, &#x60;invoice.rejected&#x60;, &#x60;invoice.error&#x60;, &#x60;invoice.delivered&#x60;, &#x60;invoice.email_bounced&#x60;, &#x60;invoice.email_failed&#x60;, &#x60;credit_note.accepted&#x60;, &#x60;credit_note.rejected&#x60;, &#x60;credit_note.error&#x60;, &#x60;credit_note.delivered&#x60;, &#x60;credit_note.email_bounced&#x60;, &#x60;credit_note.email_failed&#x60;, &#x60;debit_note.accepted&#x60;, &#x60;debit_note.rejected&#x60;, &#x60;debit_note.error&#x60;, &#x60;debit_note.delivered&#x60;, &#x60;debit_note.email_bounced&#x60;, &#x60;debit_note.email_failed&#x60;, &#x60;balance.low&#x60;, &#x60;numbering.low&#x60;, &#x60;numbering.expiring&#x60;, &#x60;certificate.expiring&#x60;, &#x60;support_document.accepted&#x60;, &#x60;support_document.rejected&#x60;, &#x60;support_document.error&#x60;, &#x60;support_document_adjustment.accepted&#x60;, &#x60;support_document_adjustment.rejected&#x60;, &#x60;support_document_adjustment.error&#x60;, &#x60;equivalent_document.accepted&#x60;, &#x60;equivalent_document.rejected&#x60;, &#x60;equivalent_document.error&#x60;, &#x60;equivalent_document.delivered&#x60;, &#x60;equivalent_document.email_bounced&#x60;, &#x60;equivalent_document.email_failed&#x60;, &#x60;equivalent_document_adjustment.accepted&#x60;, &#x60;equivalent_document_adjustment.rejected&#x60;, &#x60;equivalent_document_adjustment.error&#x60;, &#x60;equivalent_document_adjustment.delivered&#x60;, &#x60;equivalent_document_adjustment.email_bounced&#x60;, &#x60;equivalent_document_adjustment.email_failed&#x60;, &#x60;payroll.accepted&#x60;, &#x60;payroll.rejected&#x60;, &#x60;payroll.error&#x60;, &#x60;payroll_adjustment.accepted&#x60;, &#x60;payroll_adjustment.rejected&#x60;, &#x60;payroll_adjustment.error&#x60;, &#x60;radian_event.accepted&#x60;, &#x60;radian_event.rejected&#x60;, &#x60;radian_event.error&#x60;, &#x60;invoice.contingency&#x60;, &#x60;invoice_batch.completed&#x60;, &#x60;dian_document.received&#x60;, &#x60;dian_sync.completed&#x60;, &#x60;dian_sync.failed&#x60;, &#x60;numbering_request.ready&#x60;, &#x60;numbering_request.failed&#x60;, &#x60;numbering_request.canceled&#x60;, &#x60;numbering_request.action_required&#x60;, &#x60;numbering_range.associated&#x60;, &#x60;numbering_range.association_failed&#x60;, &#x60;customer.created&#x60;, &#x60;customer.updated&#x60;, &#x60;customer.deactivated&#x60;, &#x60;product.created&#x60;, &#x60;product.updated&#x60;, &#x60;product.deactivated&#x60;, &#x60;numbering_range.exhausted&#x60;, &#x60;report.ready&#x60;, &#x60;report.failed&#x60;, &#x60;webhook.test&#x60;..</param>
         /// <param name="timestamp">UTC..</param>
         /// <param name="varEnvironment">Valores conocidos: &#x60;test&#x60;, &#x60;live&#x60;..</param>
+        /// <param name="simulated">Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad..</param>
         /// <param name="apiVersion">La versión del formato de los eventos (hoy &#x60;2026-10-22&#x60;), la misma para todas las llaves: el resumen del documento no cambia con la versión de la llave..</param>
         /// <param name="data">Los datos del evento, según su &#x60;type&#x60; (ver el esquema de cada tipo)..</param>
-        public Event(string id = default, string varObject = default, string type = default, DateTimeOffset timestamp = default, string varEnvironment = default, string apiVersion = default, Dictionary<string, Object> data = default)
+        public Event(string id = default, string varObject = default, string type = default, DateTimeOffset timestamp = default, string varEnvironment = default, bool simulated = default, string apiVersion = default, Dictionary<string, Object> data = default)
         {
             this.Id = id;
             this.Object = varObject;
             this.Type = type;
             this.Timestamp = timestamp;
             this.VarEnvironment = varEnvironment;
+            this.Simulated = simulated;
             this.ApiVersion = apiVersion;
             this.Data = data;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -88,6 +90,13 @@ namespace Trevol.Generado.Model
         public string VarEnvironment { get; set; }
 
         /// <summary>
+        /// Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.
+        /// </summary>
+        /// <value>Solo en el entorno SIMULADO (la empresa simulada de la cuenta): el objeto se validó, se calculó y se firmó como siempre, pero nunca llegó a la DIAN ni tiene validez. Un objeto real no lleva esta propiedad.</value>
+        [DataMember(Name = "simulated", EmitDefaultValue = true)]
+        public bool Simulated { get; set; }
+
+        /// <summary>
         /// La versión del formato de los eventos (hoy &#x60;2026-10-22&#x60;), la misma para todas las llaves: el resumen del documento no cambia con la versión de la llave.
         /// </summary>
         /// <value>La versión del formato de los eventos (hoy &#x60;2026-10-22&#x60;), la misma para todas las llaves: el resumen del documento no cambia con la versión de la llave.</value>
@@ -120,6 +129,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
             sb.Append("  VarEnvironment: ").Append(VarEnvironment).Append("\n");
+            sb.Append("  Simulated: ").Append(Simulated).Append("\n");
             sb.Append("  ApiVersion: ").Append(ApiVersion).Append("\n");
             sb.Append("  Data: ").Append(Data).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");

@@ -61,7 +61,8 @@ namespace Trevol.Generado.Model
         /// <param name="originNote">La nota de ajuste que dio origen a este documento (opcional)..</param>
         /// <param name="contingency">Solo la contingencia 07 (el emisor transcribe un documento físico): &#x60;physical_document&#x60; con number, date y type. La 08 (la DIAN no contestó) no se pide: la decide Trevol y el documento responde &#x60;202&#x60; con &#x60;status: contingency&#x60;..</param>
         /// <param name="numbering">Solo en el POS: el prefijo de la resolución POS que numera (una empresa con varias cajas o establecimientos tiene varias). Sin él, la más nueva vigente. Si no existe, &#x60;numbering_unavailable&#x60; (&#x60;no_resolution&#x60;)..</param>
-        public EquivalentDocumentInput(string externalId = default, Customer customer = default, List<EquivalentItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, List<Withholding> withholdings = default, Object rounding = default, string documentType = default, string operationType = default, Pos pos = default, Extension extension = default, string prefix = default, OriginNote originNote = default, Contingency contingency = default, Numbering numbering = default)
+        /// <param name="pdfDesignId">El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF..</param>
+        public EquivalentDocumentInput(string externalId = default, Customer customer = default, List<EquivalentItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, List<Withholding> withholdings = default, Object rounding = default, string documentType = default, string operationType = default, Pos pos = default, Extension extension = default, string prefix = default, OriginNote originNote = default, Contingency contingency = default, Numbering numbering = default, string pdfDesignId = default)
         {
             // to ensure "items" is required (not null)
             if (items == null)
@@ -87,6 +88,7 @@ namespace Trevol.Generado.Model
             this.OriginNote = originNote;
             this.Contingency = contingency;
             this.Numbering = numbering;
+            this.PdfDesignId = pdfDesignId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -220,6 +222,13 @@ namespace Trevol.Generado.Model
         public Numbering Numbering { get; set; }
 
         /// <summary>
+        /// El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF.
+        /// </summary>
+        /// <value>El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF.</value>
+        [DataMember(Name = "pdf_design_id", EmitDefaultValue = true)]
+        public string PdfDesignId { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -252,6 +261,7 @@ namespace Trevol.Generado.Model
             sb.Append("  OriginNote: ").Append(OriginNote).Append("\n");
             sb.Append("  Contingency: ").Append(Contingency).Append("\n");
             sb.Append("  Numbering: ").Append(Numbering).Append("\n");
+            sb.Append("  PdfDesignId: ").Append(PdfDesignId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

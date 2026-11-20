@@ -42,7 +42,7 @@ namespace Trevol.Generado.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Numbering" /> class.
         /// </summary>
-        /// <param name="prefix">Prefijo de la resolución POS o de documento soporte que numera (el de &#x60;GET /v1/company&#x60; → &#x60;capabilities.equivalent_documents.pos_numbering&#x60; o &#x60;capabilities.support_documents.numbering&#x60;). (required).</param>
+        /// <param name="prefix">Prefijo de la numeración (1 a 4 letras o dígitos, sin distinguir mayúsculas). Factura: una con &#x60;usable: true&#x60; en GET /v1/numbering_ranges (sin él, la predeterminada); POS y DS: GET /v1/company. (required).</param>
         public Numbering(string prefix = default)
         {
             // to ensure "prefix" is required (not null)
@@ -55,9 +55,9 @@ namespace Trevol.Generado.Model
         }
 
         /// <summary>
-        /// Prefijo de la resolución POS o de documento soporte que numera (el de &#x60;GET /v1/company&#x60; → &#x60;capabilities.equivalent_documents.pos_numbering&#x60; o &#x60;capabilities.support_documents.numbering&#x60;).
+        /// Prefijo de la numeración (1 a 4 letras o dígitos, sin distinguir mayúsculas). Factura: una con &#x60;usable: true&#x60; en GET /v1/numbering_ranges (sin él, la predeterminada); POS y DS: GET /v1/company.
         /// </summary>
-        /// <value>Prefijo de la resolución POS o de documento soporte que numera (el de &#x60;GET /v1/company&#x60; → &#x60;capabilities.equivalent_documents.pos_numbering&#x60; o &#x60;capabilities.support_documents.numbering&#x60;).</value>
+        /// <value>Prefijo de la numeración (1 a 4 letras o dígitos, sin distinguir mayúsculas). Factura: una con &#x60;usable: true&#x60; en GET /v1/numbering_ranges (sin él, la predeterminada); POS y DS: GET /v1/company.</value>
         [DataMember(Name = "prefix", IsRequired = true, EmitDefaultValue = true)]
         public string Prefix { get; set; }
 

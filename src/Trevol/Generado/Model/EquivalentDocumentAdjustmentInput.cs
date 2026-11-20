@@ -83,7 +83,8 @@ namespace Trevol.Generado.Model
         /// <param name="concept">Concepto de la nota (tabla 16.6): \&quot;1\&quot; devolución parcial, \&quot;2\&quot; anulación del documento (lleva exactamente sus valores), \&quot;3\&quot; rebaja o descuento, \&quot;4\&quot; ajuste de precio, \&quot;5\&quot; otros. (required).</param>
         /// <param name="description">Opcional (20 a 5000 caracteres). Sin ella, Trevol pone el texto de la tabla (el EXACTO en la nota débito: NADBF04)..</param>
         /// <param name="equivalentDocument">El documento que ajusta: {\&quot;id\&quot;: \&quot;pos_…\&quot;} (de Trevol: validado, de la empresa y el ambiente de la llave) o {number, cude, issue_date, document_type, total?} si es de otra plataforma (&#x60;total&#x60; hace falta para anularlo). (required).</param>
-        public EquivalentDocumentAdjustmentInput(string externalId = default, Customer customer = default, List<EquivalentAdjustmentItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, Object rounding = default, NoteTypeEnum noteType = default, string concept = default, string description = default, EquivalentDocumentReference equivalentDocument = default)
+        /// <param name="pdfDesignId">El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF..</param>
+        public EquivalentDocumentAdjustmentInput(string externalId = default, Customer customer = default, List<EquivalentAdjustmentItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, Object rounding = default, NoteTypeEnum noteType = default, string concept = default, string description = default, EquivalentDocumentReference equivalentDocument = default, string pdfDesignId = default)
         {
             // to ensure "items" is required (not null)
             if (items == null)
@@ -114,6 +115,7 @@ namespace Trevol.Generado.Model
             this.Prepayments = prepayments;
             this.Rounding = rounding;
             this.Description = description;
+            this.PdfDesignId = pdfDesignId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -205,6 +207,13 @@ namespace Trevol.Generado.Model
         public EquivalentDocumentReference EquivalentDocument { get; set; }
 
         /// <summary>
+        /// El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF.
+        /// </summary>
+        /// <value>El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF.</value>
+        [DataMember(Name = "pdf_design_id", EmitDefaultValue = true)]
+        public string PdfDesignId { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -232,6 +241,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Concept: ").Append(Concept).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  EquivalentDocument: ").Append(EquivalentDocument).Append("\n");
+            sb.Append("  PdfDesignId: ").Append(PdfDesignId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

@@ -126,5 +126,23 @@ namespace Trevol
         /// <summary>Recorre todas las páginas de un listado de <c>WebhookEndpoint</c>, perezosamente (<c>await foreach</c>).</summary>
         public IAsyncEnumerable<WebhookEndpoint> PaginateAsync(Func<string?, Task<WebhookEndpointList>> pagina, CancellationToken cancellationToken = default) =>
             Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Id, cancellationToken);
+
+        // 0.4.0: las listas de valores y el diseño del PDF. El cursor de las entradas de una lista es su `code`, el de una lista es
+        // su `name` y el de una plantilla su `key` (no tienen `id`).
+        /// <summary>Recorre todas las páginas de un listado de <c>CodeList</c> (las listas de valores), perezosamente (<c>await foreach</c>).</summary>
+        public IAsyncEnumerable<CodeList> PaginateAsync(Func<string?, Task<CodeListList>> pagina, CancellationToken cancellationToken = default) =>
+            Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Name, cancellationToken);
+
+        /// <summary>Recorre todas las páginas de un listado de <c>CodeListEntry</c> (las entradas de una lista de valores), perezosamente (<c>await foreach</c>).</summary>
+        public IAsyncEnumerable<CodeListEntry> PaginateAsync(Func<string?, Task<CodeListEntryList>> pagina, CancellationToken cancellationToken = default) =>
+            Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Code, cancellationToken);
+
+        /// <summary>Recorre todas las páginas de un listado de <c>PdfDesign</c>, perezosamente (<c>await foreach</c>).</summary>
+        public IAsyncEnumerable<PdfDesign> PaginateAsync(Func<string?, Task<PdfDesignList>> pagina, CancellationToken cancellationToken = default) =>
+            Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Id, cancellationToken);
+
+        /// <summary>Recorre todas las páginas de un listado de <c>PdfTemplate</c>, perezosamente (<c>await foreach</c>).</summary>
+        public IAsyncEnumerable<PdfTemplate> PaginateAsync(Func<string?, Task<PdfTemplateList>> pagina, CancellationToken cancellationToken = default) =>
+            Paginacion.Recorrer(pagina, p => p.Data, p => p.HasMore, p => p.NextCursor, d => d.Key, cancellationToken);
     }
 }

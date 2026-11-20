@@ -37,12 +37,14 @@ namespace Trevol.Generado.Model
         /// <param name="varObject">Valores conocidos: &#x60;preview&#x60;..</param>
         /// <param name="document">El &#x60;object&#x60; del documento que se emitiría (&#x60;invoice&#x60;, &#x60;credit_note&#x60;, &#x60;payroll&#x60;…)..</param>
         /// <param name="varEnvironment">Valores conocidos: &#x60;test&#x60;, &#x60;live&#x60;..</param>
+        /// <param name="numbering">Solo en la factura que pide &#x60;numbering&#x60;: la numeración que la numeraría (el prefijo normalizado), ya comprobada. No reserva número..</param>
         /// <param name="totals">Los totales calculados: la misma forma que &#x60;totals&#x60; del documento (en nómina, devengados, deducciones y total del comprobante)..</param>
-        public Preview(string varObject = default, string document = default, string varEnvironment = default, Dictionary<string, Object> totals = default)
+        public Preview(string varObject = default, string document = default, string varEnvironment = default, PreviewNumbering numbering = default, Dictionary<string, Object> totals = default)
         {
             this.Object = varObject;
             this.Document = document;
             this.VarEnvironment = varEnvironment;
+            this.Numbering = numbering;
             this.Totals = totals;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -69,6 +71,13 @@ namespace Trevol.Generado.Model
         public string VarEnvironment { get; set; }
 
         /// <summary>
+        /// Solo en la factura que pide &#x60;numbering&#x60;: la numeración que la numeraría (el prefijo normalizado), ya comprobada. No reserva número.
+        /// </summary>
+        /// <value>Solo en la factura que pide &#x60;numbering&#x60;: la numeración que la numeraría (el prefijo normalizado), ya comprobada. No reserva número.</value>
+        [DataMember(Name = "numbering", EmitDefaultValue = false)]
+        public PreviewNumbering Numbering { get; set; }
+
+        /// <summary>
         /// Los totales calculados: la misma forma que &#x60;totals&#x60; del documento (en nómina, devengados, deducciones y total del comprobante).
         /// </summary>
         /// <value>Los totales calculados: la misma forma que &#x60;totals&#x60; del documento (en nómina, devengados, deducciones y total del comprobante).</value>
@@ -92,6 +101,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Object: ").Append(Object).Append("\n");
             sb.Append("  Document: ").Append(Document).Append("\n");
             sb.Append("  VarEnvironment: ").Append(VarEnvironment).Append("\n");
+            sb.Append("  Numbering: ").Append(Numbering).Append("\n");
             sb.Append("  Totals: ").Append(Totals).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");

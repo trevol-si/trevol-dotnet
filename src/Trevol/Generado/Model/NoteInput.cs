@@ -56,7 +56,8 @@ namespace Trevol.Generado.Model
         /// <param name="concept">Concepto de corrección: NC 1–6, ND 1–4. (required).</param>
         /// <param name="description">description.</param>
         /// <param name="invoice">invoice.</param>
-        public NoteInput(string externalId = default, Customer customer = default, List<ItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, List<Withholding> withholdings = default, Object rounding = default, string concept = default, string description = default, InvoiceReference invoice = default)
+        /// <param name="pdfDesignId">El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF..</param>
+        public NoteInput(string externalId = default, Customer customer = default, List<ItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, List<Withholding> withholdings = default, Object rounding = default, string concept = default, string description = default, InvoiceReference invoice = default, string pdfDesignId = default)
         {
             // to ensure "items" is required (not null)
             if (items == null)
@@ -82,6 +83,7 @@ namespace Trevol.Generado.Model
             this.Rounding = rounding;
             this.Description = description;
             this.Invoice = invoice;
+            this.PdfDesignId = pdfDesignId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -177,6 +179,13 @@ namespace Trevol.Generado.Model
         public InvoiceReference Invoice { get; set; }
 
         /// <summary>
+        /// El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF.
+        /// </summary>
+        /// <value>El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF.</value>
+        [DataMember(Name = "pdf_design_id", EmitDefaultValue = true)]
+        public string PdfDesignId { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -204,6 +213,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Concept: ").Append(Concept).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Invoice: ").Append(Invoice).Append("\n");
+            sb.Append("  PdfDesignId: ").Append(PdfDesignId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

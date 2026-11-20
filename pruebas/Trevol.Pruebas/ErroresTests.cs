@@ -17,7 +17,7 @@ public class ErroresTests
         ((JObject)Banco.Leer("errores.json")["clases"]!).Properties().SelectMany(p => ((JArray)p.Value).Select(c => new object[] { p.Name, (string)c! }));
 
     [Fact]
-    public void CubreLos43Code() => Assert.Equal(43, Codes().Count());
+    public void CubreLos49Code() => Assert.Equal(49, Codes().Count()); // 43 + los 6 del diseño del PDF (0.4.0)
 
     [Theory]
     [MemberData(nameof(Codes))]

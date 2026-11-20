@@ -26,7 +26,7 @@ using OpenAPIDateConverter = Trevol.Generado.Client.OpenAPIDateConverter;
 namespace Trevol.Generado.Model
 {
     /// <summary>
-    /// El cuerpo de &#x60;POST /v1/invoices&#x60; (los campos y las reglas de InvoiceInput) más su &#x60;idempotency_key&#x60;. Sin &#x60;contingency&#x60; (la 03 va sola).
+    /// El cuerpo de &#x60;POST /v1/invoices&#x60; (los campos y las reglas de InvoiceInput) más su &#x60;idempotency_key&#x60;. Sin &#x60;contingency&#x60; (la 03 va sola). Cada factura puede elegir su numeración con &#x60;numbering&#x60;; si no sirve, esa factura queda &#x60;failed&#x60; sin numerarse.
     /// </summary>
     [DataContract(Name = "InvoiceBatchInvoiceInput")]
     public partial class InvoiceBatchInvoiceInput
@@ -62,7 +62,9 @@ namespace Trevol.Generado.Model
         /// <param name="shipment">shipment.</param>
         /// <param name="dueDiligence">dueDiligence.</param>
         /// <param name="interoperability">interoperability.</param>
-        public InvoiceBatchInvoiceInput(string idempotencyKey = default, string externalId = default, Customer customer = default, List<ItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, List<Withholding> withholdings = default, Object rounding = default, string documentType = default, string operationType = default, Currency currency = default, bool copTotals = default, DeliveryTerms deliveryTerms = default, Shipment shipment = default, string dueDiligence = default, Interoperability interoperability = default)
+        /// <param name="numbering">numbering.</param>
+        /// <param name="pdfDesignId">pdfDesignId.</param>
+        public InvoiceBatchInvoiceInput(string idempotencyKey = default, string externalId = default, Customer customer = default, List<ItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, List<Withholding> withholdings = default, Object rounding = default, string documentType = default, string operationType = default, Currency currency = default, bool copTotals = default, DeliveryTerms deliveryTerms = default, Shipment shipment = default, string dueDiligence = default, Interoperability interoperability = default, Numbering numbering = default, string pdfDesignId = default)
         {
             // to ensure "idempotencyKey" is required (not null)
             if (idempotencyKey == null)
@@ -94,6 +96,8 @@ namespace Trevol.Generado.Model
             this.Shipment = shipment;
             this.DueDiligence = dueDiligence;
             this.Interoperability = interoperability;
+            this.Numbering = numbering;
+            this.PdfDesignId = pdfDesignId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -220,6 +224,18 @@ namespace Trevol.Generado.Model
         public Interoperability Interoperability { get; set; }
 
         /// <summary>
+        /// Gets or Sets Numbering
+        /// </summary>
+        [DataMember(Name = "numbering", EmitDefaultValue = false)]
+        public Numbering Numbering { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PdfDesignId
+        /// </summary>
+        [DataMember(Name = "pdf_design_id", EmitDefaultValue = true)]
+        public string PdfDesignId { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -253,6 +269,8 @@ namespace Trevol.Generado.Model
             sb.Append("  Shipment: ").Append(Shipment).Append("\n");
             sb.Append("  DueDiligence: ").Append(DueDiligence).Append("\n");
             sb.Append("  Interoperability: ").Append(Interoperability).Append("\n");
+            sb.Append("  Numbering: ").Append(Numbering).Append("\n");
+            sb.Append("  PdfDesignId: ").Append(PdfDesignId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

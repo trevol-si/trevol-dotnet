@@ -86,8 +86,10 @@ namespace Trevol.Generado.Api
         /// <param name="createdTo"> (optional)</param>
         /// <param name="eventCode"> (optional)</param>
         /// <param name="invoiceCufe"> (optional)</param>
+        /// <param name="number">El número completo exacto del EVENTO, como sale en &#x60;number&#x60; (p. ej. &#x60;AR994000123&#x60;), no el de la factura (esa va con &#x60;invoice_cufe&#x60;). (optional)</param>
+        /// <param name="prefix">El prefijo exacto del evento, como sale en &#x60;prefix&#x60; (&#x60;AR&#x60;, &#x60;RC&#x60;, &#x60;RB&#x60;, &#x60;AE&#x60; o &#x60;E0xx&#x60;). Para filtrar por tipo es mejor &#x60;event_code&#x60;. (optional)</param>
         /// <returns>RadianEventList</returns>
-        RadianEventList ListRadianEvents(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default);
+        RadianEventList ListRadianEvents(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, string? number = default, string? prefix = default);
 
         /// <summary>
         /// Listar (evento RADIAN)
@@ -104,8 +106,10 @@ namespace Trevol.Generado.Api
         /// <param name="createdTo"> (optional)</param>
         /// <param name="eventCode"> (optional)</param>
         /// <param name="invoiceCufe"> (optional)</param>
+        /// <param name="number">El número completo exacto del EVENTO, como sale en &#x60;number&#x60; (p. ej. &#x60;AR994000123&#x60;), no el de la factura (esa va con &#x60;invoice_cufe&#x60;). (optional)</param>
+        /// <param name="prefix">El prefijo exacto del evento, como sale en &#x60;prefix&#x60; (&#x60;AR&#x60;, &#x60;RC&#x60;, &#x60;RB&#x60;, &#x60;AE&#x60; o &#x60;E0xx&#x60;). Para filtrar por tipo es mejor &#x60;event_code&#x60;. (optional)</param>
         /// <returns>ApiResponse of RadianEventList</returns>
-        ApiResponse<RadianEventList> ListRadianEventsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default);
+        ApiResponse<RadianEventList> ListRadianEventsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, string? number = default, string? prefix = default);
         /// <summary>
         /// Un evento radian
         /// </summary>
@@ -241,9 +245,11 @@ namespace Trevol.Generado.Api
         /// <param name="createdTo"> (optional)</param>
         /// <param name="eventCode"> (optional)</param>
         /// <param name="invoiceCufe"> (optional)</param>
+        /// <param name="number">El número completo exacto del EVENTO, como sale en &#x60;number&#x60; (p. ej. &#x60;AR994000123&#x60;), no el de la factura (esa va con &#x60;invoice_cufe&#x60;). (optional)</param>
+        /// <param name="prefix">El prefijo exacto del evento, como sale en &#x60;prefix&#x60; (&#x60;AR&#x60;, &#x60;RC&#x60;, &#x60;RB&#x60;, &#x60;AE&#x60; o &#x60;E0xx&#x60;). Para filtrar por tipo es mejor &#x60;event_code&#x60;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RadianEventList</returns>
-        System.Threading.Tasks.Task<RadianEventList> ListRadianEventsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<RadianEventList> ListRadianEventsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Listar (evento RADIAN)
@@ -260,9 +266,11 @@ namespace Trevol.Generado.Api
         /// <param name="createdTo"> (optional)</param>
         /// <param name="eventCode"> (optional)</param>
         /// <param name="invoiceCufe"> (optional)</param>
+        /// <param name="number">El número completo exacto del EVENTO, como sale en &#x60;number&#x60; (p. ej. &#x60;AR994000123&#x60;), no el de la factura (esa va con &#x60;invoice_cufe&#x60;). (optional)</param>
+        /// <param name="prefix">El prefijo exacto del evento, como sale en &#x60;prefix&#x60; (&#x60;AR&#x60;, &#x60;RC&#x60;, &#x60;RB&#x60;, &#x60;AE&#x60; o &#x60;E0xx&#x60;). Para filtrar por tipo es mejor &#x60;event_code&#x60;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RadianEventList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RadianEventList>> ListRadianEventsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<RadianEventList>> ListRadianEventsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Un evento radian
         /// </summary>
@@ -829,10 +837,12 @@ namespace Trevol.Generado.Api
         /// <param name="createdTo"> (optional)</param>
         /// <param name="eventCode"> (optional)</param>
         /// <param name="invoiceCufe"> (optional)</param>
+        /// <param name="number">El número completo exacto del EVENTO, como sale en &#x60;number&#x60; (p. ej. &#x60;AR994000123&#x60;), no el de la factura (esa va con &#x60;invoice_cufe&#x60;). (optional)</param>
+        /// <param name="prefix">El prefijo exacto del evento, como sale en &#x60;prefix&#x60; (&#x60;AR&#x60;, &#x60;RC&#x60;, &#x60;RB&#x60;, &#x60;AE&#x60; o &#x60;E0xx&#x60;). Para filtrar por tipo es mejor &#x60;event_code&#x60;. (optional)</param>
         /// <returns>RadianEventList</returns>
-        public RadianEventList ListRadianEvents(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default)
+        public RadianEventList ListRadianEvents(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, string? number = default, string? prefix = default)
         {
-            Trevol.Generado.Client.ApiResponse<RadianEventList> localVarResponse = ListRadianEventsWithHttpInfo(limit, startingAfter, status, externalId, createdFrom, createdTo, eventCode, invoiceCufe);
+            Trevol.Generado.Client.ApiResponse<RadianEventList> localVarResponse = ListRadianEventsWithHttpInfo(limit, startingAfter, status, externalId, createdFrom, createdTo, eventCode, invoiceCufe, number, prefix);
             return localVarResponse.Data;
         }
 
@@ -848,8 +858,10 @@ namespace Trevol.Generado.Api
         /// <param name="createdTo"> (optional)</param>
         /// <param name="eventCode"> (optional)</param>
         /// <param name="invoiceCufe"> (optional)</param>
+        /// <param name="number">El número completo exacto del EVENTO, como sale en &#x60;number&#x60; (p. ej. &#x60;AR994000123&#x60;), no el de la factura (esa va con &#x60;invoice_cufe&#x60;). (optional)</param>
+        /// <param name="prefix">El prefijo exacto del evento, como sale en &#x60;prefix&#x60; (&#x60;AR&#x60;, &#x60;RC&#x60;, &#x60;RB&#x60;, &#x60;AE&#x60; o &#x60;E0xx&#x60;). Para filtrar por tipo es mejor &#x60;event_code&#x60;. (optional)</param>
         /// <returns>ApiResponse of RadianEventList</returns>
-        public Trevol.Generado.Client.ApiResponse<RadianEventList> ListRadianEventsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default)
+        public Trevol.Generado.Client.ApiResponse<RadianEventList> ListRadianEventsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, string? number = default, string? prefix = default)
         {
             Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
 
@@ -899,6 +911,14 @@ namespace Trevol.Generado.Api
             if (invoiceCufe != null)
             {
                 localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "invoice_cufe", invoiceCufe));
+            }
+            if (number != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "number", number));
+            }
+            if (prefix != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "prefix", prefix));
             }
 
             // authentication (llave) required
@@ -932,11 +952,13 @@ namespace Trevol.Generado.Api
         /// <param name="createdTo"> (optional)</param>
         /// <param name="eventCode"> (optional)</param>
         /// <param name="invoiceCufe"> (optional)</param>
+        /// <param name="number">El número completo exacto del EVENTO, como sale en &#x60;number&#x60; (p. ej. &#x60;AR994000123&#x60;), no el de la factura (esa va con &#x60;invoice_cufe&#x60;). (optional)</param>
+        /// <param name="prefix">El prefijo exacto del evento, como sale en &#x60;prefix&#x60; (&#x60;AR&#x60;, &#x60;RC&#x60;, &#x60;RB&#x60;, &#x60;AE&#x60; o &#x60;E0xx&#x60;). Para filtrar por tipo es mejor &#x60;event_code&#x60;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RadianEventList</returns>
-        public async System.Threading.Tasks.Task<RadianEventList> ListRadianEventsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<RadianEventList> ListRadianEventsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default)
         {
-            Trevol.Generado.Client.ApiResponse<RadianEventList> localVarResponse = await ListRadianEventsWithHttpInfoAsync(limit, startingAfter, status, externalId, createdFrom, createdTo, eventCode, invoiceCufe, cancellationToken).ConfigureAwait(false);
+            Trevol.Generado.Client.ApiResponse<RadianEventList> localVarResponse = await ListRadianEventsWithHttpInfoAsync(limit, startingAfter, status, externalId, createdFrom, createdTo, eventCode, invoiceCufe, number, prefix, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -952,9 +974,11 @@ namespace Trevol.Generado.Api
         /// <param name="createdTo"> (optional)</param>
         /// <param name="eventCode"> (optional)</param>
         /// <param name="invoiceCufe"> (optional)</param>
+        /// <param name="number">El número completo exacto del EVENTO, como sale en &#x60;number&#x60; (p. ej. &#x60;AR994000123&#x60;), no el de la factura (esa va con &#x60;invoice_cufe&#x60;). (optional)</param>
+        /// <param name="prefix">El prefijo exacto del evento, como sale en &#x60;prefix&#x60; (&#x60;AR&#x60;, &#x60;RC&#x60;, &#x60;RB&#x60;, &#x60;AE&#x60; o &#x60;E0xx&#x60;). Para filtrar por tipo es mejor &#x60;event_code&#x60;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RadianEventList)</returns>
-        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<RadianEventList>> ListRadianEventsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<RadianEventList>> ListRadianEventsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? eventCode = default, string? invoiceCufe = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default)
         {
 
             Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
@@ -1006,6 +1030,14 @@ namespace Trevol.Generado.Api
             if (invoiceCufe != null)
             {
                 localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "invoice_cufe", invoiceCufe));
+            }
+            if (number != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "number", number));
+            }
+            if (prefix != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "prefix", prefix));
             }
 
             // authentication (llave) required

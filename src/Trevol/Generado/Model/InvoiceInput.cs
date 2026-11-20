@@ -62,7 +62,9 @@ namespace Trevol.Generado.Model
         /// <param name="dueDiligence">Debida diligencia (tabla 18.3: \&quot;01\&quot;–\&quot;04\&quot;). Obligatoria en la compra y venta de divisas (15/16) y prohibida en los demás tipos de operación..</param>
         /// <param name="interoperability">Grupo de interoperabilidad (Suplemento H). Obligatorio con &#x60;operation_type&#x60; \&quot;SS-CUFE\&quot;..</param>
         /// <param name="contingency">La transcripción (03) de una factura de papel: su número y fecha. La numeración sale del prefijo del papel..</param>
-        public InvoiceInput(string externalId = default, Customer customer = default, List<ItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, List<Withholding> withholdings = default, Object rounding = default, string documentType = default, string operationType = default, Currency currency = default, bool copTotals = default, DeliveryTerms deliveryTerms = default, Shipment shipment = default, string dueDiligence = default, Interoperability interoperability = default, InvoiceContingencyInput contingency = default)
+        /// <param name="numbering">numbering.</param>
+        /// <param name="pdfDesignId">El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF..</param>
+        public InvoiceInput(string externalId = default, Customer customer = default, List<ItemInput> items = default, Payment payment = default, List<string> notes = default, Period period = default, References references = default, List<AllowanceCharge> allowanceCharges = default, List<Prepayment> prepayments = default, List<Withholding> withholdings = default, Object rounding = default, string documentType = default, string operationType = default, Currency currency = default, bool copTotals = default, DeliveryTerms deliveryTerms = default, Shipment shipment = default, string dueDiligence = default, Interoperability interoperability = default, InvoiceContingencyInput contingency = default, Numbering numbering = default, string pdfDesignId = default)
         {
             // to ensure "items" is required (not null)
             if (items == null)
@@ -89,6 +91,8 @@ namespace Trevol.Generado.Model
             this.DueDiligence = dueDiligence;
             this.Interoperability = interoperability;
             this.Contingency = contingency;
+            this.Numbering = numbering;
+            this.PdfDesignId = pdfDesignId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -228,6 +232,19 @@ namespace Trevol.Generado.Model
         public InvoiceContingencyInput Contingency { get; set; }
 
         /// <summary>
+        /// Gets or Sets Numbering
+        /// </summary>
+        [DataMember(Name = "numbering", EmitDefaultValue = false)]
+        public Numbering Numbering { get; set; }
+
+        /// <summary>
+        /// El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF.
+        /// </summary>
+        /// <value>El diseño del PDF de este documento (&#x60;pdd_…&#x60; o &#x60;classic&#x60;); gana al de la numeración y al predeterminado. &#x60;null&#x60; es lo mismo que no mandarlo. Guía: Diseño del PDF.</value>
+        [DataMember(Name = "pdf_design_id", EmitDefaultValue = true)]
+        public string PdfDesignId { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -261,6 +278,8 @@ namespace Trevol.Generado.Model
             sb.Append("  DueDiligence: ").Append(DueDiligence).Append("\n");
             sb.Append("  Interoperability: ").Append(Interoperability).Append("\n");
             sb.Append("  Contingency: ").Append(Contingency).Append("\n");
+            sb.Append("  Numbering: ").Append(Numbering).Append("\n");
+            sb.Append("  PdfDesignId: ").Append(PdfDesignId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

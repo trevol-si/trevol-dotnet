@@ -32,9 +32,9 @@ namespace Trevol.Generado.Model
     public partial class WebhookEndpoint
     {
         /// <summary>
-        /// Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;); los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide.
+        /// Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;) o actives &#x60;follow_latest_catalog&#x60;; los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide.
         /// </summary>
-        /// <value>Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;); los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide.</value>
+        /// <value>Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;) o actives &#x60;follow_latest_catalog&#x60;; los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide.</value>
         public enum CatalogVersionEnum
         {
             /// <summary>
@@ -60,9 +60,9 @@ namespace Trevol.Generado.Model
 
 
         /// <summary>
-        /// Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;); los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide.
+        /// Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;) o actives &#x60;follow_latest_catalog&#x60;; los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide.
         /// </summary>
-        /// <value>Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;); los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide.</value>
+        /// <value>Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;) o actives &#x60;follow_latest_catalog&#x60;; los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide.</value>
         [DataMember(Name = "catalog_version", EmitDefaultValue = false)]
         public CatalogVersionEnum? CatalogVersion { get; set; }
         /// <summary>
@@ -74,14 +74,15 @@ namespace Trevol.Generado.Model
         /// <param name="url">La URL completa solo la ven las llaves de escritura; las de lectura ven el esquema y el host (el camino va enmascarado: a veces es un secreto)..</param>
         /// <param name="description">description.</param>
         /// <param name="events">Eventos del catálogo (69 tipos, hasta 100 en la lista), o [\&quot;*\&quot;] para todos (no se mezcla). Solo existen en producción (llaves live): &#x60;balance.low&#x60;, &#x60;numbering.low&#x60;, &#x60;numbering.expiring&#x60;, &#x60;dian_sync.completed&#x60;, &#x60;dian_sync.failed&#x60;, &#x60;numbering_range.exhausted&#x60;. &#x60;webhook.test&#x60; no se suscribe..</param>
-        /// <param name="catalogVersion">Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;); los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide..</param>
+        /// <param name="catalogVersion">Qué catálogo recibe con &#x60;[\&quot;*\&quot;]&#x60;: &#x60;1&#x60; &#x3D; el de la fase 2 (facturas, notas, saldo, numeración y certificado); &#x60;2&#x60; &#x3D; también documento soporte, documento equivalente, nómina y eventos RADIAN; &#x60;3&#x60; &#x3D; también lo recibido, la sincronización con la DIAN, la numeración automática, los lotes y la contingencia; &#x60;4&#x60; &#x3D; también los clientes y productos del catálogo, el rango de numeración agotado y los reportes asíncronos. Un endpoint queda en el catálogo con que se guardó hasta que guardes de nuevo su lista de eventos (PATCH &#x60;events&#x60;) o actives &#x60;follow_latest_catalog&#x60;; los nuevos nacen en 4. Una lista explícita siempre recibe lo que pide..</param>
         /// <param name="status">&#x60;paused&#x60;: lo pausaste tú. &#x60;disabled&#x60;: lo desactivó Trevol por fallos sostenidos (10 seguidos durante 5 días) o porque se revocó la llave que lo creó o lo cambió; se reactiva con PATCH status&#x3D;enabled. Valores conocidos: &#x60;enabled&#x60;, &#x60;paused&#x60;, &#x60;disabled&#x60;..</param>
         /// <param name="disabledReason">&#x60;sustained_failures&#x60;: fallos sostenidos. &#x60;api_key_revoked&#x60;: se revocó la llave que lo creó o le cambió la URL, los eventos o el secreto; revísalo antes de reactivarlo. Valores conocidos: &#x60;sustained_failures&#x60;, &#x60;api_key_revoked&#x60;..</param>
+        /// <param name="followLatestCatalog">Con &#x60;events: [\&quot;*\&quot;]&#x60;, recibe el catálogo más nuevo sin volver a guardar la lista (y &#x60;catalog_version&#x60; dice ese catálogo). Por defecto false: un &#x60;[\&quot;*\&quot;]&#x60; se queda en el catálogo con que se guardó. Tu receptor tiene que ignorar los tipos que no conoce..</param>
         /// <param name="secretRotatedAt">secretRotatedAt.</param>
         /// <param name="createdAt">createdAt.</param>
         /// <param name="updatedAt">updatedAt.</param>
         /// <param name="secret">SOLO al crear o rotar, una única vez: guárdalo. Verifica cada entrega con él (Standard Webhooks)..</param>
-        public WebhookEndpoint(string id = default, string varObject = default, string varEnvironment = default, string url = default, string description = default, List<string> events = default, CatalogVersionEnum? catalogVersion = default, string status = default, string disabledReason = default, DateTimeOffset? secretRotatedAt = default, DateTimeOffset? createdAt = default, DateTimeOffset? updatedAt = default, string secret = default)
+        public WebhookEndpoint(string id = default, string varObject = default, string varEnvironment = default, string url = default, string description = default, List<string> events = default, CatalogVersionEnum? catalogVersion = default, string status = default, string disabledReason = default, bool followLatestCatalog = default, DateTimeOffset? secretRotatedAt = default, DateTimeOffset? createdAt = default, DateTimeOffset? updatedAt = default, string secret = default)
         {
             this.Id = id;
             this.Object = varObject;
@@ -92,6 +93,7 @@ namespace Trevol.Generado.Model
             this.CatalogVersion = catalogVersion;
             this.Status = status;
             this.DisabledReason = disabledReason;
+            this.FollowLatestCatalog = followLatestCatalog;
             this.SecretRotatedAt = secretRotatedAt;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
@@ -154,6 +156,13 @@ namespace Trevol.Generado.Model
         public string DisabledReason { get; set; }
 
         /// <summary>
+        /// Con &#x60;events: [\&quot;*\&quot;]&#x60;, recibe el catálogo más nuevo sin volver a guardar la lista (y &#x60;catalog_version&#x60; dice ese catálogo). Por defecto false: un &#x60;[\&quot;*\&quot;]&#x60; se queda en el catálogo con que se guardó. Tu receptor tiene que ignorar los tipos que no conoce.
+        /// </summary>
+        /// <value>Con &#x60;events: [\&quot;*\&quot;]&#x60;, recibe el catálogo más nuevo sin volver a guardar la lista (y &#x60;catalog_version&#x60; dice ese catálogo). Por defecto false: un &#x60;[\&quot;*\&quot;]&#x60; se queda en el catálogo con que se guardó. Tu receptor tiene que ignorar los tipos que no conoce.</value>
+        [DataMember(Name = "follow_latest_catalog", EmitDefaultValue = true)]
+        public bool FollowLatestCatalog { get; set; }
+
+        /// <summary>
         /// Gets or Sets SecretRotatedAt
         /// </summary>
         [DataMember(Name = "secret_rotated_at", EmitDefaultValue = true)]
@@ -201,6 +210,7 @@ namespace Trevol.Generado.Model
             sb.Append("  CatalogVersion: ").Append(CatalogVersion).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  DisabledReason: ").Append(DisabledReason).Append("\n");
+            sb.Append("  FollowLatestCatalog: ").Append(FollowLatestCatalog).Append("\n");
             sb.Append("  SecretRotatedAt: ").Append(SecretRotatedAt).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");

@@ -130,8 +130,10 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>SupportDocumentAdjustmentList</returns>
-        SupportDocumentAdjustmentList ListSupportDocumentAdjustments(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default);
+        SupportDocumentAdjustmentList ListSupportDocumentAdjustments(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default);
 
         /// <summary>
         /// Listar (nota de ajuste del documento soporte)
@@ -146,8 +148,10 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>ApiResponse of SupportDocumentAdjustmentList</returns>
-        ApiResponse<SupportDocumentAdjustmentList> ListSupportDocumentAdjustmentsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default);
+        ApiResponse<SupportDocumentAdjustmentList> ListSupportDocumentAdjustmentsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default);
         /// <summary>
         /// Calcular una nota de ajuste del documento soporte sin emitirla
         /// </summary>
@@ -331,9 +335,11 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SupportDocumentAdjustmentList</returns>
-        System.Threading.Tasks.Task<SupportDocumentAdjustmentList> ListSupportDocumentAdjustmentsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<SupportDocumentAdjustmentList> ListSupportDocumentAdjustmentsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Listar (nota de ajuste del documento soporte)
@@ -348,9 +354,11 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SupportDocumentAdjustmentList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SupportDocumentAdjustmentList>> ListSupportDocumentAdjustmentsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, System.Threading.CancellationToken cancellationToken = default);
+        System.Threading.Tasks.Task<ApiResponse<SupportDocumentAdjustmentList>> ListSupportDocumentAdjustmentsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Calcular una nota de ajuste del documento soporte sin emitirla
         /// </summary>
@@ -1201,10 +1209,12 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>SupportDocumentAdjustmentList</returns>
-        public SupportDocumentAdjustmentList ListSupportDocumentAdjustments(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default)
+        public SupportDocumentAdjustmentList ListSupportDocumentAdjustments(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default)
         {
-            Trevol.Generado.Client.ApiResponse<SupportDocumentAdjustmentList> localVarResponse = ListSupportDocumentAdjustmentsWithHttpInfo(limit, startingAfter, status, externalId, createdFrom, createdTo);
+            Trevol.Generado.Client.ApiResponse<SupportDocumentAdjustmentList> localVarResponse = ListSupportDocumentAdjustmentsWithHttpInfo(limit, startingAfter, status, externalId, createdFrom, createdTo, number, prefix);
             return localVarResponse.Data;
         }
 
@@ -1218,8 +1228,10 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>ApiResponse of SupportDocumentAdjustmentList</returns>
-        public Trevol.Generado.Client.ApiResponse<SupportDocumentAdjustmentList> ListSupportDocumentAdjustmentsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default)
+        public Trevol.Generado.Client.ApiResponse<SupportDocumentAdjustmentList> ListSupportDocumentAdjustmentsWithHttpInfo(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default)
         {
             Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
 
@@ -1261,6 +1273,14 @@ namespace Trevol.Generado.Api
             if (createdTo != null)
             {
                 localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "created_to", createdTo));
+            }
+            if (number != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "number", number));
+            }
+            if (prefix != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "prefix", prefix));
             }
 
             // authentication (llave) required
@@ -1292,11 +1312,13 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SupportDocumentAdjustmentList</returns>
-        public async System.Threading.Tasks.Task<SupportDocumentAdjustmentList> ListSupportDocumentAdjustmentsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<SupportDocumentAdjustmentList> ListSupportDocumentAdjustmentsAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default)
         {
-            Trevol.Generado.Client.ApiResponse<SupportDocumentAdjustmentList> localVarResponse = await ListSupportDocumentAdjustmentsWithHttpInfoAsync(limit, startingAfter, status, externalId, createdFrom, createdTo, cancellationToken).ConfigureAwait(false);
+            Trevol.Generado.Client.ApiResponse<SupportDocumentAdjustmentList> localVarResponse = await ListSupportDocumentAdjustmentsWithHttpInfoAsync(limit, startingAfter, status, externalId, createdFrom, createdTo, number, prefix, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1310,9 +1332,11 @@ namespace Trevol.Generado.Api
         /// <param name="externalId"> (optional)</param>
         /// <param name="createdFrom"> (optional)</param>
         /// <param name="createdTo"> (optional)</param>
+        /// <param name="number">El número completo exacto, como sale en &#x60;number&#x60; (p. ej. &#x60;SETP990000123&#x60;; sin prefijo, solo el consecutivo), sin ceros a la izquierda, espacios ni guiones. Puede traer más de un documento. (optional)</param>
+        /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SupportDocumentAdjustmentList)</returns>
-        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<SupportDocumentAdjustmentList>> ListSupportDocumentAdjustmentsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, System.Threading.CancellationToken cancellationToken = default)
+        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<SupportDocumentAdjustmentList>> ListSupportDocumentAdjustmentsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? status = default, string? externalId = default, string? createdFrom = default, string? createdTo = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default)
         {
 
             Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
@@ -1356,6 +1380,14 @@ namespace Trevol.Generado.Api
             if (createdTo != null)
             {
                 localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "created_to", createdTo));
+            }
+            if (number != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "number", number));
+            }
+            if (prefix != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(Trevol.Generado.Client.ClientUtils.ParameterToMultiMap("", "prefix", prefix));
             }
 
             // authentication (llave) required
