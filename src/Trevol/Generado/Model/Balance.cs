@@ -43,7 +43,7 @@ namespace Trevol.Generado.Model
         /// <param name="level">Valores conocidos: &#x60;ok&#x60;, &#x60;low&#x60;, &#x60;empty&#x60;..</param>
         /// <param name="updatedAt">Cuándo cambió el saldo por última vez; null si nunca tuvo..</param>
         /// <param name="shared">Siempre true: el saldo es de la cuenta y lo comparten todas sus empresas..</param>
-        /// <param name="keyOwner">Cuando la llave paga primero con el saldo propio de su persona responsable (lo activa esa persona en la app): el nivel de ese saldo propio, sin montos (quien tiene la llave no ve cuánto tiene esa persona). null si la llave paga con el saldo de la cuenta. Los demás campos siguen siendo los de la cuenta..</param>
+        /// <param name="keyOwner">Cuando la llave paga primero con el saldo propio de su persona responsable (así nace cada llave; esa persona lo puede apagar en la app): el nivel de ese saldo propio, sin montos (quien tiene la llave no ve cuánto tiene esa persona). null si la llave paga con el saldo de la cuenta (por ejemplo, la del titular, o si su persona responsable no tiene saldo propio). Los demás campos siguen siendo los de la cuenta..</param>
         /// <param name="operationPrices">El precio en pesos de cada operación que Trevol hace por la empresa en el portal de la DIAN y que se cobra del saldo (0 es gratis). Solo en producción..</param>
         public Balance(string varObject = default, string currency = default, int available = default, int held = default, int overdraft = default, int? lowThreshold = default, string level = default, DateTimeOffset? updatedAt = default, bool shared = default, BalanceKeyOwner keyOwner = default, BalanceOperationPrices operationPrices = default)
         {
@@ -125,9 +125,9 @@ namespace Trevol.Generado.Model
         public bool Shared { get; set; }
 
         /// <summary>
-        /// Cuando la llave paga primero con el saldo propio de su persona responsable (lo activa esa persona en la app): el nivel de ese saldo propio, sin montos (quien tiene la llave no ve cuánto tiene esa persona). null si la llave paga con el saldo de la cuenta. Los demás campos siguen siendo los de la cuenta.
+        /// Cuando la llave paga primero con el saldo propio de su persona responsable (así nace cada llave; esa persona lo puede apagar en la app): el nivel de ese saldo propio, sin montos (quien tiene la llave no ve cuánto tiene esa persona). null si la llave paga con el saldo de la cuenta (por ejemplo, la del titular, o si su persona responsable no tiene saldo propio). Los demás campos siguen siendo los de la cuenta.
         /// </summary>
-        /// <value>Cuando la llave paga primero con el saldo propio de su persona responsable (lo activa esa persona en la app): el nivel de ese saldo propio, sin montos (quien tiene la llave no ve cuánto tiene esa persona). null si la llave paga con el saldo de la cuenta. Los demás campos siguen siendo los de la cuenta.</value>
+        /// <value>Cuando la llave paga primero con el saldo propio de su persona responsable (así nace cada llave; esa persona lo puede apagar en la app): el nivel de ese saldo propio, sin montos (quien tiene la llave no ve cuánto tiene esa persona). null si la llave paga con el saldo de la cuenta (por ejemplo, la del titular, o si su persona responsable no tiene saldo propio). Los demás campos siguen siendo los de la cuenta.</value>
         [DataMember(Name = "key_owner", EmitDefaultValue = true)]
         public BalanceKeyOwner KeyOwner { get; set; }
 
