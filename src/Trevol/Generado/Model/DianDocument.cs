@@ -26,7 +26,7 @@ using OpenAPIDateConverter = Trevol.Generado.Client.OpenAPIDateConverter;
 namespace Trevol.Generado.Model
 {
     /// <summary>
-    /// Un documento de la empresa ante la DIAN (emitido con Trevol o con otro sistema, o recibido de un proveedor), tal como lo trajo la sincronización o el buzón. Es de solo lectura: no tiene PDF ni acciones aquí; su XML se le pide a la DIAN (&#x60;xml_available&#x60;).
+    /// Un documento de la empresa ante la DIAN (emitido con Trevol o con otro sistema, o recibido de un proveedor), tal como lo trajo la sincronización o el buzón. Es de solo lectura: su XML se le pide a la DIAN (&#x60;xml_available&#x60;) y también el PDF oficial que genera la DIAN (&#x60;pdf_available&#x60;, &#x60;pdf_status&#x60;).
     /// </summary>
     [DataContract(Name = "DianDocument")]
     public partial class DianDocument
@@ -52,7 +52,9 @@ namespace Trevol.Generado.Model
         /// <param name="receivedOn">La fecha de recepción que lista la DIAN..</param>
         /// <param name="source">De dónde salió: la sincronización con la DIAN o el buzón de recepción (lo recibido). Lo del buzón aparece cuando la sincronización con la DIAN ya lo trajo. Valores conocidos: &#x60;sync&#x60;, &#x60;mailbox&#x60;..</param>
         /// <param name="xmlAvailable">Si se le puede pedir el XML a la DIAN con GET /v1/dian_documents/{id}/xml (tiene CUFE y la DIAN lo verificó; Trevol no lo guarda). En lo emitido, además, si la llave tiene el permiso customers:read (su XML trae los datos personales del cliente)..</param>
-        public DianDocument(string id = default, string varObject = default, string varEnvironment = default, string type = default, string dianType = default, string number = default, string prefix = default, string cufe = default, DateTime? issuedOn = default, DianCounterpart counterpart = default, string currency = default, decimal? total = default, decimal? taxTotal = default, string dianStatus = default, string direction = default, DateTime? receivedOn = default, string source = default, bool xmlAvailable = default)
+        /// <param name="pdfAvailable">Si se le puede pedir a la DIAN el PDF oficial del documento con POST /v1/dian_documents/{id}/pdf: solo en producción, con CUFE y verificado por la DIAN. En lo emitido, además, si la llave tiene el permiso customers:read..</param>
+        /// <param name="pdfStatus">Cómo va el PDF de la DIAN: &#x60;not_requested&#x60; (nunca se pidió, o el que se pidió venció a los 90 días), &#x60;pending&#x60; (Trevol lo está pidiendo a la DIAN), &#x60;ready&#x60; (se baja con GET /v1/dian_documents/{id}/pdf) o &#x60;failed&#x60; (la DIAN no lo entregó; no se cobró: se puede pedir otra vez)..</param>
+        public DianDocument(string id = default, string varObject = default, string varEnvironment = default, string type = default, string dianType = default, string number = default, string prefix = default, string cufe = default, DateTime? issuedOn = default, DianCounterpart counterpart = default, string currency = default, decimal? total = default, decimal? taxTotal = default, string dianStatus = default, string direction = default, DateTime? receivedOn = default, string source = default, bool xmlAvailable = default, bool pdfAvailable = default, string pdfStatus = default)
         {
             this.Id = id;
             this.Object = varObject;
@@ -72,6 +74,8 @@ namespace Trevol.Generado.Model
             this.ReceivedOn = receivedOn;
             this.Source = source;
             this.XmlAvailable = xmlAvailable;
+            this.PdfAvailable = pdfAvailable;
+            this.PdfStatus = pdfStatus;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -200,6 +204,20 @@ namespace Trevol.Generado.Model
         public bool XmlAvailable { get; set; }
 
         /// <summary>
+        /// Si se le puede pedir a la DIAN el PDF oficial del documento con POST /v1/dian_documents/{id}/pdf: solo en producción, con CUFE y verificado por la DIAN. En lo emitido, además, si la llave tiene el permiso customers:read.
+        /// </summary>
+        /// <value>Si se le puede pedir a la DIAN el PDF oficial del documento con POST /v1/dian_documents/{id}/pdf: solo en producción, con CUFE y verificado por la DIAN. En lo emitido, además, si la llave tiene el permiso customers:read.</value>
+        [DataMember(Name = "pdf_available", EmitDefaultValue = true)]
+        public bool PdfAvailable { get; set; }
+
+        /// <summary>
+        /// Cómo va el PDF de la DIAN: &#x60;not_requested&#x60; (nunca se pidió, o el que se pidió venció a los 90 días), &#x60;pending&#x60; (Trevol lo está pidiendo a la DIAN), &#x60;ready&#x60; (se baja con GET /v1/dian_documents/{id}/pdf) o &#x60;failed&#x60; (la DIAN no lo entregó; no se cobró: se puede pedir otra vez).
+        /// </summary>
+        /// <value>Cómo va el PDF de la DIAN: &#x60;not_requested&#x60; (nunca se pidió, o el que se pidió venció a los 90 días), &#x60;pending&#x60; (Trevol lo está pidiendo a la DIAN), &#x60;ready&#x60; (se baja con GET /v1/dian_documents/{id}/pdf) o &#x60;failed&#x60; (la DIAN no lo entregó; no se cobró: se puede pedir otra vez).</value>
+        [DataMember(Name = "pdf_status", EmitDefaultValue = false)]
+        public string PdfStatus { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -231,6 +249,8 @@ namespace Trevol.Generado.Model
             sb.Append("  ReceivedOn: ").Append(ReceivedOn).Append("\n");
             sb.Append("  Source: ").Append(Source).Append("\n");
             sb.Append("  XmlAvailable: ").Append(XmlAvailable).Append("\n");
+            sb.Append("  PdfAvailable: ").Append(PdfAvailable).Append("\n");
+            sb.Append("  PdfStatus: ").Append(PdfStatus).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

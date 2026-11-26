@@ -34,8 +34,8 @@ namespace Trevol.Generado.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BalanceTransactionOperation" /> class.
         /// </summary>
-        /// <param name="type">Valores conocidos: &#x60;dian_sync&#x60;, &#x60;numbering_refresh&#x60;, &#x60;numbering_association&#x60;, &#x60;numbering_request&#x60;..</param>
-        /// <param name="id">dsync_… (sincronización), nas_… (asociación) o nreq_… (solicitud); null en una lectura de numeraciones..</param>
+        /// <param name="type">Valores conocidos: &#x60;dian_sync&#x60;, &#x60;numbering_refresh&#x60;, &#x60;numbering_association&#x60;, &#x60;numbering_request&#x60;, &#x60;dian_document_pdf&#x60;..</param>
+        /// <param name="id">dsync_… (sincronización), nas_… (asociación), nreq_… (solicitud) o ddoc_… (el documento del PDF de la DIAN); null en una lectura de numeraciones..</param>
         public BalanceTransactionOperation(string type = default, string id = default)
         {
             this.Type = type;
@@ -44,16 +44,16 @@ namespace Trevol.Generado.Model
         }
 
         /// <summary>
-        /// Valores conocidos: &#x60;dian_sync&#x60;, &#x60;numbering_refresh&#x60;, &#x60;numbering_association&#x60;, &#x60;numbering_request&#x60;.
+        /// Valores conocidos: &#x60;dian_sync&#x60;, &#x60;numbering_refresh&#x60;, &#x60;numbering_association&#x60;, &#x60;numbering_request&#x60;, &#x60;dian_document_pdf&#x60;.
         /// </summary>
-        /// <value>Valores conocidos: &#x60;dian_sync&#x60;, &#x60;numbering_refresh&#x60;, &#x60;numbering_association&#x60;, &#x60;numbering_request&#x60;.</value>
+        /// <value>Valores conocidos: &#x60;dian_sync&#x60;, &#x60;numbering_refresh&#x60;, &#x60;numbering_association&#x60;, &#x60;numbering_request&#x60;, &#x60;dian_document_pdf&#x60;.</value>
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// dsync_… (sincronización), nas_… (asociación) o nreq_… (solicitud); null en una lectura de numeraciones.
+        /// dsync_… (sincronización), nas_… (asociación), nreq_… (solicitud) o ddoc_… (el documento del PDF de la DIAN); null en una lectura de numeraciones.
         /// </summary>
-        /// <value>dsync_… (sincronización), nas_… (asociación) o nreq_… (solicitud); null en una lectura de numeraciones.</value>
+        /// <value>dsync_… (sincronización), nas_… (asociación), nreq_… (solicitud) o ddoc_… (el documento del PDF de la DIAN); null en una lectura de numeraciones.</value>
         [DataMember(Name = "id", EmitDefaultValue = true)]
         public string Id { get; set; }
 

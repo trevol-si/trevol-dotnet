@@ -51,7 +51,8 @@ namespace Trevol.Generado.Model
         /// <param name="counterpart">El emisor (el proveedor), con los datos que verificó la DIAN (el aviso solo sale de un documento que la sincronización ya trajo)..</param>
         /// <param name="source">Valores conocidos: &#x60;sync&#x60;, &#x60;mailbox&#x60;..</param>
         /// <param name="xmlAvailable">Si se le puede pedir el XML a la DIAN con GET /v1/dian_documents/{id}/xml (tiene CUFE y la DIAN lo verificó)..</param>
-        public DianDocumentEventData(string varObject = default, string id = default, string direction = default, string varEnvironment = default, string type = default, string dianType = default, string number = default, string prefix = default, string cufe = default, DateTime? issuedOn = default, DateTime? receivedOn = default, string currency = default, decimal? total = default, decimal? taxTotal = default, EventDianCounterpart counterpart = default, string source = default, bool xmlAvailable = default)
+        /// <param name="pdfAvailable">Si se le puede pedir el PDF oficial de la DIAN con POST /v1/dian_documents/{id}/pdf (además, solo en producción)..</param>
+        public DianDocumentEventData(string varObject = default, string id = default, string direction = default, string varEnvironment = default, string type = default, string dianType = default, string number = default, string prefix = default, string cufe = default, DateTime? issuedOn = default, DateTime? receivedOn = default, string currency = default, decimal? total = default, decimal? taxTotal = default, EventDianCounterpart counterpart = default, string source = default, bool xmlAvailable = default, bool pdfAvailable = default)
         {
             this.Object = varObject;
             this.Id = id;
@@ -70,6 +71,7 @@ namespace Trevol.Generado.Model
             this.Counterpart = counterpart;
             this.Source = source;
             this.XmlAvailable = xmlAvailable;
+            this.PdfAvailable = pdfAvailable;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -185,6 +187,13 @@ namespace Trevol.Generado.Model
         public bool XmlAvailable { get; set; }
 
         /// <summary>
+        /// Si se le puede pedir el PDF oficial de la DIAN con POST /v1/dian_documents/{id}/pdf (además, solo en producción).
+        /// </summary>
+        /// <value>Si se le puede pedir el PDF oficial de la DIAN con POST /v1/dian_documents/{id}/pdf (además, solo en producción).</value>
+        [DataMember(Name = "pdf_available", EmitDefaultValue = true)]
+        public bool PdfAvailable { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -215,6 +224,7 @@ namespace Trevol.Generado.Model
             sb.Append("  Counterpart: ").Append(Counterpart).Append("\n");
             sb.Append("  Source: ").Append(Source).Append("\n");
             sb.Append("  XmlAvailable: ").Append(XmlAvailable).Append("\n");
+            sb.Append("  PdfAvailable: ").Append(PdfAvailable).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

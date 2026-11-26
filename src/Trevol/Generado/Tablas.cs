@@ -6,7 +6,7 @@ namespace Trevol.Generado
 {
     public static class Tablas
     {
-        public const string Version = "0.5.0";
+        public const string Version = "0.6.0";
         public const string ApiVersion = "2026-11-18";
 
         /// <summary>Una operación de la API. Reintento: «seguro» (GET, preview, PATCH y todo POST/PUT con Idempotency-Key que no devuelva un secreto una sola vez) o «solo_429». Binario: «pdf», «xml», «zip», «csv» (los reportes: CSV o Excel), «png» (el logo de la empresa) o null.</summary>
@@ -75,6 +75,7 @@ namespace Trevol.Generado
             new Operacion("downloadDebitNotePdf", "GET", "/debit_notes/{id}/pdf", "DebitNotes", false, "seguro", "pdf", "api_o_administracion"),
             new Operacion("downloadDebitNoteXml", "GET", "/debit_notes/{id}/xml", "DebitNotes", false, "seguro", "xml", "api_o_administracion"),
             new Operacion("downloadDebitNoteZip", "GET", "/debit_notes/{id}/zip", "DebitNotes", false, "seguro", "zip", "api_o_administracion"),
+            new Operacion("downloadDianDocumentPdf", "GET", "/dian_documents/{id}/pdf", "DianDocuments", false, "seguro", "pdf", "api_o_administracion"),
             new Operacion("downloadDianDocumentXml", "GET", "/dian_documents/{id}/xml", "DianDocuments", false, "seguro", "xml", "api_o_administracion"),
             new Operacion("downloadEquivalentDocumentAdjustmentDianResponse", "GET", "/equivalent_document_adjustments/{id}/dian_response", "EquivalentDocumentAdjustments", false, "seguro", "xml", "api_o_administracion"),
             new Operacion("downloadEquivalentDocumentAdjustmentPdf", "GET", "/equivalent_document_adjustments/{id}/pdf", "EquivalentDocumentAdjustments", false, "seguro", "pdf", "api_o_administracion"),
@@ -148,6 +149,7 @@ namespace Trevol.Generado
             new Operacion("previewSupportDocument", "POST", "/support_documents/preview", "SupportDocuments", false, "seguro", null, "api_o_administracion"),
             new Operacion("previewSupportDocumentAdjustment", "POST", "/support_document_adjustments/preview", "SupportDocumentAdjustments", false, "seguro", null, "api_o_administracion"),
             new Operacion("refreshNumberingRanges", "POST", "/numbering_ranges/refresh", "NumberingRanges", false, "solo_429", null, "api_o_administracion"),
+            new Operacion("requestDianDocumentPdf", "POST", "/dian_documents/{id}/pdf", "DianDocuments", false, "solo_429", null, "api_o_administracion"),
             new Operacion("resendEvent", "POST", "/events/{id}/resend", "Events", false, "solo_429", null, "api_o_administracion"),
             new Operacion("retrieveAccount", "GET", "/account", "Account", false, "seguro", null, "administracion"),
             new Operacion("retrieveAccountCompany", "GET", "/account/companies/{id}", "Account", false, "seguro", null, "administracion"),

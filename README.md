@@ -10,7 +10,7 @@ RADIAN ante la DIAN (Colombia). Documentación: <https://platform.trevol.si/docs
 > environment, `tvl_live_` = production; account keys `tva_test_`/`tva_live_` too, with `Company`/`WithCompany` for per-company calls), pinned `Trevol-Version`, Standard Webhooks signature verification, cursor pagination with
 > `IAsyncEnumerable<T>` and PDF/XML/ZIP downloads. Docs are in Spanish like the API.
 
-**Versión 0.5.0** — API `2026-11-18`. Licencia MIT.
+**Versión 0.6.0** — API `2026-11-18`. Licencia MIT.
 
 ## Instalación
 

@@ -7,7 +7,7 @@
     <AssemblyName>Trevol</AssemblyName>
     <RootNamespace>Trevol</RootNamespace>
     <PackageId>Trevol</PackageId>
-    <Version>0.5.0</Version>
+    <Version>0.6.0</Version>
     <Authors>Joshua Montclair (Trevol)</Authors>
     <Company>Trevol</Company>
     <Product>Trevol</Product>

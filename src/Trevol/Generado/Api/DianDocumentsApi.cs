@@ -28,6 +28,27 @@ namespace Trevol.Generado.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Bajar el PDF de la DIAN de un documento
+        /// </summary>
+        /// <remarks>
+        /// El PDF oficial de la DIAN de un documento, cuando está listo (200 &#x60;application/pdf&#x60;). Bajarlo no se cobra. Si todavía viene en camino: 409 &#x60;file_unavailable&#x60; reintentable con &#x60;reason: pending&#x60; y &#x60;Retry-After&#x60; (o mira &#x60;pdf_status&#x60;). Si no se ha pedido (o venció a los 90 días): 409 &#x60;file_unavailable&#x60; con &#x60;reason: not_requested&#x60;; pídelo con POST /v1/dian_documents/{id}/pdf. Si la DIAN no lo entregó: 503 &#x60;dian_unavailable&#x60; (pídelo otra vez) o 409 &#x60;file_unavailable&#x60; con &#x60;reason: dian_failed&#x60; (la DIAN no tiene el PDF de ese documento); en los dos casos no se cobró. Solo producción; lo emitido exige &#x60;customers:read&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>FileParameter</returns>
+        FileParameter DownloadDianDocumentPdf(string id);
+
+        /// <summary>
+        /// Bajar el PDF de la DIAN de un documento
+        /// </summary>
+        /// <remarks>
+        /// El PDF oficial de la DIAN de un documento, cuando está listo (200 &#x60;application/pdf&#x60;). Bajarlo no se cobra. Si todavía viene en camino: 409 &#x60;file_unavailable&#x60; reintentable con &#x60;reason: pending&#x60; y &#x60;Retry-After&#x60; (o mira &#x60;pdf_status&#x60;). Si no se ha pedido (o venció a los 90 días): 409 &#x60;file_unavailable&#x60; con &#x60;reason: not_requested&#x60;; pídelo con POST /v1/dian_documents/{id}/pdf. Si la DIAN no lo entregó: 503 &#x60;dian_unavailable&#x60; (pídelo otra vez) o 409 &#x60;file_unavailable&#x60; con &#x60;reason: dian_failed&#x60; (la DIAN no tiene el PDF de ese documento); en los dos casos no se cobró. Solo producción; lo emitido exige &#x60;customers:read&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of FileParameter</returns>
+        ApiResponse<FileParameter> DownloadDianDocumentPdfWithHttpInfo(string id);
+        /// <summary>
         /// El XML de un documento (pedido a la DIAN)
         /// </summary>
         /// <remarks>
@@ -104,6 +125,27 @@ namespace Trevol.Generado.Api
         /// <param name="prefix">El prefijo exacto, como sale en &#x60;prefix&#x60;. Solo, lista una numeración; con &#x60;number&#x60;, quita la ambigüedad. (optional)</param>
         /// <returns>ApiResponse of DianDocumentList</returns>
         ApiResponse<DianDocumentList> ListDianDocumentsWithHttpInfo(int? limit = default, string? startingAfter = default, string? type = default, string? issuedFrom = default, string? issuedTo = default, string? direction = default, string? number = default, string? prefix = default);
+        /// <summary>
+        /// Pedir el PDF de la DIAN de un documento
+        /// </summary>
+        /// <remarks>
+        /// Pide el PDF oficial que genera la DIAN de un documento de la empresa de la llave (emitido o recibido): la representación gráfica de la DIAN, la misma que ofrece su portal. Trevol lo pide a la DIAN y puede tardar unos segundos o minutos: responde 202 con el objeto &#x60;dian_document_pdf&#x60; (&#x60;status: pending&#x60;), &#x60;Location&#x60; y &#x60;Retry-After&#x60;; cuando está listo, bájalo con GET /v1/dian_documents/{id}/pdf (o mira &#x60;pdf_status&#x60; en el documento). Si ya hay uno en camino o listo, lo devuelve sin pedir otro ni cobrar (200 si ya está listo): repetir la petición es seguro y no necesita &#x60;Idempotency-Key&#x60;. Se cobra del saldo cuando llega (&#x60;dian_document_pdf&#x60; en &#x60;operation_prices&#x60; de GET /v1/balance); si la DIAN no lo entrega, no se cobra. Se guarda 90 días: bajarlo otra vez no se cobra; después vence y pedirlo es un pedido nuevo. Solo producción (con una llave de prueba, 403 &#x60;live_mode_required&#x60;) y con una llave de escritura. Lo emitido trae los datos personales del cliente: exige el permiso &#x60;customers:read&#x60; de la llave. Errores: 404 (otra empresa u otro ambiente), 409 &#x60;file_unavailable&#x60; (sin CUFE: mira &#x60;pdf_available&#x60;), 402 &#x60;insufficient_balance&#x60; (no se pidió nada) y 429 con &#x60;limit: dian_document_pdf&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>DianDocumentPdf</returns>
+        DianDocumentPdf RequestDianDocumentPdf(string id);
+
+        /// <summary>
+        /// Pedir el PDF de la DIAN de un documento
+        /// </summary>
+        /// <remarks>
+        /// Pide el PDF oficial que genera la DIAN de un documento de la empresa de la llave (emitido o recibido): la representación gráfica de la DIAN, la misma que ofrece su portal. Trevol lo pide a la DIAN y puede tardar unos segundos o minutos: responde 202 con el objeto &#x60;dian_document_pdf&#x60; (&#x60;status: pending&#x60;), &#x60;Location&#x60; y &#x60;Retry-After&#x60;; cuando está listo, bájalo con GET /v1/dian_documents/{id}/pdf (o mira &#x60;pdf_status&#x60; en el documento). Si ya hay uno en camino o listo, lo devuelve sin pedir otro ni cobrar (200 si ya está listo): repetir la petición es seguro y no necesita &#x60;Idempotency-Key&#x60;. Se cobra del saldo cuando llega (&#x60;dian_document_pdf&#x60; en &#x60;operation_prices&#x60; de GET /v1/balance); si la DIAN no lo entrega, no se cobra. Se guarda 90 días: bajarlo otra vez no se cobra; después vence y pedirlo es un pedido nuevo. Solo producción (con una llave de prueba, 403 &#x60;live_mode_required&#x60;) y con una llave de escritura. Lo emitido trae los datos personales del cliente: exige el permiso &#x60;customers:read&#x60; de la llave. Errores: 404 (otra empresa u otro ambiente), 409 &#x60;file_unavailable&#x60; (sin CUFE: mira &#x60;pdf_available&#x60;), 402 &#x60;insufficient_balance&#x60; (no se pidió nada) y 429 con &#x60;limit: dian_document_pdf&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of DianDocumentPdf</returns>
+        ApiResponse<DianDocumentPdf> RequestDianDocumentPdfWithHttpInfo(string id);
         #endregion Synchronous Operations
     }
 
@@ -113,6 +155,29 @@ namespace Trevol.Generado.Api
     public interface IDianDocumentsApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
+        /// <summary>
+        /// Bajar el PDF de la DIAN de un documento
+        /// </summary>
+        /// <remarks>
+        /// El PDF oficial de la DIAN de un documento, cuando está listo (200 &#x60;application/pdf&#x60;). Bajarlo no se cobra. Si todavía viene en camino: 409 &#x60;file_unavailable&#x60; reintentable con &#x60;reason: pending&#x60; y &#x60;Retry-After&#x60; (o mira &#x60;pdf_status&#x60;). Si no se ha pedido (o venció a los 90 días): 409 &#x60;file_unavailable&#x60; con &#x60;reason: not_requested&#x60;; pídelo con POST /v1/dian_documents/{id}/pdf. Si la DIAN no lo entregó: 503 &#x60;dian_unavailable&#x60; (pídelo otra vez) o 409 &#x60;file_unavailable&#x60; con &#x60;reason: dian_failed&#x60; (la DIAN no tiene el PDF de ese documento); en los dos casos no se cobró. Solo producción; lo emitido exige &#x60;customers:read&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of FileParameter</returns>
+        System.Threading.Tasks.Task<FileParameter> DownloadDianDocumentPdfAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Bajar el PDF de la DIAN de un documento
+        /// </summary>
+        /// <remarks>
+        /// El PDF oficial de la DIAN de un documento, cuando está listo (200 &#x60;application/pdf&#x60;). Bajarlo no se cobra. Si todavía viene en camino: 409 &#x60;file_unavailable&#x60; reintentable con &#x60;reason: pending&#x60; y &#x60;Retry-After&#x60; (o mira &#x60;pdf_status&#x60;). Si no se ha pedido (o venció a los 90 días): 409 &#x60;file_unavailable&#x60; con &#x60;reason: not_requested&#x60;; pídelo con POST /v1/dian_documents/{id}/pdf. Si la DIAN no lo entregó: 503 &#x60;dian_unavailable&#x60; (pídelo otra vez) o 409 &#x60;file_unavailable&#x60; con &#x60;reason: dian_failed&#x60; (la DIAN no tiene el PDF de ese documento); en los dos casos no se cobró. Solo producción; lo emitido exige &#x60;customers:read&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (FileParameter)</returns>
+        System.Threading.Tasks.Task<ApiResponse<FileParameter>> DownloadDianDocumentPdfWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// El XML de un documento (pedido a la DIAN)
         /// </summary>
@@ -196,6 +261,29 @@ namespace Trevol.Generado.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (DianDocumentList)</returns>
         System.Threading.Tasks.Task<ApiResponse<DianDocumentList>> ListDianDocumentsWithHttpInfoAsync(int? limit = default, string? startingAfter = default, string? type = default, string? issuedFrom = default, string? issuedTo = default, string? direction = default, string? number = default, string? prefix = default, System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Pedir el PDF de la DIAN de un documento
+        /// </summary>
+        /// <remarks>
+        /// Pide el PDF oficial que genera la DIAN de un documento de la empresa de la llave (emitido o recibido): la representación gráfica de la DIAN, la misma que ofrece su portal. Trevol lo pide a la DIAN y puede tardar unos segundos o minutos: responde 202 con el objeto &#x60;dian_document_pdf&#x60; (&#x60;status: pending&#x60;), &#x60;Location&#x60; y &#x60;Retry-After&#x60;; cuando está listo, bájalo con GET /v1/dian_documents/{id}/pdf (o mira &#x60;pdf_status&#x60; en el documento). Si ya hay uno en camino o listo, lo devuelve sin pedir otro ni cobrar (200 si ya está listo): repetir la petición es seguro y no necesita &#x60;Idempotency-Key&#x60;. Se cobra del saldo cuando llega (&#x60;dian_document_pdf&#x60; en &#x60;operation_prices&#x60; de GET /v1/balance); si la DIAN no lo entrega, no se cobra. Se guarda 90 días: bajarlo otra vez no se cobra; después vence y pedirlo es un pedido nuevo. Solo producción (con una llave de prueba, 403 &#x60;live_mode_required&#x60;) y con una llave de escritura. Lo emitido trae los datos personales del cliente: exige el permiso &#x60;customers:read&#x60; de la llave. Errores: 404 (otra empresa u otro ambiente), 409 &#x60;file_unavailable&#x60; (sin CUFE: mira &#x60;pdf_available&#x60;), 402 &#x60;insufficient_balance&#x60; (no se pidió nada) y 429 con &#x60;limit: dian_document_pdf&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of DianDocumentPdf</returns>
+        System.Threading.Tasks.Task<DianDocumentPdf> RequestDianDocumentPdfAsync(string id, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Pedir el PDF de la DIAN de un documento
+        /// </summary>
+        /// <remarks>
+        /// Pide el PDF oficial que genera la DIAN de un documento de la empresa de la llave (emitido o recibido): la representación gráfica de la DIAN, la misma que ofrece su portal. Trevol lo pide a la DIAN y puede tardar unos segundos o minutos: responde 202 con el objeto &#x60;dian_document_pdf&#x60; (&#x60;status: pending&#x60;), &#x60;Location&#x60; y &#x60;Retry-After&#x60;; cuando está listo, bájalo con GET /v1/dian_documents/{id}/pdf (o mira &#x60;pdf_status&#x60; en el documento). Si ya hay uno en camino o listo, lo devuelve sin pedir otro ni cobrar (200 si ya está listo): repetir la petición es seguro y no necesita &#x60;Idempotency-Key&#x60;. Se cobra del saldo cuando llega (&#x60;dian_document_pdf&#x60; en &#x60;operation_prices&#x60; de GET /v1/balance); si la DIAN no lo entrega, no se cobra. Se guarda 90 días: bajarlo otra vez no se cobra; después vence y pedirlo es un pedido nuevo. Solo producción (con una llave de prueba, 403 &#x60;live_mode_required&#x60;) y con una llave de escritura. Lo emitido trae los datos personales del cliente: exige el permiso &#x60;customers:read&#x60; de la llave. Errores: 404 (otra empresa u otro ambiente), 409 &#x60;file_unavailable&#x60; (sin CUFE: mira &#x60;pdf_available&#x60;), 402 &#x60;insufficient_balance&#x60; (no se pidió nada) y 429 con &#x60;limit: dian_document_pdf&#x60;.
+        /// </remarks>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (DianDocumentPdf)</returns>
+        System.Threading.Tasks.Task<ApiResponse<DianDocumentPdf>> RequestDianDocumentPdfWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -407,6 +495,135 @@ namespace Trevol.Generado.Api
                 return _exceptionFactory;
             }
             set { _exceptionFactory = value; }
+        }
+
+        /// <summary>
+        /// Bajar el PDF de la DIAN de un documento El PDF oficial de la DIAN de un documento, cuando está listo (200 &#x60;application/pdf&#x60;). Bajarlo no se cobra. Si todavía viene en camino: 409 &#x60;file_unavailable&#x60; reintentable con &#x60;reason: pending&#x60; y &#x60;Retry-After&#x60; (o mira &#x60;pdf_status&#x60;). Si no se ha pedido (o venció a los 90 días): 409 &#x60;file_unavailable&#x60; con &#x60;reason: not_requested&#x60;; pídelo con POST /v1/dian_documents/{id}/pdf. Si la DIAN no lo entregó: 503 &#x60;dian_unavailable&#x60; (pídelo otra vez) o 409 &#x60;file_unavailable&#x60; con &#x60;reason: dian_failed&#x60; (la DIAN no tiene el PDF de ese documento); en los dos casos no se cobró. Solo producción; lo emitido exige &#x60;customers:read&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>FileParameter</returns>
+        public FileParameter DownloadDianDocumentPdf(string id)
+        {
+            Trevol.Generado.Client.ApiResponse<FileParameter> localVarResponse = DownloadDianDocumentPdfWithHttpInfo(id);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Bajar el PDF de la DIAN de un documento El PDF oficial de la DIAN de un documento, cuando está listo (200 &#x60;application/pdf&#x60;). Bajarlo no se cobra. Si todavía viene en camino: 409 &#x60;file_unavailable&#x60; reintentable con &#x60;reason: pending&#x60; y &#x60;Retry-After&#x60; (o mira &#x60;pdf_status&#x60;). Si no se ha pedido (o venció a los 90 días): 409 &#x60;file_unavailable&#x60; con &#x60;reason: not_requested&#x60;; pídelo con POST /v1/dian_documents/{id}/pdf. Si la DIAN no lo entregó: 503 &#x60;dian_unavailable&#x60; (pídelo otra vez) o 409 &#x60;file_unavailable&#x60; con &#x60;reason: dian_failed&#x60; (la DIAN no tiene el PDF de ese documento); en los dos casos no se cobró. Solo producción; lo emitido exige &#x60;customers:read&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of FileParameter</returns>
+        public Trevol.Generado.Client.ApiResponse<FileParameter> DownloadDianDocumentPdfWithHttpInfo(string id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new Trevol.Generado.Client.ApiException(400, "Missing required parameter 'id' when calling DianDocumentsApi->DownloadDianDocumentPdf");
+
+            Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/pdf",
+                "application/problem+json"
+            };
+
+            var localVarContentType = Trevol.Generado.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Trevol.Generado.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", Trevol.Generado.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (llave) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<FileParameter>("/dian_documents/{id}/pdf", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DownloadDianDocumentPdf", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Bajar el PDF de la DIAN de un documento El PDF oficial de la DIAN de un documento, cuando está listo (200 &#x60;application/pdf&#x60;). Bajarlo no se cobra. Si todavía viene en camino: 409 &#x60;file_unavailable&#x60; reintentable con &#x60;reason: pending&#x60; y &#x60;Retry-After&#x60; (o mira &#x60;pdf_status&#x60;). Si no se ha pedido (o venció a los 90 días): 409 &#x60;file_unavailable&#x60; con &#x60;reason: not_requested&#x60;; pídelo con POST /v1/dian_documents/{id}/pdf. Si la DIAN no lo entregó: 503 &#x60;dian_unavailable&#x60; (pídelo otra vez) o 409 &#x60;file_unavailable&#x60; con &#x60;reason: dian_failed&#x60; (la DIAN no tiene el PDF de ese documento); en los dos casos no se cobró. Solo producción; lo emitido exige &#x60;customers:read&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of FileParameter</returns>
+        public async System.Threading.Tasks.Task<FileParameter> DownloadDianDocumentPdfAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            Trevol.Generado.Client.ApiResponse<FileParameter> localVarResponse = await DownloadDianDocumentPdfWithHttpInfoAsync(id, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Bajar el PDF de la DIAN de un documento El PDF oficial de la DIAN de un documento, cuando está listo (200 &#x60;application/pdf&#x60;). Bajarlo no se cobra. Si todavía viene en camino: 409 &#x60;file_unavailable&#x60; reintentable con &#x60;reason: pending&#x60; y &#x60;Retry-After&#x60; (o mira &#x60;pdf_status&#x60;). Si no se ha pedido (o venció a los 90 días): 409 &#x60;file_unavailable&#x60; con &#x60;reason: not_requested&#x60;; pídelo con POST /v1/dian_documents/{id}/pdf. Si la DIAN no lo entregó: 503 &#x60;dian_unavailable&#x60; (pídelo otra vez) o 409 &#x60;file_unavailable&#x60; con &#x60;reason: dian_failed&#x60; (la DIAN no tiene el PDF de ese documento); en los dos casos no se cobró. Solo producción; lo emitido exige &#x60;customers:read&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (FileParameter)</returns>
+        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<FileParameter>> DownloadDianDocumentPdfWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new Trevol.Generado.Client.ApiException(400, "Missing required parameter 'id' when calling DianDocumentsApi->DownloadDianDocumentPdf");
+
+
+            Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/pdf",
+                "application/problem+json"
+            };
+
+
+            var localVarContentType = Trevol.Generado.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Trevol.Generado.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", Trevol.Generado.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (llave) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<FileParameter>("/dian_documents/{id}/pdf", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DownloadDianDocumentPdf", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
         }
 
         /// <summary>
@@ -872,6 +1089,135 @@ namespace Trevol.Generado.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ListDianDocuments", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Pedir el PDF de la DIAN de un documento Pide el PDF oficial que genera la DIAN de un documento de la empresa de la llave (emitido o recibido): la representación gráfica de la DIAN, la misma que ofrece su portal. Trevol lo pide a la DIAN y puede tardar unos segundos o minutos: responde 202 con el objeto &#x60;dian_document_pdf&#x60; (&#x60;status: pending&#x60;), &#x60;Location&#x60; y &#x60;Retry-After&#x60;; cuando está listo, bájalo con GET /v1/dian_documents/{id}/pdf (o mira &#x60;pdf_status&#x60; en el documento). Si ya hay uno en camino o listo, lo devuelve sin pedir otro ni cobrar (200 si ya está listo): repetir la petición es seguro y no necesita &#x60;Idempotency-Key&#x60;. Se cobra del saldo cuando llega (&#x60;dian_document_pdf&#x60; en &#x60;operation_prices&#x60; de GET /v1/balance); si la DIAN no lo entrega, no se cobra. Se guarda 90 días: bajarlo otra vez no se cobra; después vence y pedirlo es un pedido nuevo. Solo producción (con una llave de prueba, 403 &#x60;live_mode_required&#x60;) y con una llave de escritura. Lo emitido trae los datos personales del cliente: exige el permiso &#x60;customers:read&#x60; de la llave. Errores: 404 (otra empresa u otro ambiente), 409 &#x60;file_unavailable&#x60; (sin CUFE: mira &#x60;pdf_available&#x60;), 402 &#x60;insufficient_balance&#x60; (no se pidió nada) y 429 con &#x60;limit: dian_document_pdf&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>DianDocumentPdf</returns>
+        public DianDocumentPdf RequestDianDocumentPdf(string id)
+        {
+            Trevol.Generado.Client.ApiResponse<DianDocumentPdf> localVarResponse = RequestDianDocumentPdfWithHttpInfo(id);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Pedir el PDF de la DIAN de un documento Pide el PDF oficial que genera la DIAN de un documento de la empresa de la llave (emitido o recibido): la representación gráfica de la DIAN, la misma que ofrece su portal. Trevol lo pide a la DIAN y puede tardar unos segundos o minutos: responde 202 con el objeto &#x60;dian_document_pdf&#x60; (&#x60;status: pending&#x60;), &#x60;Location&#x60; y &#x60;Retry-After&#x60;; cuando está listo, bájalo con GET /v1/dian_documents/{id}/pdf (o mira &#x60;pdf_status&#x60; en el documento). Si ya hay uno en camino o listo, lo devuelve sin pedir otro ni cobrar (200 si ya está listo): repetir la petición es seguro y no necesita &#x60;Idempotency-Key&#x60;. Se cobra del saldo cuando llega (&#x60;dian_document_pdf&#x60; en &#x60;operation_prices&#x60; de GET /v1/balance); si la DIAN no lo entrega, no se cobra. Se guarda 90 días: bajarlo otra vez no se cobra; después vence y pedirlo es un pedido nuevo. Solo producción (con una llave de prueba, 403 &#x60;live_mode_required&#x60;) y con una llave de escritura. Lo emitido trae los datos personales del cliente: exige el permiso &#x60;customers:read&#x60; de la llave. Errores: 404 (otra empresa u otro ambiente), 409 &#x60;file_unavailable&#x60; (sin CUFE: mira &#x60;pdf_available&#x60;), 402 &#x60;insufficient_balance&#x60; (no se pidió nada) y 429 con &#x60;limit: dian_document_pdf&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of DianDocumentPdf</returns>
+        public Trevol.Generado.Client.ApiResponse<DianDocumentPdf> RequestDianDocumentPdfWithHttpInfo(string id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new Trevol.Generado.Client.ApiException(400, "Missing required parameter 'id' when calling DianDocumentsApi->RequestDianDocumentPdf");
+
+            Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/problem+json"
+            };
+
+            var localVarContentType = Trevol.Generado.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Trevol.Generado.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", Trevol.Generado.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (llave) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<DianDocumentPdf>("/dian_documents/{id}/pdf", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RequestDianDocumentPdf", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Pedir el PDF de la DIAN de un documento Pide el PDF oficial que genera la DIAN de un documento de la empresa de la llave (emitido o recibido): la representación gráfica de la DIAN, la misma que ofrece su portal. Trevol lo pide a la DIAN y puede tardar unos segundos o minutos: responde 202 con el objeto &#x60;dian_document_pdf&#x60; (&#x60;status: pending&#x60;), &#x60;Location&#x60; y &#x60;Retry-After&#x60;; cuando está listo, bájalo con GET /v1/dian_documents/{id}/pdf (o mira &#x60;pdf_status&#x60; en el documento). Si ya hay uno en camino o listo, lo devuelve sin pedir otro ni cobrar (200 si ya está listo): repetir la petición es seguro y no necesita &#x60;Idempotency-Key&#x60;. Se cobra del saldo cuando llega (&#x60;dian_document_pdf&#x60; en &#x60;operation_prices&#x60; de GET /v1/balance); si la DIAN no lo entrega, no se cobra. Se guarda 90 días: bajarlo otra vez no se cobra; después vence y pedirlo es un pedido nuevo. Solo producción (con una llave de prueba, 403 &#x60;live_mode_required&#x60;) y con una llave de escritura. Lo emitido trae los datos personales del cliente: exige el permiso &#x60;customers:read&#x60; de la llave. Errores: 404 (otra empresa u otro ambiente), 409 &#x60;file_unavailable&#x60; (sin CUFE: mira &#x60;pdf_available&#x60;), 402 &#x60;insufficient_balance&#x60; (no se pidió nada) y 429 con &#x60;limit: dian_document_pdf&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of DianDocumentPdf</returns>
+        public async System.Threading.Tasks.Task<DianDocumentPdf> RequestDianDocumentPdfAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            Trevol.Generado.Client.ApiResponse<DianDocumentPdf> localVarResponse = await RequestDianDocumentPdfWithHttpInfoAsync(id, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Pedir el PDF de la DIAN de un documento Pide el PDF oficial que genera la DIAN de un documento de la empresa de la llave (emitido o recibido): la representación gráfica de la DIAN, la misma que ofrece su portal. Trevol lo pide a la DIAN y puede tardar unos segundos o minutos: responde 202 con el objeto &#x60;dian_document_pdf&#x60; (&#x60;status: pending&#x60;), &#x60;Location&#x60; y &#x60;Retry-After&#x60;; cuando está listo, bájalo con GET /v1/dian_documents/{id}/pdf (o mira &#x60;pdf_status&#x60; en el documento). Si ya hay uno en camino o listo, lo devuelve sin pedir otro ni cobrar (200 si ya está listo): repetir la petición es seguro y no necesita &#x60;Idempotency-Key&#x60;. Se cobra del saldo cuando llega (&#x60;dian_document_pdf&#x60; en &#x60;operation_prices&#x60; de GET /v1/balance); si la DIAN no lo entrega, no se cobra. Se guarda 90 días: bajarlo otra vez no se cobra; después vence y pedirlo es un pedido nuevo. Solo producción (con una llave de prueba, 403 &#x60;live_mode_required&#x60;) y con una llave de escritura. Lo emitido trae los datos personales del cliente: exige el permiso &#x60;customers:read&#x60; de la llave. Errores: 404 (otra empresa u otro ambiente), 409 &#x60;file_unavailable&#x60; (sin CUFE: mira &#x60;pdf_available&#x60;), 402 &#x60;insufficient_balance&#x60; (no se pidió nada) y 429 con &#x60;limit: dian_document_pdf&#x60;.
+        /// </summary>
+        /// <exception cref="Trevol.Generado.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (DianDocumentPdf)</returns>
+        public async System.Threading.Tasks.Task<Trevol.Generado.Client.ApiResponse<DianDocumentPdf>> RequestDianDocumentPdfWithHttpInfoAsync(string id, System.Threading.CancellationToken cancellationToken = default)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new Trevol.Generado.Client.ApiException(400, "Missing required parameter 'id' when calling DianDocumentsApi->RequestDianDocumentPdf");
+
+
+            Trevol.Generado.Client.RequestOptions localVarRequestOptions = new Trevol.Generado.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json",
+                "application/problem+json"
+            };
+
+
+            var localVarContentType = Trevol.Generado.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Trevol.Generado.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("id", Trevol.Generado.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+            // authentication (llave) required
+            // bearer authentication required
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken) && !localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<DianDocumentPdf>("/dian_documents/{id}/pdf", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RequestDianDocumentPdf", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

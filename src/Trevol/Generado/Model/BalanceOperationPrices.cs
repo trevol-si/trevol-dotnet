@@ -26,7 +26,7 @@ using OpenAPIDateConverter = Trevol.Generado.Client.OpenAPIDateConverter;
 namespace Trevol.Generado.Model
 {
     /// <summary>
-    /// El precio en pesos de cada operación que Trevol hace por la empresa en el portal de la DIAN y que se cobra del saldo (0 es gratis). Solo en producción.
+    /// El precio en pesos de cada operación de la API que Trevol hace por la empresa ante la DIAN y que se cobra del saldo (0 es gratis). Solo en producción.
     /// </summary>
     [DataContract(Name = "BalanceOperationPrices")]
     public partial class BalanceOperationPrices
@@ -38,12 +38,14 @@ namespace Trevol.Generado.Model
         /// <param name="numberingRefresh">numberingRefresh.</param>
         /// <param name="numberingAssociation">numberingAssociation.</param>
         /// <param name="numberingRequest">numberingRequest.</param>
-        public BalanceOperationPrices(int dianSync = default, int numberingRefresh = default, int numberingAssociation = default, int numberingRequest = default)
+        /// <param name="dianDocumentPdf">dianDocumentPdf.</param>
+        public BalanceOperationPrices(int dianSync = default, int numberingRefresh = default, int numberingAssociation = default, int numberingRequest = default, int dianDocumentPdf = default)
         {
             this.DianSync = dianSync;
             this.NumberingRefresh = numberingRefresh;
             this.NumberingAssociation = numberingAssociation;
             this.NumberingRequest = numberingRequest;
+            this.DianDocumentPdf = dianDocumentPdf;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -72,6 +74,12 @@ namespace Trevol.Generado.Model
         public int NumberingRequest { get; set; }
 
         /// <summary>
+        /// Gets or Sets DianDocumentPdf
+        /// </summary>
+        [DataMember(Name = "dian_document_pdf", EmitDefaultValue = false)]
+        public int DianDocumentPdf { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -89,6 +97,7 @@ namespace Trevol.Generado.Model
             sb.Append("  NumberingRefresh: ").Append(NumberingRefresh).Append("\n");
             sb.Append("  NumberingAssociation: ").Append(NumberingAssociation).Append("\n");
             sb.Append("  NumberingRequest: ").Append(NumberingRequest).Append("\n");
+            sb.Append("  DianDocumentPdf: ").Append(DianDocumentPdf).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
